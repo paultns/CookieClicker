@@ -4,9 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
 
 public class CookieClicker {
     public static void main(String[] args) throws InterruptedException {
@@ -18,29 +21,32 @@ public class CookieClicker {
         driver = new FirefoxDriver();
         //driver = new ChromeDriver();
         //driver = new InternetExplorerDriver();
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
 
-        //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
         driver.get("http://orteil.dashnet.org/cookieclicker/");
         Thread.sleep(2000);
 
-        //setUp(driver);
-        driver.findElement(By.id("prefsButton")).click();
+        setUp(driver);
 
-        save(driver);
+        //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        while (true) {
+            for (int i = 0; i < 250; i++) {
+            driver.findElement(By.cssSelector("#bigCookie")).click();
+            if (isElementPresent(By.cssSelector(".shimmer"), driver))
+            driver.findElement(By.cssSelector(".shimmer")).click();}
+            //Thread.sleep(60000);
+            while (isElementPresent(By.cssSelector(".upgrade.enabled"), driver))
+            driver.findElement(By.cssSelector(".upgrade.enabled")).click();
+            while (isElementPresent(By.cssSelector(".unlocked.enabled"), driver)) {
+                driver.findElements(By.cssSelector(".unlocked.enabled"))
+                        .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1).click();
+            }
+            save(driver);
+        }
+        //save(driver);
 
-        /*while (true) {
-            for (int i = 0; i < 100; i++)
-                driver.findElement(By.cssSelector("#bigCookie")).click();
-            if (isElementPresent(By.cssSelector("div[class*='upgrade enabled']"), driver))
-                driver.findElement(By.cssSelector("div[class*='upgrade enabled']")).click();
-            else if (isElementPresent(By.cssSelector("div[class*='unlocked enabled']"), driver))
-                driver.findElement(By.cssSelector("div[class*='unlocked enabled']")).click();
-
-
-        } */
     }
-
 
     private static boolean isElementPresent(By by, WebDriver driver) {
         try {
@@ -54,40 +60,89 @@ public class CookieClicker {
     private static void setUp(WebDriver driver) {
         driver.findElement(By.id("prefsButton")).click();
         driver.findElement(By.linkText("Import save")).click();
-        driver.findElement(By.id("textareaPrompt")).sendKeys("Mi4wMTA2fHwxNTI4Mjg1OTAzMTA5OzE1MjgyODU5MDMxMDk7MTUyODI4NTkxMzA1MDtDb29raWUgTW9uc3RlcjthZGtzbnwxMTExMTEwMTEwMDEwMDEwMHwwOzA7MDswOzA7MDswOzA7MDswOzA7MDswOzA7MDswOzA7MDswOzA7MDswOzswOzA7MDswOzA7MDswOy0xOy0xOy0xOy0xOy0xOzA7MDswOzA7NTA7MDswOy0xOy0xOzE1MjgyODU5MDMxMDM7MDswO3wwLDAsMCwwOzAsMCwwLDA7MCwwLDAsMDswLDAsMCwwOzAsMCwwLDA7MCwwLDAsMDswLDAsMCwwOzAsMCwwLDA7MCwwLDAsMDswLDAsMCwwOzAsMCwwLDA7MCwwLDAsMDswLDAsMCwwOzAsMCwwLDA7MCwwLDAsMDt8MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwfDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwfA%3D%3D%21END%21");
-        driver.findElement(By.linkText("Load")).click();
-        driver.findElement(By.linkText("Fancy graphics ON")).click();
-        driver.findElement(By.linkText("Particles ON")).click();
-        driver.findElement(By.linkText("Numbers ON")).click();
-        driver.findElement(By.linkText("Milk ON")).click();
-        driver.findElement(By.linkText("Cursors ON")).click();
-        driver.findElement(By.linkText("Wobbly cookie ON")).click();
-        driver.findElement(By.linkText("Alt cookie sound ON")).click();
-        driver.findElement(By.linkText("Fast notes OFF")).click();
-        driver.findElement(By.linkText("Defocus OFF")).click();
+
+        read(driver);
+        try {
+            driver.findElement(By.linkText("Load")).click();
+        } catch (Exception e) {
+
+        }
+        try {
+            driver.findElement(By.linkText("Fancy graphics ON")).click();
+        } catch (Exception e) {
+
+        }
+        try {
+            driver.findElement(By.linkText("Particles ON")).click();
+        } catch (Exception e) {
+
+        }
+        try {
+            driver.findElement(By.linkText("Numbers ON")).click();
+        } catch (Exception e) {
+
+        }
+        try {
+            driver.findElement(By.linkText("Milk ON")).click();
+        } catch (Exception e) {
+
+        }
+        try {
+            driver.findElement(By.linkText("Cursors ON")).click();
+        } catch (Exception e) {
+
+        }
+        try {
+            driver.findElement(By.linkText("Wobbly cookie ON")).click();
+        } catch (Exception e) {
+
+        }
+        try {
+            driver.findElement(By.linkText("Alt cookie sound ON")).click();
+        } catch (Exception e) {
+
+        }
+        try {
+            driver.findElement(By.linkText("Defocus OFF")).click();
+        } catch (Exception e) {
+
+        }
 
 
         //driver.findElement(By.id("prefsButton")).click();
 
     }
 
-    private static void save (WebDriver driver) {
+    private static void read(WebDriver driver) {
+
+        File txt = new File("CookieSave.txt");
+        Scanner sc = null;
+        try {
+            sc = new Scanner(txt);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        sc.useDelimiter("\\Z");
+        driver.findElement(By.id("textareaPrompt")).sendKeys(sc.next());
+
+    }
+
+    private static void save(WebDriver driver) {
 
         driver.findElement(By.linkText("Export save")).click();
-        System.out.println(driver.findElement(By.id("textareaPrompt")).getText());
-        driver.findElement(By.linkText("All done!")).click();
 
-        File txt = new File("hours.txt");
-        PrintWriter writeHours;
+        File txt = new File("CookieSave.txt");
+        PrintWriter saveCookies;
         try {
-            writeHours = new PrintWriter(txt);
-            for (int i = 0; i < this.hours.length; i++)
-                writeHours.println(this.projects[i] + this.hours[i] * 0.25);
-            writeHours.close();
-            ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "hours.txt");
-            pb.start();
+            saveCookies = new PrintWriter(txt);
+            saveCookies.println(driver.findElement(By.id("textareaPrompt")).getText());
+            saveCookies.close();
+            //ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "CookieSave.txt");
+            //pb.start();
         } catch (IOException io) {
             System.out.println(io.getMessage());
 
+        }
+        driver.findElement(By.linkText("All done!")).click();
     }
 }
