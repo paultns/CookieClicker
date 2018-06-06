@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="10.0" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://D:/Dropbox/Java Shit/drivers/selenium-java-3.12.0/libs" />
+          <root url="jar://D:/Dropbox/Java Shit/drivers/selenium-java-3.12.0/client-combined-3.12.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://D:/Dropbox/Java Shit/drivers/selenium-java-3.12.0/client-combined-3.12.0-sources.jar!/" />
+        </SOURCES>
+        <jarDirectory url="file://D:/Dropbox/Java Shit/drivers/selenium-java-3.12.0/libs" recursive="false" />
+      </library>
+    </orderEntry>
+  </component>
+</module>
