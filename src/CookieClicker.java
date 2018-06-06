@@ -3,6 +3,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
 public class CookieClicker {
@@ -15,22 +18,27 @@ public class CookieClicker {
         driver = new FirefoxDriver();
         //driver = new ChromeDriver();
         //driver = new InternetExplorerDriver();
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
 
         //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get("http://orteil.dashnet.org/cookieclicker/");
         Thread.sleep(2000);
 
-        setUp(driver);
+        //setUp(driver);
+        driver.findElement(By.id("prefsButton")).click();
 
+        save(driver);
 
-        while (true) {
+        /*while (true) {
+            for (int i = 0; i < 100; i++)
+                driver.findElement(By.cssSelector("#bigCookie")).click();
             if (isElementPresent(By.cssSelector("div[class*='upgrade enabled']"), driver))
                 driver.findElement(By.cssSelector("div[class*='upgrade enabled']")).click();
             else if (isElementPresent(By.cssSelector("div[class*='unlocked enabled']"), driver))
                 driver.findElement(By.cssSelector("div[class*='unlocked enabled']")).click();
-            driver.findElement(By.cssSelector("#bigCookie")).click();
-        }
+
+
+        } */
     }
 
 
@@ -50,9 +58,36 @@ public class CookieClicker {
         driver.findElement(By.linkText("Load")).click();
         driver.findElement(By.linkText("Fancy graphics ON")).click();
         driver.findElement(By.linkText("Particles ON")).click();
-        driver.findElement(By.linkText("Alt cookie sound ON")).click();
         driver.findElement(By.linkText("Numbers ON")).click();
-        driver.findElement(By.id("prefsButton")).click();
+        driver.findElement(By.linkText("Milk ON")).click();
+        driver.findElement(By.linkText("Cursors ON")).click();
+        driver.findElement(By.linkText("Wobbly cookie ON")).click();
+        driver.findElement(By.linkText("Alt cookie sound ON")).click();
+        driver.findElement(By.linkText("Fast notes OFF")).click();
+        driver.findElement(By.linkText("Defocus OFF")).click();
+
+
+        //driver.findElement(By.id("prefsButton")).click();
+
+    }
+
+    private static void save (WebDriver driver) {
+
+        driver.findElement(By.linkText("Export save")).click();
+        System.out.println(driver.findElement(By.id("textareaPrompt")).getText());
+        driver.findElement(By.linkText("All done!")).click();
+
+        File txt = new File("hours.txt");
+        PrintWriter writeHours;
+        try {
+            writeHours = new PrintWriter(txt);
+            for (int i = 0; i < this.hours.length; i++)
+                writeHours.println(this.projects[i] + this.hours[i] * 0.25);
+            writeHours.close();
+            ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "hours.txt");
+            pb.start();
+        } catch (IOException io) {
+            System.out.println(io.getMessage());
 
     }
 }
