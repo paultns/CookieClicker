@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 
 public class CookieClicker {
@@ -28,23 +27,39 @@ public class CookieClicker {
         Thread.sleep(2000);
 
         setUp(driver);
-
+        int count = 0;
         //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         while (true) {
-            for (int i = 0; i < 250; i++) {
-            driver.findElement(By.cssSelector("#bigCookie")).click();
-            if (isElementPresent(By.cssSelector(".shimmer"), driver))
-            driver.findElement(By.cssSelector(".shimmer")).click();}
-            //Thread.sleep(60000);
-            while (isElementPresent(By.cssSelector(".upgrade.enabled"), driver))
-            driver.findElement(By.cssSelector(".upgrade.enabled")).click();
-            while (isElementPresent(By.cssSelector(".unlocked.enabled"), driver)) {
+            count++;
+            System.out.println("Cycle nr: " + count + " start!");
+            for (int times = 0; times < 11; times++) {
+                for (int i = 0; i < 250; i++) {
+                    driver.findElement(By.cssSelector("#bigCookie")).click();
+                    if (isElementPresent(By.cssSelector(".shimmer"), driver)) {
+                        driver.findElement(By.cssSelector(".shimmer")).click();
+                        System.out.println("Golden cookie found!");
+                    }
+                    if (isElementPresent(By.cssSelector(".upgrade.enabled"), driver)) {
+                        driver.findElement(By.cssSelector(".upgrade.enabled")).click();
+                        System.out.println("Bought Upgrade! Note: see if you can find which update");
+                    }
+                }
+
+                if (isElementPresent(By.cssSelector(".unlocked.enabled"), driver)) {
+                    String bought = "";
+                    driver.findElements(By.cssSelector(".unlocked.enabled"))
+                            .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1).click();
+                    System.out.println("Bought 1 unit of: " + "find item");
+                }
+
+            }
+            System.out.println("Buying all upgrades");
+            while (isElementPresent(By.cssSelector(".unlocked.enabled"), driver))
                 driver.findElements(By.cssSelector(".unlocked.enabled"))
                         .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1).click();
-            }
             save(driver);
+            System.out.println("Cycle nr: " + count + " ended");
         }
-        //save(driver);
 
     }
 
