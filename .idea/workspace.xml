@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4806543-7898-4eea-b620-a9c57da7fa4f" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CookieSave.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CookieSave.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CookieClicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CookieClicker.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -15,13 +17,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CookieClicker.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CookieClicker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+            <state relative-caret-position="548">
+              <caret line="54" column="41" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#run#0;class#CookieClicker#0" />
                 <element signature="method#isElementPresent#0;class#CookieClicker#0" />
                 <element signature="method#setUp#0;class#CookieClicker#0" />
                 <element signature="method#read#0;class#CookieClicker#0" />
@@ -32,16 +35,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CookieSave.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CookieSave.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CookieSave.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="2425" selection-start-column="2425" selection-end-column="2425" />
+              <caret column="2445" selection-start-column="2445" selection-end-column="2445" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>,=</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,8 +64,8 @@
         <option value="$PROJECT_DIR$/src/TestSelenium.java" />
         <option value="$PROJECT_DIR$/src/TestSelenium.java" />
         <option value="$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-        <option value="$PROJECT_DIR$/CookieSave.txt" />
         <option value="$PROJECT_DIR$/src/CookieClicker.java" />
+        <option value="$PROJECT_DIR$/CookieSave.txt" />
       </list>
     </option>
   </component>
@@ -74,6 +82,8 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -90,8 +100,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -169,49 +177,67 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
+    <frame x="1912" y="-1091" width="1096" height="1896" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32731137" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33156216" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33127457" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3295901" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.30167013" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info id="Designer" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33156216" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32731137" />
+      <window_info anchor="right" id="Maven Projects" order="6" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.30167013" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32943678" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.4415449" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32943678" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -220,9 +246,10 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32873806" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info id="Favorites" order="5" side_tool="true" />
@@ -238,7 +265,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -248,6 +275,7 @@
           <caret line="114" lean-forward="true" selection-start-line="114" selection-end-line="114" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -270,6 +298,7 @@
           <caret line="89" column="48" lean-forward="true" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -285,6 +314,7 @@
           <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -300,6 +330,7 @@
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -327,6 +358,7 @@
           <caret line="89" column="48" lean-forward="true" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -342,6 +374,7 @@
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -369,6 +402,7 @@
           <caret line="74" column="61" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -384,6 +418,7 @@
           <caret line="144" column="1" lean-forward="true" selection-start-line="144" selection-start-column="1" selection-end-line="144" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -406,6 +441,7 @@
           <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -421,6 +457,7 @@
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
@@ -443,25 +480,26 @@
     <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
     <entry file="file://$PROJECT_DIR$/SeleniumPractice.iml" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/6-WorkingWithElementsList.java" />
-    <entry file="file://$PROJECT_DIR$/CookieSave.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2425" selection-start-column="2425" selection-end-column="2425" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        <state relative-caret-position="548">
+          <caret line="54" column="41" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CookieSave.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2445" selection-start-column="2445" selection-end-column="2445" />
         </state>
       </provider>
     </entry>
