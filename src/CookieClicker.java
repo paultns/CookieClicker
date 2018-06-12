@@ -12,6 +12,20 @@ import java.util.Scanner;
 
 
 public class CookieClicker {
+
+    //private WebDriver driver;
+    //private String url;
+
+    /*
+    CookieClicker {
+
+         System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
+         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+         System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
+
+     }
+
+ */
     public static void main(String[] args) throws InterruptedException {
         System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
@@ -19,9 +33,8 @@ public class CookieClicker {
 
         WebDriver driver;
         driver = new FirefoxDriver();
-        //driver = new ChromeDriver();
-        //driver = new InternetExplorerDriver();
-        //driver.manage().window().maximize();
+
+        driver.manage().window().maximize();
 
 
         driver.get("http://orteil.dashnet.org/cookieclicker/");
@@ -68,6 +81,11 @@ public class CookieClicker {
             System.out.println("Cycle " + count + " ended\n");
             round = 0;
         }
+
+    }
+
+    private static void startUp() {
+
 
     }
 
