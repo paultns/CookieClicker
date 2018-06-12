@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
@@ -29,15 +30,17 @@ public class CookieClicker {
         setUp(driver);
         int count = 0;
         //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        int round = 0;
         while (true) {
             count++;
-            System.out.println("Cycle nr: " + count + " start!");
-            for (int times = 0; times < 11; times++) {
+            System.out.println("Cycle nr: " + count + ".");
+            for (int times = 0; times < 3; times++) {
+                round++;
                 for (int i = 0; i < 250; i++) {
                     driver.findElement(By.cssSelector("#bigCookie")).click();
                     if (isElementPresent(By.cssSelector(".shimmer"), driver)) {
                         driver.findElement(By.cssSelector(".shimmer")).click();
-                        System.out.println("Golden cookie found!");
+                        System.out.println("\n!! Golden cookie found!\n");
                     }
                     if (isElementPresent(By.cssSelector(".upgrade.enabled"), driver)) {
                         driver.findElement(By.cssSelector(".upgrade.enabled")).click();
@@ -46,19 +49,24 @@ public class CookieClicker {
                 }
 
                 if (isElementPresent(By.cssSelector(".unlocked.enabled"), driver)) {
-                    String bought = "";
+                    String bought = matchProduct(driver, driver.findElements(By.cssSelector(".unlocked.enabled"))
+                            .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1));
                     driver.findElements(By.cssSelector(".unlocked.enabled"))
                             .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1).click();
-                    System.out.println("Bought 1 unit of: " + "find item");
+                    System.out.println("    + Round " + round + ". Bought an unit of: " + bought);
                 }
 
             }
-            System.out.println("Buying all upgrades");
-            while (isElementPresent(By.cssSelector(".unlocked.enabled"), driver))
-                driver.findElements(By.cssSelector(".unlocked.enabled"))
-                        .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1).click();
+            System.out.println("\nBuying items.");
+            while (isElementPresent(By.cssSelector(".unlocked.enabled"), driver)) {
+                String bought = matchProduct(driver, driver.findElements(By.cssSelector(".unlocked.enabled"))
+                        .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1));
+                driver.findElements(By.cssSelector(".unlocked.enabled")).get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1).click();
+                System.out.println("    + Bought an unit of: " + bought);
+            }
             save(driver);
-            System.out.println("Cycle nr: " + count + " ended");
+            System.out.println("Cycle " + count + " ended\n");
+            round = 0;
         }
 
     }
@@ -124,7 +132,7 @@ public class CookieClicker {
         }
 
 
-        //driver.findElement(By.id("prefsButton")).click();
+        driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
 
     }
 
@@ -159,5 +167,29 @@ public class CookieClicker {
 
         }
         driver.findElement(By.linkText("All done!")).click();
+        System.out.println("\nGame Saved!\n");
+    }
+
+    private static String matchProduct(WebDriver driver, WebElement upgrade) {
+        String name = "";
+        if (upgrade.equals(driver.findElement(By.id("product7"))))
+            name = "Wizard tower";
+        else if (upgrade.equals(driver.findElement(By.id("product6"))))
+            name = "Temple";
+        else if (upgrade.equals(driver.findElement(By.id("product5"))))
+            name = "Bank";
+        else if (upgrade.equals(driver.findElement(By.id("product4"))))
+            name = "Factory";
+        else if (upgrade.equals(driver.findElement(By.id("product3"))))
+            name = "Mine";
+        else if (upgrade.equals(driver.findElement(By.id("product2"))))
+            name = "Farm";
+        else if (upgrade.equals(driver.findElement(By.id("product1"))))
+            name = "Grandma";
+        else if (upgrade.equals(driver.findElement(By.id("product0"))))
+            name = "Cursor";
+        else name = "big ass fail";
+
+        return name;
     }
 }
