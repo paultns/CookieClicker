@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f4806543-7898-4eea-b620-a9c57da7fa4f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CookieSave.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CookieSave.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CookieClicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CookieClicker.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -19,11 +18,10 @@
       <file leaf-file-name="CookieClicker.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="96" column="55" selection-start-line="96" selection-start-column="55" selection-end-line="96" selection-end-column="55" />
+            <state relative-caret-position="825">
+              <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
               <folding>
                 <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-                <element signature="method#setUp#0;class#CookieClicker#0" />
                 <element signature="method#read#0;class#CookieClicker#0" />
                 <element signature="method#save#0;class#CookieClicker#0" />
                 <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -178,11 +176,19 @@
       <option name="project" value="LOCAL" />
       <updated>1528839930600</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="- transformed into OO&#10;- added comments">
+      <created>1528878662993</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1528878662993</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-1091" width="1096" height="1896" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -247,7 +253,8 @@
     <MESSAGE value="-added login" />
     <MESSAGE value="- added console updates&#10;- added product finding method" />
     <MESSAGE value="- added console updates&#10;- started progress towards making it more OO" />
-    <option name="LAST_COMMIT_MESSAGE" value="- added console updates&#10;- started progress towards making it more OO" />
+    <MESSAGE value="- transformed into OO&#10;- added comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="- transformed into OO&#10;- added comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -261,7 +268,6 @@
           <caret line="114" lean-forward="true" selection-start-line="114" selection-end-line="114" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -283,7 +289,6 @@
           <caret line="89" column="48" lean-forward="true" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -298,7 +303,6 @@
           <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -313,7 +317,6 @@
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -340,7 +343,6 @@
           <caret line="89" column="48" lean-forward="true" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -355,7 +357,6 @@
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -382,7 +383,6 @@
           <caret line="74" column="61" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -397,7 +397,6 @@
           <caret line="144" column="1" lean-forward="true" selection-start-line="144" selection-start-column="1" selection-end-line="144" selection-end-column="1" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -419,7 +418,6 @@
           <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -434,7 +432,6 @@
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />
@@ -465,11 +462,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="96" column="55" selection-start-line="96" selection-start-column="55" selection-end-line="96" selection-end-column="55" />
+        <state relative-caret-position="825">
+          <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
             <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#matchProduct#0;class#CookieClicker#0" />

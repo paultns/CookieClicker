@@ -102,6 +102,7 @@ public class CookieClicker {
 
     // importing save and disabling resource intensive things
     private void setUp() {
+        System.out.println("Setup Sequence!");
         driver.findElement(By.id("prefsButton")).click();
         driver.findElement(By.linkText("Import save")).click();
 
@@ -112,42 +113,42 @@ public class CookieClicker {
         try {
             driver.findElement(By.linkText("Fancy graphics ON")).click();
         } catch (Exception e) {
-
+            System.out.println("Fancy graphics button already depressed");
         }
         try {
             driver.findElement(By.linkText("Particles ON")).click();
         } catch (Exception e) {
-
+            System.out.println("Particles button already depressed");
         }
         try {
             driver.findElement(By.linkText("Numbers ON")).click();
         } catch (Exception e) {
-
+            System.out.println("Number button already depressed");
         }
         try {
             driver.findElement(By.linkText("Milk ON")).click();
         } catch (Exception e) {
-
+            System.out.println("Milk button already depressed");
         }
         try {
             driver.findElement(By.linkText("Cursors ON")).click();
         } catch (Exception e) {
-
+            System.out.println("Cursors button already depressed");
         }
         try {
             driver.findElement(By.linkText("Wobbly cookie ON")).click();
         } catch (Exception e) {
-
+            System.out.println("Wobbly cookie button already depressed");
         }
         try {
             driver.findElement(By.linkText("Alt cookie sound ON")).click();
         } catch (Exception e) {
-
+            System.out.println("Alt cookie sound button already depressed");
         }
         try {
             driver.findElement(By.linkText("Defocus OFF")).click();
         } catch (Exception e) {
-
+            System.out.println("Defocus button already pressed");
         }
 
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
