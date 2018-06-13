@@ -21,6 +21,8 @@ public class CookieClicker {
     private int round;
     private int turn;
     private int loops;
+    private boolean buyUpgrades;
+    private boolean buyBuildings;
 
 
     public CookieClicker() {
@@ -44,10 +46,11 @@ public class CookieClicker {
         CookieClicker cC = new CookieClicker();
         cC.setUp();
 
-        // declare how much time each turn should take, in number of for loops
-        cC.turn = 1000;
-        // declare how many loops to go through before buying all upgrades
-        cC.loops = 3;
+        // initializing inputs
+        cC.turn = 1000;                  // declare how much time each turn should take, in number of for loops
+        cC.loops = 3;                   // declare how many loops to go through before buying all upgrades
+        cC.buyUpgrades = false;         // choose whether to buy upgrades
+        cC.buyBuildings = true;         // choose whether to buy buildings
 
         while (true) {
             cC.run();
@@ -71,7 +74,7 @@ public class CookieClicker {
                     System.out.println("\n!! Golden cookie found !!\n");
                 }
             }
-            if (isElementPresent(By.cssSelector(".unlocked.enabled"))) {
+            if (isElementPresent(By.cssSelector(".unlocked.enabled")) && buyBuildings) {
                 String bought = matchProduct(driver.findElements(By.cssSelector(".unlocked.enabled"))
                         .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1));
                 driver.findElements(By.cssSelector(".unlocked.enabled"))
@@ -83,14 +86,14 @@ public class CookieClicker {
         }
         System.out.println("\nBuying items.");
 
-        if (isElementPresent(By.cssSelector(".upgrade.enabled"))) {
+        if (isElementPresent(By.cssSelector(".upgrade.enabled")) && buyUpgrades) {
             Actions move = new Actions(driver);
             move.moveToElement(driver.findElement(By.cssSelector(".upgrade.enabled"))).build().perform();
             System.out.println(" * Bought Upgrade!\n" + driver.findElement(By.cssSelector(".name")).getText()
                     + ": " + driver.findElement(By.cssSelector(".description")).getText() + "\n");
             driver.findElement(By.cssSelector(".upgrade.enabled")).click();
         }
-        while (isElementPresent(By.cssSelector(".unlocked.enabled"))) {
+        while (isElementPresent(By.cssSelector(".unlocked.enabled")) && buyBuildings) {
             String bought = matchProduct(driver.findElements(By.cssSelector(".unlocked.enabled"))
                     .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1));
             driver.findElements(By.cssSelector(".unlocked.enabled")).get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1).click();
@@ -198,7 +201,7 @@ public class CookieClicker {
         if (building.equals(driver.findElement(By.id("product10"))))
             name = "";
         else if (building.equals(driver.findElement(By.id("product9"))))
-            name = "";
+            name = "Alchemy Lab";
         else if (building.equals(driver.findElement(By.id("product8"))))
             name = "Shipment";
         else if (building.equals(driver.findElement(By.id("product7"))))
