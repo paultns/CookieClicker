@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4806543-7898-4eea-b620-a9c57da7fa4f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CookieSave.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CookieSave.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CookieClicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CookieClicker.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,21 +17,14 @@
       <file leaf-file-name="CookieClicker.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="221" column="55" selection-start-line="221" selection-start-column="55" selection-end-line="221" selection-end-column="55" />
+            <state relative-caret-position="476">
+              <caret line="54" column="19" lean-forward="true" selection-start-line="54" selection-start-column="19" selection-end-line="55" />
               <folding>
                 <element signature="method#CookieClicker#0;class#CookieClicker#0" />
                 <element signature="method#run#0;class#CookieClicker#0" />
                 <element signature="method#setUp#0;class#CookieClicker#0" />
-                <element signature="method#read#0;class#CookieClicker#0" />
                 <element signature="method#save#0;class#CookieClicker#0" />
-                <element signature="method#matchProduct#0;class#CookieClicker#0" />
-                <element signature="method#getGoal#0;class#CookieClicker#0" />
                 <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-                <element signature="e#9993#9994#0" expanded="true" />
-                <element signature="e#10035#10036#0" expanded="true" />
-                <element signature="e#10125#10126#0" expanded="true" />
-                <element signature="e#10171#10172#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -85,7 +75,27 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CookieClicker" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CookieClicker" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CookieClicker" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CookieClicker" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="jdk.selected.JAVA_MODULE" value="10.0" />
@@ -181,7 +191,21 @@
       <option name="project" value="LOCAL" />
       <updated>1528913086759</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="- added algorythm !!!!! wooop">
+      <created>1529015753953</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1529015753953</updated>
+    </task>
+    <task id="LOCAL-00008" summary="- added algorythm !!!!! wooop">
+      <created>1529016179345</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1529016179345</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -190,18 +214,18 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3267827" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.3267827" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3267827" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3267827" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.30167013" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.30092594" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -253,7 +277,8 @@
     <MESSAGE value="- added console updates&#10;- started progress towards making it more OO" />
     <MESSAGE value="- transformed into OO&#10;- added comments" />
     <MESSAGE value="- save update" />
-    <option name="LAST_COMMIT_MESSAGE" value="- save update" />
+    <MESSAGE value="- added algorythm !!!!! wooop" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added algorythm !!!!! wooop" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -269,15 +294,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -297,15 +315,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -318,15 +329,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -339,15 +343,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -372,15 +369,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -393,15 +383,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -426,15 +409,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -447,15 +423,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -475,15 +444,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -496,15 +458,8 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -531,21 +486,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="221" column="55" selection-start-line="221" selection-start-column="55" selection-end-line="221" selection-end-column="55" />
+        <state relative-caret-position="476">
+          <caret line="54" column="19" lean-forward="true" selection-start-line="54" selection-start-column="19" selection-end-line="55" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#matchProduct#0;class#CookieClicker#0" />
-            <element signature="method#getGoal#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-            <element signature="e#9993#9994#0" expanded="true" />
-            <element signature="e#10035#10036#0" expanded="true" />
-            <element signature="e#10125#10126#0" expanded="true" />
-            <element signature="e#10171#10172#0" expanded="true" />
           </folding>
         </state>
       </provider>
