@@ -11,18 +11,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Scanner;
 
 
 public class CookieClicker {
 
     private WebDriver driver;
-    private int cycle;
-    private int round;
-    private int turn;
-    private int loops;
-    private boolean buyUpgrades;
-    private boolean buyBuildings;
+    private Double[] buildingsPrices;
+    private WebElement goal;
 
 
     public CookieClicker() {
@@ -33,6 +30,7 @@ public class CookieClicker {
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("http://orteil.dashnet.org/cookieclicker/");
+        buildingsPrices = new Double[13];
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -45,22 +43,23 @@ public class CookieClicker {
 
         CookieClicker cC = new CookieClicker();
         cC.setUp();
+        cC.pullPrice();
 
-        // initializing inputs
-        cC.turn = 1000;                  // declare how much time each turn should take, in number of for loops
-        cC.loops = 3;                   // declare how many loops to go through before buying all upgrades
-        cC.buyUpgrades = false;         // choose whether to buy upgrades
-        cC.buyBuildings = true;         // choose whether to buy buildings
 
+        // .pieTimer e frenzyu
+
+        System.out.println("Price: " + Double.parseDouble(cC.driver.findElement(By.id("productPrice0")).getText().replaceAll("\\D+", "")));
+/*
         while (true) {
             cC.run();
         }
+        */
     }
 
     // actual run of programs using 2 two loops
     // buys one upgrade and one building at end of each loop
     // buys buildings until no money left at the end of all loops
-    private void run() throws InterruptedException {
+   /* private void run() throws InterruptedException {
 
         cycle++;
         System.out.println("\nCycle nr: " + cycle + ":\n");
@@ -102,7 +101,7 @@ public class CookieClicker {
         System.out.println("\nCycle " + cycle + " ended.");
         round = 0;
     }
-
+*/
     // importing save and disabling resource intensive things
     private void setUp() {
         System.out.println("Setup Sequence!");
@@ -155,9 +154,6 @@ public class CookieClicker {
         }
 
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
-        round = 0;
-        cycle = 0;
-
     }
 
     // reads save code from txt file
@@ -223,8 +219,27 @@ public class CookieClicker {
         else name = "big ass fail";
 
         return name;
+    }   // REDO
+
+    // finds the optimal building to buy
+    private void goal() {
+
     }
 
+    // pulls price of building
+    private void pullPrice() {
+        for (int i = 0; i < buildingsPrices.length; i++)
+            buildingsPrices[i] = Double.parseDouble(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", ""));
+        for (double j : buildingsPrices)
+            System.out.println(j);
+    }
+
+    // pulls production per building
+    /*
+  private void pullProduction () {
+
+    }
+*/
     // verifies element is present
     private boolean isElementPresent(By by) {
         try {
