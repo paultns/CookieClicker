@@ -1,7 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 
@@ -18,14 +17,17 @@ import java.util.Scanner;
 public class CookieClicker {
 
     private WebDriver driver;
-    private int buildings;
     private By goal;
     private String goalName;
     private boolean started = false;
     private int cycleLength;
+    private int buildings;
 
+    // add multiple files
+    // create method to generate number of buildings
+    // find way to set goal for building with no units
 
-    public CookieClicker() {
+    private CookieClicker() {
 
         System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
@@ -46,9 +48,9 @@ public class CookieClicker {
         CookieClicker cC = new CookieClicker();
 
         // set number of unlocked buildings
-        cC.setBuildings(10);
+        cC.buildings = 10;
         // set number of loops between building buys
-        cC.setCycleLength(10);
+        cC.cycleLength = 10;
 
         cC.setUp();
 
@@ -157,8 +159,7 @@ public class CookieClicker {
         System.out.println("\n-- Importing Save! --\n");
         try {
             File txt = new File("CookieSave.txt");
-            Scanner sc = null;
-            sc = new Scanner(txt);
+            Scanner sc = new Scanner(txt);
             sc.useDelimiter("\\Z");
             driver.findElement(By.id("textareaPrompt")).sendKeys(sc.next());
             System.out.println("\n-- Save game imported --\n");
@@ -188,38 +189,8 @@ public class CookieClicker {
                 + "\n");
     }
 
-    // finds name of bought building
-    private String matchProduct(WebElement building) {
-        String name = "";
-        if (building.equals(driver.findElement(By.id("product10"))))
-            name = "";
-        else if (building.equals(driver.findElement(By.id("product9"))))
-            name = "Alchemy Lab";
-        else if (building.equals(driver.findElement(By.id("product8"))))
-            name = "Shipment";
-        else if (building.equals(driver.findElement(By.id("product7"))))
-            name = "Wizard tower";
-        else if (building.equals(driver.findElement(By.id("product6"))))
-            name = "Temple";
-        else if (building.equals(driver.findElement(By.id("product5"))))
-            name = "Bank";
-        else if (building.equals(driver.findElement(By.id("product4"))))
-            name = "Factory";
-        else if (building.equals(driver.findElement(By.id("product3"))))
-            name = "Mine";
-        else if (building.equals(driver.findElement(By.id("product2"))))
-            name = "Farm";
-        else if (building.equals(driver.findElement(By.id("product1"))))
-            name = "Grandma";
-        else if (building.equals(driver.findElement(By.id("product0"))))
-            name = "Cursor";
-        else name = "big ass fail";
-
-        return name;
-    }   // REDO
-
     // pulls efficiency of each building
-    private void getGoal() throws InterruptedException {
+    private void getGoal() {
         Actions move = new Actions(driver);
         BigDecimal producing;
         int index = 0;
@@ -261,15 +232,36 @@ public class CookieClicker {
         }
     }
 
-    // set number of buildings for which the efficiency can be calculated
-    public void setBuildings(int buildings) {
-        this.buildings = buildings;
+/*
+    // finds name of bought building
+    private String matchProduct(WebElement building) {
+        String name = "";
+        if (building.equals(driver.findElement(By.id("product10"))))
+            name = "Portal";
+        else if (building.equals(driver.findElement(By.id("product9"))))
+            name = "Alchemy Lab";
+        else if (building.equals(driver.findElement(By.id("product8"))))
+            name = "Shipment";
+        else if (building.equals(driver.findElement(By.id("product7"))))
+            name = "Wizard tower";
+        else if (building.equals(driver.findElement(By.id("product6"))))
+            name = "Temple";
+        else if (building.equals(driver.findElement(By.id("product5"))))
+            name = "Bank";
+        else if (building.equals(driver.findElement(By.id("product4"))))
+            name = "Factory";
+        else if (building.equals(driver.findElement(By.id("product3"))))
+            name = "Mine";
+        else if (building.equals(driver.findElement(By.id("product2"))))
+            name = "Farm";
+        else if (building.equals(driver.findElement(By.id("product1"))))
+            name = "Grandma";
+        else if (building.equals(driver.findElement(By.id("product0"))))
+            name = "Cursor";
+        else name = "big ass fail";
+        return name;
     }
-
-    // set number of loops to go throu
-    public void setCycleLength(int cycleLength) {
-        this.cycleLength = cycleLength;
-    }
+ */
 }
 
 
