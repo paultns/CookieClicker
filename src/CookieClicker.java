@@ -6,20 +6,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Scanner;
 
 
 public class CookieClicker {
 
     private WebDriver driver;
-    private Double[] buildingsPrices;
-    private WebElement goal;
+    private int buildings;
+    private By goal;
+    private String goalName;
+    private boolean started = false;
+    private int cycleLength;
 
 
     public CookieClicker() {
@@ -30,7 +33,6 @@ public class CookieClicker {
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("http://orteil.dashnet.org/cookieclicker/");
-        buildingsPrices = new Double[13];
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -42,69 +44,61 @@ public class CookieClicker {
 
 
         CookieClicker cC = new CookieClicker();
+
+        // set number of unlocked buildings
+        cC.setBuildings(10);
+        // set number of loops between building buys
+        cC.setCycleLength(10);
+
         cC.setUp();
-        cC.pullPrice();
 
+        cC.getGoal();
 
-        // .pieTimer e frenzyu
-
-        System.out.println("Price: " + Double.parseDouble(cC.driver.findElement(By.id("productPrice0")).getText().replaceAll("\\D+", "")));
-/*
-        while (true) {
+        while (true)
             cC.run();
-        }
-        */
+
     }
 
-    // actual run of programs using 2 two loops
-    // buys one upgrade and one building at end of each loop
-    // buys buildings until no money left at the end of all loops
-   /* private void run() throws InterruptedException {
+    //System.out.println(value1.divide(value2, 2, RoundingMode.DOWN));
+    //Double.parseDouble(cC.driver.findElement(By.id("productPrice0")).getText().replaceAll("\\D+", "")));
 
-        cycle++;
-        System.out.println("\nCycle nr: " + cycle + ":\n");
-        for (int times = 0; times < loops; times++) {
-            round++;
-            for (int i = 0; i < turn; i++) {
-                driver.findElement(By.cssSelector("#bigCookie")).click();
-                if (isElementPresent(By.cssSelector(".shimmer"))) {
-                    Thread.sleep(800);
-                    driver.findElement(By.cssSelector(".shimmer")).click();
-                    System.out.println("\n!! Golden cookie found !!\n");
-                }
+    // actual run of program
+    private void run() throws InterruptedException {
+        if (!started)
+            System.out.println("\n    >>  Cycle Starting\n");
+        else
+            System.out.println("    >> New Cycle Starting");
+        for (int clicks = 0; clicks < cycleLength; clicks++) {
+
+            driver.findElement(By.cssSelector("#bigCookie")).click();
+            if (isElementPresent(By.cssSelector(".shimmer"))) {
+                Thread.sleep(800);
+                driver.findElement(By.cssSelector(".shimmer")).click();
+                System.out.println("\n!! Golden cookie found !!\n");
             }
-            if (isElementPresent(By.cssSelector(".unlocked.enabled")) && buyBuildings) {
-                String bought = matchProduct(driver.findElements(By.cssSelector(".unlocked.enabled"))
-                        .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1));
-                driver.findElements(By.cssSelector(".unlocked.enabled"))
-                        .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1).click();
-                System.out.println("    + Round " + round + ". Bought a Building: " + bought);
-            }
-            System.out.println();
-            save();
         }
-        System.out.println("\nBuying items.");
+        if (isElementPresent(goal)) {
+            driver.findElement(goal).click();
+            System.out.println("\n++ " + goalName + " has been bought.\n");
+            getGoal();
+        } else
+            System.out.println("\n" + goalName + " was not found. Restarting..");
 
-        if (isElementPresent(By.cssSelector(".upgrade.enabled")) && buyUpgrades) {
+        save();
+        started = true;
+/*
+        if (isElementPresent(By.cssSelector(".upgrade.enabled"))) {
             Actions move = new Actions(driver);
             move.moveToElement(driver.findElement(By.cssSelector(".upgrade.enabled"))).build().perform();
             System.out.println(" * Bought Upgrade!\n" + driver.findElement(By.cssSelector(".name")).getText()
                     + ": " + driver.findElement(By.cssSelector(".description")).getText() + "\n");
             driver.findElement(By.cssSelector(".upgrade.enabled")).click();
-        }
-        while (isElementPresent(By.cssSelector(".unlocked.enabled")) && buyBuildings) {
-            String bought = matchProduct(driver.findElements(By.cssSelector(".unlocked.enabled"))
-                    .get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1));
-            driver.findElements(By.cssSelector(".unlocked.enabled")).get(driver.findElements(By.cssSelector(".unlocked.enabled")).size() - 1).click();
-            System.out.println("    + Bought a Building: " + bought);
-        }
-        System.out.println("\nCycle " + cycle + " ended.");
-        round = 0;
-    }
 */
+    }
+
     // importing save and disabling resource intensive things
     private void setUp() {
-        System.out.println("Setup Sequence!");
+        System.out.println("Setup Sequence!\n");
         driver.findElement(By.id("prefsButton")).click();
         driver.findElement(By.linkText("Import save")).click();
 
@@ -154,20 +148,23 @@ public class CookieClicker {
         }
 
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
+        System.out.println("\nSetup Complete!\n");
     }
 
     // reads save code from txt file
     private void read() {
 
-        File txt = new File("CookieSave.txt");
-        Scanner sc = null;
+        System.out.println("\n-- Importing Save! --\n");
         try {
+            File txt = new File("CookieSave.txt");
+            Scanner sc = null;
             sc = new Scanner(txt);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            sc.useDelimiter("\\Z");
+            driver.findElement(By.id("textareaPrompt")).sendKeys(sc.next());
+            System.out.println("\n-- Save game imported --\n");
+        } catch (Exception e) {
+            System.out.println("\n !! -- Savegame could not be imported! -- !!\n");
         }
-        sc.useDelimiter("\\Z");
-        driver.findElement(By.id("textareaPrompt")).sendKeys(sc.next());
 
     }
 
@@ -187,7 +184,7 @@ public class CookieClicker {
 
         }
         driver.findElement(By.linkText("All done!")).click();
-        System.out.println(">> Game Saved! @ " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS)
+        System.out.println("\n>> Game Saved! @ " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS)
                 + "\n");
     }
 
@@ -221,25 +218,39 @@ public class CookieClicker {
         return name;
     }   // REDO
 
-    // finds the optimal building to buy
-    private void goal() {
+    // pulls efficiency of each building
+    private void getGoal() throws InterruptedException {
+        Actions move = new Actions(driver);
+        BigDecimal producing;
+        int index = 0;
+        long min = Integer.MAX_VALUE;
+        long eff;
+        //if (!isElementPresent(By.cssSelector(".pieTimer"))) {
+        System.out.println("Calculating goal..\n");
+        try {
+            for (int i = 0; i < buildings; i++) {
+                move.moveToElement(driver.findElement(By.cssSelector("#product" + i))).build().perform();
+                Thread.sleep(700);
+                producing = new BigDecimal(driver.findElement(By.cssSelector("div.data b")).getText().replaceAll("\\D+", ""));
+                System.out.print("Price for a " + driver.findElement(By.id("productName" + i)).getText() + " is: " +
+                        new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", ""))
+                        + ", and it produces: " + producing);
+                eff = (new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", "")).divide(producing, 0, RoundingMode.DOWN)).longValue();
+                System.out.println(", with an effiency of: " + eff);
+                if (eff == Math.min(eff, min)) {
+                    min = eff;
+                    index = i;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("\n//// Failed to get a goddamn number.. ");
+        }
+        goal = By.cssSelector("#product" + index + ".enabled");
+        goalName = driver.findElement(By.id("productName" + index)).getText();
+        System.out.println("\n* Goal has been set to buy: " + goalName);
 
     }
 
-    // pulls price of building
-    private void pullPrice() {
-        for (int i = 0; i < buildingsPrices.length; i++)
-            buildingsPrices[i] = Double.parseDouble(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", ""));
-        for (double j : buildingsPrices)
-            System.out.println(j);
-    }
-
-    // pulls production per building
-    /*
-  private void pullProduction () {
-
-    }
-*/
     // verifies element is present
     private boolean isElementPresent(By by) {
         try {
@@ -249,4 +260,16 @@ public class CookieClicker {
             return false;
         }
     }
+
+    // set number of buildings for which the efficiency can be calculated
+    public void setBuildings(int buildings) {
+        this.buildings = buildings;
+    }
+
+    // set number of loops to go throu
+    public void setCycleLength(int cycleLength) {
+        this.cycleLength = cycleLength;
+    }
 }
+
+
