@@ -141,11 +141,15 @@ class CookieClicker {
             for (int i = 0; i < buildings; i++) {
                 move.moveToElement(driver.findElement(By.cssSelector("#product" + i))).build().perform();
                 Thread.sleep(700);
-                producing = new BigDecimal(driver.findElement(By.cssSelector("div.data b")).getText().replaceAll("\\D+", ""));
-                System.out.print("Price for a " + driver.findElement(By.id("productName" + i)).getText() + " is: " +
-                        new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", ""))
+                producing = new BigDecimal(driver.findElement(By.cssSelector("div.data b")).getText()
+                        .replaceAll("\\D+", ""));
+                System.out.print("Price for a " + driver.findElement(By.id("productName" + i)).getText() +
+                        " is: " +
+                        new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll
+                                ("\\D+", ""))
                         + ", and it produces: " + producing);
-                eff = (new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", "")).divide(producing, 0, RoundingMode.DOWN)).longValue();
+                eff = (new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll
+                        ("\\D+", "")).divide(producing, 0, RoundingMode.DOWN)).longValue();
                 System.out.println(", with an effiency of: " + eff);
                 if (eff == Math.min(eff, min)) {
                     min = eff;
@@ -194,7 +198,8 @@ class CookieClicker {
 
         }
         driver.findElement(By.linkText("All done!")).click();
-        System.out.println("\n>> Game Saved! @ " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS)
+        System.out.println("\n>> Game Saved! @ " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit
+                .SECONDS)
                 + "\n");
     }
 
