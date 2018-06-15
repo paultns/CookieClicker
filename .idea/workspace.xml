@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4806543-7898-4eea-b620-a9c57da7fa4f" name="Default" comment="">
+    <list default="true" id="f4806543-7898-4eea-b620-a9c57da7fa4f" name="Default" comment="- added algorythm !!!!! wooop">
+      <change afterPath="$PROJECT_DIR$/src/CookieAI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OldMethods" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CookieClicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CookieClicker.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,15 +20,25 @@
       <file leaf-file-name="CookieClicker.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="54" column="19" lean-forward="true" selection-start-line="54" selection-start-column="19" selection-end-line="55" />
+            <state relative-caret-position="272">
+              <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
               <folding>
                 <element signature="method#CookieClicker#0;class#CookieClicker#0" />
                 <element signature="method#run#0;class#CookieClicker#0" />
                 <element signature="method#setUp#0;class#CookieClicker#0" />
+                <element signature="method#read#0;class#CookieClicker#0" />
                 <element signature="method#save#0;class#CookieClicker#0" />
                 <element signature="method#isElementPresent#0;class#CookieClicker#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CookieAI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CookieAI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
             </state>
           </provider>
         </entry>
@@ -39,7 +52,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="OldMethods" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/OldMethods">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -59,8 +88,11 @@
         <option value="$PROJECT_DIR$/src/TestSelenium.java" />
         <option value="$PROJECT_DIR$/src/TestSelenium.java" />
         <option value="$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-        <option value="$PROJECT_DIR$/src/CookieClicker.java" />
         <option value="$PROJECT_DIR$/CookieSave.txt" />
+        <option value="$PROJECT_DIR$/src/OldMethods.java" />
+        <option value="$PROJECT_DIR$/src/OldMethods" />
+        <option value="$PROJECT_DIR$/src/CookieAI.java" />
+        <option value="$PROJECT_DIR$/src/CookieClicker.java" />
       </list>
     </option>
   </component>
@@ -70,13 +102,14 @@
     <option name="width" value="1096" />
     <option name="height" value="1896" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -95,6 +128,7 @@
       </pane>
       <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -121,7 +155,7 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="10" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="CookieClicker" />
+      <option name="MAIN_CLASS_NAME" value="CookieAI" />
       <module name="CookieClicker" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
@@ -205,52 +239,59 @@
       <option name="project" value="LOCAL" />
       <updated>1529016179345</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="- added algorythm !!!!! wooop">
+      <created>1529016261484</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1529016261484</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-1091" width="1096" height="1896" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.3267827" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3267827" />
       <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3267827" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.30092594" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25555557" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3267827" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32943678" />
       <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.4415449" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32943678" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -259,10 +300,9 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info id="Capture Tool" order="6" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32873806" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info id="Favorites" order="5" side_tool="true" />
@@ -288,47 +328,13 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="114" lean-forward="true" selection-start-line="114" selection-end-line="114" />
-          <folding>
-            <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#run#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CookieSave.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2385" selection-start-column="2385" selection-end-column="2385" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="89" column="48" lean-forward="true" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
-          <folding>
-            <element signature="method#CookieClicker#0;class#CookieClicker#0" />
-            <element signature="method#run#0;class#CookieClicker#0" />
-            <element signature="method#setUp#0;class#CookieClicker#0" />
-            <element signature="method#save#0;class#CookieClicker#0" />
-            <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1258">
           <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
           </folding>
@@ -343,6 +349,7 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
           </folding>
@@ -369,6 +376,7 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
           </folding>
@@ -383,6 +391,7 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
           </folding>
@@ -409,6 +418,7 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
           </folding>
@@ -423,6 +433,7 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
           </folding>
@@ -444,6 +455,7 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
           </folding>
@@ -458,6 +470,7 @@
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
           </folding>
@@ -477,6 +490,13 @@
     <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
     <entry file="file://$PROJECT_DIR$/SeleniumPractice.iml" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/6-WorkingWithElementsList.java" />
+    <entry file="file://$PROJECT_DIR$/src/OldMethods.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CookieSave.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -484,14 +504,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/OldMethods">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CookieAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="54" column="19" lean-forward="true" selection-start-line="54" selection-start-column="19" selection-end-line="55" />
+        <state relative-caret-position="272">
+          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
           <folding>
             <element signature="method#CookieClicker#0;class#CookieClicker#0" />
             <element signature="method#run#0;class#CookieClicker#0" />
             <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#read#0;class#CookieClicker#0" />
             <element signature="method#save#0;class#CookieClicker#0" />
             <element signature="method#isElementPresent#0;class#CookieClicker#0" />
           </folding>

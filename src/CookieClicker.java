@@ -14,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 
-public class CookieClicker {
+class CookieClicker {
 
     private WebDriver driver;
     private By goal;
@@ -23,11 +23,8 @@ public class CookieClicker {
     private int cycleLength;
     private int buildings;
 
-    // add multiple files
-    // create method to generate number of buildings
-    // find way to set goal for building with no units
 
-    private CookieClicker() {
+    CookieClicker() {
 
         System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
@@ -42,36 +39,14 @@ public class CookieClicker {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
-
-
-        CookieClicker cC = new CookieClicker();
-
-        // set number of unlocked buildings
-        cC.buildings = 10;
-        // set number of loops between building buys
-        cC.cycleLength = 10;
-
-        cC.setUp();
-
-        cC.getGoal();
-
-        while (true)
-            cC.run();
-
-    }
-
-    //System.out.println(value1.divide(value2, 2, RoundingMode.DOWN));
-    //Double.parseDouble(cC.driver.findElement(By.id("productPrice0")).getText().replaceAll("\\D+", "")));
-
     // actual run of program
-    private void run() throws InterruptedException {
+    void run() throws InterruptedException {
         if (!started)
             System.out.println("\n    >>  Cycle Starting\n");
         else
             System.out.println("    >> New Cycle Starting");
-        for (int clicks = 0; clicks < cycleLength; clicks++) {
 
+        for (int clicks = 0; clicks < cycleLength; clicks++) {
             driver.findElement(By.cssSelector("#bigCookie")).click();
             if (isElementPresent(By.cssSelector(".shimmer"))) {
                 Thread.sleep(800);
@@ -99,7 +74,7 @@ public class CookieClicker {
     }
 
     // importing save and disabling resource intensive things
-    private void setUp() {
+    void setUp() {
         System.out.println("Setup Sequence!\n");
         driver.findElement(By.id("prefsButton")).click();
         driver.findElement(By.linkText("Import save")).click();
@@ -153,6 +128,40 @@ public class CookieClicker {
         System.out.println("\nSetup Complete!\n");
     }
 
+    // pulls efficiency of each building
+    void getGoal() {
+        Actions move = new Actions(driver);
+        BigDecimal producing;
+        int index = 0;
+        long min = Integer.MAX_VALUE;
+        long eff;
+        //if (!isElementPresent(By.cssSelector(".pieTimer"))) {
+        System.out.println("Calculating goal..\n");
+        try {
+            for (int i = 0; i < buildings; i++) {
+                move.moveToElement(driver.findElement(By.cssSelector("#product" + i))).build().perform();
+                Thread.sleep(700);
+                producing = new BigDecimal(driver.findElement(By.cssSelector("div.data b")).getText().replaceAll("\\D+", ""));
+                System.out.print("Price for a " + driver.findElement(By.id("productName" + i)).getText() + " is: " +
+                        new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", ""))
+                        + ", and it produces: " + producing);
+                eff = (new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", "")).divide(producing, 0, RoundingMode.DOWN)).longValue();
+                System.out.println(", with an effiency of: " + eff);
+                if (eff == Math.min(eff, min)) {
+                    min = eff;
+                    index = i;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("\n//// Failed to get a goddamn number.. ");
+        }
+
+        goal = By.cssSelector("#product" + index + ".enabled");
+        goalName = driver.findElement(By.id("productName" + index)).getText();
+        System.out.println("\n* Goal has been set to buy: " + goalName);
+
+    }
+
     // reads save code from txt file
     private void read() {
 
@@ -189,39 +198,6 @@ public class CookieClicker {
                 + "\n");
     }
 
-    // pulls efficiency of each building
-    private void getGoal() {
-        Actions move = new Actions(driver);
-        BigDecimal producing;
-        int index = 0;
-        long min = Integer.MAX_VALUE;
-        long eff;
-        //if (!isElementPresent(By.cssSelector(".pieTimer"))) {
-        System.out.println("Calculating goal..\n");
-        try {
-            for (int i = 0; i < buildings; i++) {
-                move.moveToElement(driver.findElement(By.cssSelector("#product" + i))).build().perform();
-                Thread.sleep(700);
-                producing = new BigDecimal(driver.findElement(By.cssSelector("div.data b")).getText().replaceAll("\\D+", ""));
-                System.out.print("Price for a " + driver.findElement(By.id("productName" + i)).getText() + " is: " +
-                        new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", ""))
-                        + ", and it produces: " + producing);
-                eff = (new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", "")).divide(producing, 0, RoundingMode.DOWN)).longValue();
-                System.out.println(", with an effiency of: " + eff);
-                if (eff == Math.min(eff, min)) {
-                    min = eff;
-                    index = i;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("\n//// Failed to get a goddamn number.. ");
-        }
-        goal = By.cssSelector("#product" + index + ".enabled");
-        goalName = driver.findElement(By.id("productName" + index)).getText();
-        System.out.println("\n* Goal has been set to buy: " + goalName);
-
-    }
-
     // verifies element is present
     private boolean isElementPresent(By by) {
         try {
@@ -232,36 +208,15 @@ public class CookieClicker {
         }
     }
 
-/*
-    // finds name of bought building
-    private String matchProduct(WebElement building) {
-        String name = "";
-        if (building.equals(driver.findElement(By.id("product10"))))
-            name = "Portal";
-        else if (building.equals(driver.findElement(By.id("product9"))))
-            name = "Alchemy Lab";
-        else if (building.equals(driver.findElement(By.id("product8"))))
-            name = "Shipment";
-        else if (building.equals(driver.findElement(By.id("product7"))))
-            name = "Wizard tower";
-        else if (building.equals(driver.findElement(By.id("product6"))))
-            name = "Temple";
-        else if (building.equals(driver.findElement(By.id("product5"))))
-            name = "Bank";
-        else if (building.equals(driver.findElement(By.id("product4"))))
-            name = "Factory";
-        else if (building.equals(driver.findElement(By.id("product3"))))
-            name = "Mine";
-        else if (building.equals(driver.findElement(By.id("product2"))))
-            name = "Farm";
-        else if (building.equals(driver.findElement(By.id("product1"))))
-            name = "Grandma";
-        else if (building.equals(driver.findElement(By.id("product0"))))
-            name = "Cursor";
-        else name = "big ass fail";
-        return name;
+    void setBuildings(int buildings) {
+        this.buildings = buildings;
     }
- */
+
+    void setCycleLength(int cycleLength) {
+        this.cycleLength = cycleLength;
+    }
+
+
 }
 
 
