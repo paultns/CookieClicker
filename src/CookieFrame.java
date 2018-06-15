@@ -5,37 +5,27 @@ import java.awt.event.ActionListener;
 
 public class CookieFrame extends JFrame implements ActionListener {
 
-    private double num;
-    private int[] hours;
-    private String[] projects;
-    private JButton plus25;
-    private JButton minus25;
-    private JButton minus1;
-    private JButton plus1;
-    private JRadioButton email;
-    private JRadioButton sites;
-    private JRadioButton ola;
-    private JButton calculate;
+    private JButton start;;
+    private JRadioButton loopYes;
+    private JRadioButton loopNo;
+    private JRadioButton upgrades;
+    private JRadioButton buildings;
     private JLabel text;
 
     CookieFrame() {
-        this.setTitle("OpenAir Tool");
+        this.setTitle("CookieAutoClicker");
         //this.setSize(1000, 1000);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         Container panel = this.getContentPane();
         panel.setLayout(new GridBagLayout());
         //panel.setBackground(Color.blue);
-        this.minus25 = new JButton("-0.25h");
-        this.minus25.addActionListener(this);
-        this.plus25 = new JButton("+0.25h");
-        this.plus25.addActionListener(this);
-        this.minus1 = new JButton("-1h");
-        this.minus1.addActionListener(this);
-        this.plus1 = new JButton("+1h");
-        this.plus1.addActionListener(this);
-        this.calculate = new JButton("Split!");
-        this.calculate.addActionListener(this);
+        start = new JButton("Run");
+        start.addActionListener(this);
+        loopYes = new JRadioButton("Loop");
+        loopYes.addActionListener(this);
+        loopNo = new JRadioButton("End after current cycle");
+        loopNo.addActionListener(this);
         this.email = new JRadioButton("Email Stream");
         this.sites = new JRadioButton("Sites Stream");
         this.ola = new JRadioButton("OLA Stream");
