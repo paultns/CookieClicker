@@ -1,12 +1,18 @@
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 public class CookieAI {
 
     public static void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+        System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
 
-
-        CookieClicker cC = new CookieClicker();
+        CookieClicker cC = new CookieClicker(new ChromeDriver());
 
         // set number of unlocked buildings
         cC.setBuildings(10);
+
         // set number of loops between building buys
         cC.setCycleLength(10);
 
@@ -14,7 +20,7 @@ public class CookieAI {
 
         cC.getGoal();
 
-        while (true)
+        while (cC.isLoop())
             cC.run();
 
 

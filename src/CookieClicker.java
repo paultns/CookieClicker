@@ -22,14 +22,17 @@ class CookieClicker {
     private boolean started = false;
     private int cycleLength;
     private int buildings;
+    private boolean loop;
+    private boolean upgrade;
 
 
-    CookieClicker() {
+
+    CookieClicker(WebDriver browser) {
 
         System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
         System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
-        driver = new FirefoxDriver();
+        driver = browser;
         driver.manage().window().maximize();
         driver.get("http://orteil.dashnet.org/cookieclicker/");
         try {
@@ -37,6 +40,8 @@ class CookieClicker {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        loop = true;
+        upgrade = false;
     }
 
     // actual run of program
@@ -222,6 +227,23 @@ class CookieClicker {
     }
 
 
+    public boolean isLoop() {
+        return loop;
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
+    }
+
+    // returns if the user wants to buy an upgrade or not
+    public boolean isUpgrade() {
+        return upgrade;
+    }
+
+    // sets
+    public void setUpgrade(boolean upgrade) {
+        this.upgrade = upgrade;
+    }
 }
 
 
