@@ -27,6 +27,37 @@
         return name;
     }
 
-
+// dividing big decimals
 System.out.println(value1.divide(value2, 2, RoundingMode.DOWN));
+
+// parsing strings to number
 Double.parseDouble(cC.driver.findElement(By.id("productPrice0")).getText().replaceAll("\\D+", "")));
+new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll("\\D+", ""))
+
+
+
+
+
+System.out.println((char)27 + "[31m typehere" + (char)27 + "[0m");
+
+
++~~~~~~+~~~~~~+~~~~~~~~~~~+
+|  fg  |  bg  |  color    |
++~~~~~~+~~~~~~+~~~~~~~~~~~+
+|  30  |  40  |  black    |
+|  31  |  41  |  red      |
+|  32  |  42  |  green    |
+|  33  |  43  |  yellow   |
+|  34  |  44  |  blue     |
+|  35  |  45  |  magenta  |
+|  36  |  46  |  cyan     |
+|  37  |  47  |  white    |
+|  39  |  49  |  default  |
++~~~~~~+~~~~~~+~~~~~~~~~~~+
+
+
+
+if (buildings == 1) {
+                goal = By.cssSelector("#product0" + ".enabled");
+                goalName = driver.findElement(By.id("productName0")).getText();
+            } else

@@ -8,25 +8,28 @@ public class CookieAI {
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
         System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
 
-        CookieClicker cC = new CookieClicker(new ChromeDriver());
+        CookieClicker cC = new CookieClicker(new FirefoxDriver());
 
         // set number of unlocked buildings
-        cC.setBuildings(10);
 
         // set number of loops between building buys
-        cC.setCycleLength(10);
 
-        cC.setUp();
+        while (cC.isLoop())             cC.run();
 
-        cC.getGoal();
-
-        while (cC.isLoop())
-            cC.run();
 
 
     }
 }
 
 
-// create method to generate number of buildings
-// find way to set goal for building with no units
+
+// calculate worth by comparing with previous unit price also
+// fix upgrade text
+
+// method to capture next upgrade price.. check if price returned is empty or not
+// calculate worth of buying upgrade also
+
+
+
+// build for repeated try to find an element until succeed (by)
+

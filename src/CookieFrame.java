@@ -10,6 +10,9 @@ public class CookieFrame extends JFrame implements ActionListener {
     private JRadioButton loopNo;
     private JRadioButton upgrades;
     private JRadioButton buildings;
+    private JRadioButton saveFor;
+    private JButton = newGame;
+    private JButton = continueGame;
     private JLabel text;
 
     CookieFrame() {
@@ -23,13 +26,12 @@ public class CookieFrame extends JFrame implements ActionListener {
         start = new JButton("Run");
         start.addActionListener(this);
         loopYes = new JRadioButton("Loop");
-        loopYes.addActionListener(this);
-        loopNo = new JRadioButton("End after current cycle");
-        loopNo.addActionListener(this);
-        this.email = new JRadioButton("Email Stream");
-        this.sites = new JRadioButton("Sites Stream");
-        this.ola = new JRadioButton("OLA Stream");
-        this.text = new JLabel("Hours:  " + String.valueOf(this.num));
+         loopNo = new JRadioButton("End after current cycle");
+         buildings = new JRadioButton("Buy Buildings");
+         Upgrades = new JRadioButton ("Buy Upgrades");
+         saveFor = new JRadioButton ("Save to buy new building");
+
+       this.text = new JLabel("Hours:  " + String.valueOf(this.num));
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -62,7 +64,6 @@ public class CookieFrame extends JFrame implements ActionListener {
 
     }
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource() == this.minus25 && this.num > 0.24)
             this.num = this.num - 0.25;
         else if (e.getSource() == this.plus25)
@@ -71,7 +72,8 @@ public class CookieFrame extends JFrame implements ActionListener {
             this.num--;
         else if (e.getSource() == this.plus1)
             this.num++;
-        else if (e.getSource() == this.calculate && (email.isSelected() || sites.isSelected() || ola.isSelected()) && this.num > 0)
+        else if (e.getSource() == this.calculate && (email.isSelected() || sites.isSelected() || ola
+                .isSelected()) && this.num > 0)
             Output();
         else
             this.text.setText("Error!");
