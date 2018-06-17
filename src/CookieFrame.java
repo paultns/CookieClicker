@@ -1,83 +1,108 @@
-/*
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CookieFrame extends JFrame implements ActionListener {
 
-    private JButton start;;
+    private JButton start;
+    ;
     private JRadioButton loopYes;
     private JRadioButton loopNo;
     private JRadioButton firefox;
     private JRadioButton explorer;
     private JRadioButton chrome;
-    private JButton = newGame;
-    private JButton = continueGame;
-    private JLabel text;
+    private JRadioButton loadGame;
+    private JRadioButton newGame;
+    private JRadioButton continueGame;
+    private JTextField loadSave;
+    private JPanel panel;
+    private JPanel panel2;
+    //private JLabel text;
+    private boolean started;
 
     CookieFrame() {
-        this.setTitle("CookieAutoClicker");
-        //this.setSize(1000, 1000);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
-        Container panel = this.getContentPane();
-        panel.setLayout(new GridBagLayout());
+        started = false;
+        setTitle("CookieAutoClicker");
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        Container frame = getContentPane();
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(0, 3));
+        panel2 = new JPanel();
+        panel2.setLayout(new GridLayout(0,1));
+
         //panel.setBackground(Color.blue);
+
         start = new JButton("Run");
         start.addActionListener(this);
+
+        final ButtonGroup browsers = new ButtonGroup();
+        chrome = new JRadioButton("Open in Chrome");
+        firefox = new JRadioButton("Open in Firefox");
+        explorer = new JRadioButton("Open in InternetExplorer");
+        browsers.add(firefox);
+        browsers.add(chrome);
+        browsers.add(explorer);
+
+        final ButtonGroup game = new ButtonGroup();
+        newGame = new JRadioButton("New Game");
+        loadGame = new JRadioButton("Load");
+        continueGame = new JRadioButton("Continue");
+        game.add(loadGame);
+        game.add(newGame);
+        game.add(continueGame);
+
+        final ButtonGroup loopGame = new ButtonGroup();
         loopYes = new JRadioButton("Loop");
-         loopNo = new JRadioButton("End after current cycle");
-         chrome = new JRadioButton("Open in Chrome");
-         firefox = new JRadioButton ("Open in Firefox");
-         explorer = new JRadioButton ("Open in InternetExplorer");
+        loopNo = new JRadioButton("End after current cycle");
+        loopGame.add(loopYes);
+        loopGame.add(loopNo);
 
-       this.text = new JLabel("Hours:  " + String.valueOf(this.num));
+        loadSave = new JTextField();
 
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 40;
-        c.weightx = 0.5;
-        c.gridx = GridBagConstraints.RELATIVE;
-        panel.add(this.text, c);
-        c.gridy = 1;
-        panel.add(this.minus1, c);
-        panel.add(this.plus1, c);
-        c.gridy = 2;
-        panel.add(this.minus25, c);
-        panel.add(this.plus25, c);
-        final ButtonGroup streams = new ButtonGroup();
-        streams.add(this.email);
-        streams.add(this.ola);
-        streams.add(this.sites);
-        c.gridy = 3;
-        panel.add(this.email, c);
-        panel.add(this.sites, c);
-        panel.add(this.ola, c);
-        c.weighty = 1.0;
-        c.anchor = GridBagConstraints.PAGE_END;
-        c.gridy = 4;
-        c.gridwidth = GridBagConstraints.REMAINDER;
-        panel.add(this.calculate, c);
+        panel.add(chrome);
+        panel.add(firefox);
+        panel.add(explorer);
 
-        this.pack();
-        this.setVisible(true);
+        panel.add(loadSave);
 
+        panel.add(newGame);
+        panel.add(loadGame);
+        panel.add(continueGame);
+
+        frame.add(panel,BorderLayout.NORTH);
+        frame.add(loadSave, BorderLayout.CENTER);
+        frame.add(panel2,BorderLayout.SOUTH);
+        setSize(1000, 3000);
+        //panel.add(loopYes);
+        //panel.add(loopNo);
+
+
+        panel2.add(start);
+
+        pack();
+        setVisible(true);
     }
+
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.minus25 && this.num > 0.24)
-            this.num = this.num - 0.25;
-        else if (e.getSource() == this.plus25)
-            this.num = this.num + 0.25;
-        else if (e.getSource() == this.minus1 && this.num > 0.99)
-            this.num--;
-        else if (e.getSource() == this.plus1)
-            this.num++;
-        else if (e.getSource() == this.calculate && (email.isSelected() || sites.isSelected() || ola
-                .isSelected()) && this.num > 0)
-            Output();
-        else
-            this.text.setText("Error!");
-        this.text.setText("Hours:  " + String.valueOf(this.num));  //refreshes the value
+        if (e.getSource() == start) {
+            if (!newGame.isSelected() && !loadGame.isSelected() && !continueGame.isSelected())
+                System.out.println("choose game error");
+            if (!firefox.isSelected() && !chrome.isSelected() && !explorer.isSelected())
+                System.out.println("choose browser error");
+            if (started)
+                System.out.println("Game already started");
+            else {
+                started = true;
+                start.setText("Update Game");
+                panel.add(loopYes);
+                panel.add(loopNo);
+                //panel.add(start);
+                pack();
+            }
+        }
     }
 }
-*/

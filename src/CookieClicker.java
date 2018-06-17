@@ -30,17 +30,10 @@ class CookieClicker {
 
     CookieClicker(WebDriver browser) {
 
-        //System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
-        //System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
         driver = browser;
         driver.manage().window().maximize();
         driver.get("http://orteil.dashnet.org/cookieclicker/");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         cycleLength = 1;
         loop = true;
         minutes = 1;
@@ -49,7 +42,13 @@ class CookieClicker {
         buyNewBuilding = false;
         newBuildingFound = false;
         cps = new BigDecimal(0);
-        newGame = true;
+        newGame = false;
+        try {
+            Thread.sleep(3000);
+            driver.findElement(By.id("prefsButton")).click();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         setUp();
     }
@@ -58,7 +57,6 @@ class CookieClicker {
     private void setUp() {
 
         System.out.println("\nSetup Sequence!\n");
-        driver.findElement(By.id("prefsButton")).click();
 
         if (!newGame)
             read();
@@ -126,15 +124,15 @@ class CookieClicker {
 
         //driver.findElement(By.id("storeBulk10")).click();
 
-        System.out.println("\nSetup Complete! Game starting at: " + ZonedDateTime.now().toLocalTime
-                ().truncatedTo(ChronoUnit.SECONDS));
+        System.out.println("Setup Complete! Game starting at: " + ZonedDateTime.now().toLocalTime
+                ().truncatedTo(ChronoUnit.SECONDS) + "\n");
 
         //driver.manage().window().setPosition(new Point(0, -2000));
     }
 
     // actual run of program
     void run() throws InterruptedException {
-        System.out.print((char) 27 + "[34m>> New Cycle Starting. ");
+        System.out.print((char) 27 + "[34>> New Cycle Starting. ");
         //System.out.print("\n>> New Cycle Starting. ");
         if (upgrade)
             System.out.println("Will buy a new upgrade." + (char) 27 + "[0m\n");
@@ -158,11 +156,24 @@ class CookieClicker {
 
     // golden cookie
     private void goldenCookie() throws InterruptedException {
-        Thread.sleep(800);
-        driver.findElement(By.cssSelector(".shimmer")).click();
-        Thread.sleep(500);
+        while (true) {
+            try {
+                driver.findElement(By.cssSelector(".shimmer")).click();
+                break;
+            } catch (Exception e) {
+                System.out.println((char) 27 + "[31m" + "Golden cookie fail. Retrying..." + (char) 27 + "[0m\n");
+            }
+        }
         System.out.println((char) 27 + "[33m!! Golden cookie found !!\n");
-        System.out.println(driver.findElement(By.id("particle0")).getText() + (char) 27 + "[0m\n");
+
+        while (true) {
+            try {
+                System.out.println(driver.findElement(By.id("particle0")).getText() + (char) 27 + "[0m\n");
+                break;
+            } catch (Exception e) {
+                System.out.println((char) 27 + "[31m" + "Golden cookie text fail. Retrying..." + (char) 27 + "[0m\n");
+            }
+        }
     }
 
     // buying method
@@ -188,7 +199,7 @@ class CookieClicker {
         } else {
             cycleLength++;
             System.out.println((char) 27 + "[31m" + goalName + " could not be afforded. Trying again " + "next cycle..."
-                    + (char) 27 + "[0m Increasing number of turns per cycle to " + cycleLength + "\n");
+                    + (char) 27 + "[0m Increasing number of turns per cycle to " + cycleLength);
         }
     }
 
@@ -243,7 +254,7 @@ class CookieClicker {
             if (driver.findElement(By.id("productOwned" + index)).getText().isEmpty()) {
                 newBuildingFound = true;
                 System.out.print("\nNew unlocked building found: " + (char) 27 + "[32m" + driver.findElement(By.id
-                        ("productName" + index)).getAttribute("textContent") + (char) 27 + "[0m");
+                        ("productName" + index)).getAttribute("textContent") + (char) 27 + "[0m\n");
                 break;
             } else count++;
         }
@@ -311,7 +322,7 @@ class CookieClicker {
             }
     }
 
-    // algorhtym to decide if it's worth it to buy a new building
+    // algorhtym to decide if it's worth it to buy a new building or upgrade
     private boolean evolve() {
         if (getUpgradePrice().compareTo(new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1)))
                 .getText()
@@ -340,14 +351,11 @@ class CookieClicker {
         try {
             double minutesTo;
             minutesTo = (new BigDecimal(driver.findElement(By.id("productPrice" + buildings)).getText()
-                    .replaceAll("\\D+", ""))
-                    .divide(cps, 2, RoundingMode.UP))
+                    .replaceAll("\\D+", "")).divide(cps, 2, RoundingMode.UP))
                     .divide(BigDecimal.valueOf(60), 2, RoundingMode.UP).doubleValue();
-            System.out.println((char) 27 + "[36m" + " > Next building can be afforded in " + minutesTo + (char) 27 +
-                    "[0m " +
-                    "Must be under " + minutes + " minutes. Price for next building: " +
-                    driver.findElement(By.id("productPrice" + buildings)).getText()
-                            .replaceAll("\\D+", ""));
+            System.out.println((char) 27 + "[36m" + " > Next building can be afforded in " + minutesTo + " minutes." +
+                    +(char) 27 + "[0m " + "Must be under " + minutes + " minutes. Price for next building: " +
+                    driver.findElement(By.id("productPrice" + buildings)).getText().replaceAll("\\D+", ""));
 
 
             if (minutesTo < minutes) {
@@ -361,7 +369,7 @@ class CookieClicker {
             }
         } catch (ArithmeticException e) {
             System.out.println((char) 27 + "[31mERROR!! Skipping new building calculation. Following error has been " +
-                    "encountered: \"" + e.getMessage() + "\""+ (char) 27 + "[0m");
+                    "encountered: \"" + e.getMessage() + "\"" + (char) 27 + "[0m");
         }
 
         return false;
@@ -411,6 +419,28 @@ class CookieClicker {
 
     }
 
+    // reads a save code from the input box
+    private void read(String saveGame) {
+        System.out.println("\n-- Importing Save! --\n");
+        try {
+            driver.findElement(By.linkText("Import save")).click();
+            driver.findElement(By.id("textareaPrompt")).sendKeys(saveGame);
+            driver.findElement(By.linkText("Load")).click();
+            try {
+                driver.findElement(By.cssSelector("#bigCookie")).click();
+            } catch (Exception e) {
+                driver.findElement(By.linkText("Nevermind")).click();
+                System.out.println((char) 27 + "[31m\n   !!! Corrupted Save code !!!\n" + (char) 27 + "[0m");
+            }
+            System.out.println("\n-- Save game imported --\n");
+        } catch (Exception e) {
+            e.getMessage();
+            driver.findElement(By.linkText("Nevermind")).click();
+            System.out.println((char) 27 + "[31m\n !! -- Savegame could not be imported! Check that file " +
+                    "is present-- !!\n" + (char) 27 + "[0m");
+        }
+    }
+
     // saves game to txt file
     private void save() {
         try {
@@ -448,5 +478,4 @@ class CookieClicker {
     public void setLoop(boolean bool) {
         this.loop = bool;
     }
-
 }
