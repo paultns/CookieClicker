@@ -8,9 +8,9 @@ public class CookieFrame extends JFrame implements ActionListener {
     private JButton start;;
     private JRadioButton loopYes;
     private JRadioButton loopNo;
-    private JRadioButton upgrades;
-    private JRadioButton buildings;
-    private JRadioButton saveFor;
+    private JRadioButton firefox;
+    private JRadioButton explorer;
+    private JRadioButton chrome;
     private JButton = newGame;
     private JButton = continueGame;
     private JLabel text;
@@ -27,9 +27,9 @@ public class CookieFrame extends JFrame implements ActionListener {
         start.addActionListener(this);
         loopYes = new JRadioButton("Loop");
          loopNo = new JRadioButton("End after current cycle");
-         buildings = new JRadioButton("Buy Buildings");
-         Upgrades = new JRadioButton ("Buy Upgrades");
-         saveFor = new JRadioButton ("Save to buy new building");
+         chrome = new JRadioButton("Open in Chrome");
+         firefox = new JRadioButton ("Open in Firefox");
+         explorer = new JRadioButton ("Open in InternetExplorer");
 
        this.text = new JLabel("Hours:  " + String.valueOf(this.num));
 

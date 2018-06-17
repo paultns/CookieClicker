@@ -16,11 +16,11 @@ class CookieClicker {
     private WebDriver driver;
     private By goal;
     private String goalName;
+    private String upgradeName;
     private int cycleLength;
     private int buildings;
     private double minutes;
     private BigDecimal cps;
-    private BigDecimal upgradePrice;
     private boolean newBuildingFound;
     private boolean buyNewBuilding; // user decides if he wishes to save for the unlocked building
     private boolean upgrade; // user decides if he wishes to save for next upgrade
@@ -30,9 +30,9 @@ class CookieClicker {
 
     CookieClicker(WebDriver browser) {
 
-        System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
-        System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
+        //System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+        //System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
         driver = browser;
         driver.manage().window().maximize();
         driver.get("http://orteil.dashnet.org/cookieclicker/");
@@ -45,11 +45,11 @@ class CookieClicker {
         loop = true;
         minutes = 1;
         upgrade = false;
+        upgradeName = "";
         buyNewBuilding = false;
-        newGame = true;
         newBuildingFound = false;
         cps = new BigDecimal(0);
-        upgradePrice = new BigDecimal(0);
+        newGame = true;
 
         setUp();
     }
@@ -99,14 +99,19 @@ class CookieClicker {
             System.out.println("Alt cookie sound button already depressed");
         }
         try {
-            driver.findElement(By.linkText("Defocus OFF")).click();
+            driver.findElement(By.linkText("Short numbers ON")).click();
         } catch (Exception e) {
-            System.out.println("Defocus button already pressed");
+            System.out.println("Short numbers button already depressed");
         }
         try {
             driver.findElement(By.linkText("Fast notes OFF")).click();
         } catch (Exception e) {
             System.out.println("Fast notes button already pressed");
+        }
+        try {
+            driver.findElement(By.linkText("Defocus OFF")).click();
+        } catch (Exception e) {
+            System.out.println("Defocus button already pressed");
         }
 
 
@@ -121,100 +126,112 @@ class CookieClicker {
 
         //driver.findElement(By.id("storeBulk10")).click();
 
-        System.out.println("\nSetup Complete!\n");
+        System.out.println("\nSetup Complete! Game starting at: " + ZonedDateTime.now().toLocalTime
+                ().truncatedTo(ChronoUnit.SECONDS));
 
         //driver.manage().window().setPosition(new Point(0, -2000));
     }
 
     // actual run of program
     void run() throws InterruptedException {
-        System.out.print((char) 27 + "[34m\n>> New Cycle Starting. ");
+        System.out.print((char) 27 + "[34m>> New Cycle Starting. ");
         //System.out.print("\n>> New Cycle Starting. ");
         if (upgrade)
-            System.out.println("Will buy a new upgrade.\n" + (char) 27 + "[0m");
+            System.out.println("Will buy a new upgrade." + (char) 27 + "[0m\n");
         else if (buyNewBuilding)
-            System.out.println("Will buy a new building.\n" + (char) 27 + "[0m");
+            System.out.println("Will buy a new building." + (char) 27 + "[0m\n");
         else
-            System.out.println("Will buy the most efficient building.\n" + (char) 27 + "[0m");
+            System.out.println("Will buy the most efficient building." + (char) 27 + "[0m\n");
 
         for (int loops = 0; loops < cycleLength; loops++)
-            for (int clicks = 0; clicks < 20; clicks++) {
+            for (int clicks = 0; clicks < 11; clicks++) {
                 driver.findElement(By.cssSelector("#bigCookie")).click();
-                if (isElementPresent(By.cssSelector(".shimmer"))) {
-                    goldenCookie();
-                }
+                if (isElementPresent(By.cssSelector(".shimmer"))) goldenCookie();
+
             }
 
-        if (upgrade)
-            buyUpgrade();
-        else
-            buy();
+        buy();
 
-        save();
+        //save();
 
     }
 
-    //golden cookie
+    // golden cookie
     private void goldenCookie() throws InterruptedException {
         Thread.sleep(800);
         driver.findElement(By.cssSelector(".shimmer")).click();
         Thread.sleep(500);
-        System.out.println((char) 27 + "[33m\n!! Golden cookie found !!\n");
-        System.out.println(driver.findElement(By.id("particle0")).getText() + (char) 27 + "[0m");
-        //System.out.println(driver.findElement(By.cssSelector("#particle0 div")).getText() + (char) 27 + "[0m");
+        System.out.println((char) 27 + "[33m!! Golden cookie found !!\n");
+        System.out.println(driver.findElement(By.id("particle0")).getText() + (char) 27 + "[0m\n");
     }
 
-    // default buy most effiecient building
+    // buying method
     private void buy() {
         if (isElementPresent(goal)) {
             driver.findElement(goal).click();
             //System.out.println("\n++ " + goalName + " has been bought.\n");
-            System.out.println((char) 27 + "[32m\n   ++  " + goalName + " has been bought.\n" + (char) 27 + "[0m");
-            getGoal();
-            updateCps();
+            System.out.println((char) 27 + "[32m   ++  " + goalName + " has been bought." + (char) 27 + "[0m\n");
+            if (upgrade) {
+                System.out.println((char) 27 + "[35m" + upgradeName + (char) 27 + "[0m\n");
+                upgrade = false;
+            }
             if (cycleLength > 1) {
                 cycleLength--;
-                System.out.println(" Decreasing cycle duration.\n");
+                System.out.println(" Decreasing number of turns per cycle to " + cycleLength + "\n");
             }
             if (buyNewBuilding) {
                 buyNewBuilding = false;
                 newBuilding();
-                minutes += 3;
             }
+            updateCps();
+            getGoal();
         } else {
             cycleLength++;
-            System.out.println((char) 27 + "[31m \n" + goalName + " could not be afforded. Trying again " +
-                    "next cycle..." + (char) 27 + "[0m Increasing cycle duration.");
+            System.out.println((char) 27 + "[31m" + goalName + " could not be afforded. Trying again " + "next cycle..."
+                    + (char) 27 + "[0m Increasing number of turns per cycle to " + cycleLength + "\n");
         }
-
     }
 
-    // buys upgrade
-    private void buyUpgrade() {
-        if (isElementPresent(goal)) {
-            System.out.println(" * Bought Upgrade!");
+    // retrieves the next upgrade's price
+    private BigDecimal getUpgradePrice() {
+        BigDecimal upgradePrice;
+        while (true)
             try {
                 Actions move = new Actions(driver);
-                move.moveToElement(driver.findElement(By.cssSelector(".upgrade.enabled"))).build()
-                        .perform();
-                Thread.sleep(1000);
-                System.out.println("\n" + driver.findElement(By.cssSelector(".name"))
-                        .getText()
-                        + ": " + driver.findElement(By.cssSelector(".description")).getText() + "\n");
+                move.moveToElement(driver.findElement(By.cssSelector("#upgrade0"))).build().perform();
+                Thread.sleep(200);
+                upgradePrice = new BigDecimal(driver.findElement(By.cssSelector("#tooltip .price")).getAttribute
+                        ("textContent").replaceAll("[^\\d]", ""));
+                if (upgradePrice != null) {
+                    System.out.println((char) 27 + "[36m -upgrade price pull succeeded " + (char) 27 + "[0m" +
+                            upgradePrice + "\n");
+                    break;
+                }
+                System.out.println((char) 27 + "[31m -upgrade price pull error. retrying.." + (char) 27 + "[0m");
             } catch (Exception e) {
-                System.out.println("Description could not be retrieved at this moment :(");
+                System.out.println((char) 27 + "[31m -upgrade price pull error. retrying.." + (char) 27 + "[0m");
             }
-            driver.findElement(goal).click();
-            upgrade = false;
-            getGoal();
-        } else
-            System.out.println(" * No unlocked upgrade found at this time.\n");
-        //upgrade = false;
+        return upgradePrice;
     }
 
-    // retrieves the next upgrade's price and text
+    // retrieves the next upgrade's text
     private void getUpgrade() {
+        while (true)
+            try {
+                Actions move = new Actions(driver);
+                move.moveToElement(driver.findElement(By.cssSelector("#upgrade0"))).build().perform();
+                Thread.sleep(500);
+                goalName = driver.findElement(By.cssSelector("#tooltip .name")).getAttribute("textContent");
+                upgradeName = driver.findElement(By.cssSelector("#tooltip .description")).getAttribute("textContent");
+                if (!upgradeName.isEmpty() && !goalName.isEmpty()) {
+                    System.out.println((char) 27 + "[36m -upgrade text pull succeeded." + (char) 27 + "[0m\n");
+                    break;
+                }
 
+                System.out.println((char) 27 + "[31m -upgrade pull error. retrying.." + (char) 27 + "[0m");
+            } catch (Exception e) {
+                System.out.println((char) 27 + "[31m -upgrade pull error. retrying.." + (char) 27 + "[0m");
+            }
     }
 
     // pulls number of already owned buildings and the next new unlocked building
@@ -231,11 +248,13 @@ class CookieClicker {
             } else count++;
         }
         buildings = count;
+        if (count > 0)
+            minutes = count * 2.25;
         if (!newBuildingFound) {
             System.out.print("No new building found");
         }
 
-        System.out.println(". Number of already bought buildings: " + count);
+        System.out.println(". Number of already bought buildings: " + count + "\n");
         if (buildings == 0) {
             System.out.println("\nNo pre-owned buildings found. Saving for the next new building\n");
             buyNewBuilding = true;
@@ -261,14 +280,13 @@ class CookieClicker {
                 for (int i = 0; i < buildings; i++) {
                     try {
                         move.moveToElement(driver.findElement(By.cssSelector("#product" + i))).build().perform();
-                        Thread.sleep(700);
-                        producing = new BigDecimal(driver.findElement(By.cssSelector("div.data b")).getText()
-                                .replaceAll("\\D+", ""));
-                        System.out.print("Price for a " + driver.findElement(By.id("productName" + i)).getText() +
-                                " is: " +
+                        Thread.sleep(100);
+                        producing = new BigDecimal(driver.findElement(By.cssSelector("div.data b")).getAttribute
+                                ("textContent").replaceAll("\\D+", ""));
+                        System.out.print("Price for a " + driver.findElement(By.id("productName" + i)).getText() + " " +
+                                "is: " +
                                 new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll
-                                        ("\\D+", ""))
-                                + ", and it produces: " + producing);
+                                        ("\\D+", "")) + ", and it produces: " + producing);
                         eff = (new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll
                                 ("\\D+", "")).divide(producing, 0, RoundingMode.DOWN)).longValue();
                         System.out.println(", with an effiency of: " + eff);
@@ -293,46 +311,59 @@ class CookieClicker {
             }
     }
 
-
     // algorhtym to decide if it's worth it to buy a new building
     private boolean evolve() {
-        if (upgradePrice.compareTo(new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1))).getText()
+        if (getUpgradePrice().compareTo(new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1)))
+                .getText()
                 .replaceAll("\\D+", ""))) < 0) {
             upgrade = true;
-            goal = By.cssSelector(".upgrade.enabled");
-            return true;
-        }
-        if (new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1))).getText().replaceAll("\\D+", ""))
-                .compareTo(new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1))).getText()
-                        .replaceAll("\\D+", ""))) > 0) {
-            goal = By.cssSelector("#product" + buildings + ".enabled");
-            goalName = driver.findElement(By.id("productName" + buildings))
-                    .getAttribute("textContent");
-            System.out.println("\nProfitable to buy a new unlocked building. Setting goal for " +
-                    (char) 27 + "[32m" + goalName + (char) 27 + "[0m\n");
-            buyNewBuilding = true;
-            return true;
-        }
-        int minutesTo;
-        minutesTo = (new BigDecimal(driver.findElement(By.id("productPrice" + buildings)).getText()
-                .replaceAll("\\D+", ""))
-                .divide(cps, 0, RoundingMode.UP))
-                .divide(BigDecimal.valueOf(60), 0, RoundingMode.UP).intValue();
-        System.out.println((char) 27 + "[36m" + "\n > Next building can be afforded in " + minutesTo + (char) 27 +
-                "[0m " +
-                "Must be under " + minutes + " minutes. Price for next building: " +
-                driver.findElement(By.id("productPrice" + buildings)).getText()
-                        .replaceAll("\\D+", ""));
-
-        if (minutesTo < minutes) {
-            goal = By.cssSelector("#product" + buildings + ".enabled");
-            goalName = driver.findElement(By.id("productName" + buildings))
-                    .getAttribute("textContent");
-            System.out.println("\nProfitable to buy a new unlocked building. Setting goal for " +
+            getUpgrade();
+            goal = By.cssSelector("#upgrade0.enabled");
+            System.out.println("Profitable to buy a new upgrade. Setting goal for " +
                     (char) 27 + "[32m" + goalName + (char) 27 + "[0m \n");
-            buyNewBuilding = true;
             return true;
         }
+ /*
+            if (new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1))).getText().replaceAll
+            ("\\D+", ""))
+                    .compareTo(new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1))).getText()
+                            .replaceAll("\\D+", ""))) > 0) {
+                goal = By.cssSelector("#product" + buildings + ".enabled");
+                goalName = driver.findElement(By.id("productName" + buildings))
+                        .getAttribute("textContent");
+                System.out.println("Profitable to buy a new unlocked building. Setting goal for " +
+                        (char) 27 + "[32m" + goalName + (char) 27 + "[0m\n");
+                buyNewBuilding = true;
+                return true;
+            }
+*/
+        try {
+            double minutesTo;
+            minutesTo = (new BigDecimal(driver.findElement(By.id("productPrice" + buildings)).getText()
+                    .replaceAll("\\D+", ""))
+                    .divide(cps, 2, RoundingMode.UP))
+                    .divide(BigDecimal.valueOf(60), 2, RoundingMode.UP).doubleValue();
+            System.out.println((char) 27 + "[36m" + " > Next building can be afforded in " + minutesTo + (char) 27 +
+                    "[0m " +
+                    "Must be under " + minutes + " minutes. Price for next building: " +
+                    driver.findElement(By.id("productPrice" + buildings)).getText()
+                            .replaceAll("\\D+", ""));
+
+
+            if (minutesTo < minutes) {
+                goal = By.cssSelector("#product" + buildings + ".enabled");
+                goalName = driver.findElement(By.id("productName" + buildings))
+                        .getAttribute("textContent");
+                System.out.println("Profitable to buy a new unlocked building. Setting goal for " +
+                        (char) 27 + "[32m" + goalName + (char) 27 + "[0m \n");
+                buyNewBuilding = true;
+                return true;
+            }
+        } catch (ArithmeticException e) {
+            System.out.println((char) 27 + "[31mERROR!! Skipping new building calculation. Following error has been " +
+                    "encountered: \"" + e.getMessage() + "\""+ (char) 27 + "[0m");
+        }
+
         return false;
 
     }
@@ -340,11 +371,10 @@ class CookieClicker {
     // updates the cookies per second
     private void updateCps() {
         if (isElementPresent(By.cssSelector(".pieTimer"))) {
-            System.out.println((char) 27 + "[31m> Cookie multiplier underway. Not updating cps" + (char) 27 + "[0m");
-        }
-        while (true) {
+            System.out.println((char) 27 + "[31m> Cookie multiplier underway. Not updating cps" + (char) 27 + "[0m\n");
+        } else while (true) {
             try {
-                cps = new BigDecimal(driver.findElement(By.cssSelector("#cookies div")).getText()
+                cps = new BigDecimal(driver.findElement(By.cssSelector("#cookies div")).getAttribute("textContent")
                         .replaceAll("[^\\d.]", ""));
                 System.out.println((char) 27 + "[36m -cps updated:" + (char) 27 + "[0m " + cps + "\n");
                 break;
@@ -383,29 +413,20 @@ class CookieClicker {
 
     // saves game to txt file
     private void save() {
-
-        driver.findElement(By.linkText("Export save")).click();
-
-        File txt = new File("CookieSave.txt");
-        PrintWriter saveCookies;
         try {
+            driver.findElement(By.linkText("Save")).click();
+            driver.findElement(By.linkText("Export save")).click();
+            File txt = new File("CookieSave.txt");
+            PrintWriter saveCookies;
             saveCookies = new PrintWriter(txt);
             saveCookies.println(driver.findElement(By.id("textareaPrompt")).getText());
             saveCookies.close();
-        } catch (Exception io) {
-            System.out.println(io.getMessage());
-
+            driver.findElement(By.linkText("All done!")).click();
+            System.out.println((char) 27 + "[35m      >> Game Saved! @ " + ZonedDateTime.now().toLocalTime
+                    ().truncatedTo(ChronoUnit.SECONDS) + (char) 27 + "[0m");
+        } catch (Exception e) {
+            System.out.println((char) 27 + "[31m      >> Game could not be saved at this time!" + (char) 27 + "[0m");
         }
-        driver.findElement(By.linkText("All done!")).click();
-        //System.out.println("\n      >> Game Saved! @ " + ZonedDateTime.now().toLocalTime().truncatedTo
-        //        (ChronoUnit.SECONDS) + "\n");
-        System.out.println((char) 27 + "[35m \n      >> Game Saved! @ " + ZonedDateTime.now().toLocalTime
-                ().truncatedTo(ChronoUnit.SECONDS) + (char) 27 + "[0m");
-    }
-
-    // foolproof method of clicking sometbhing
-    private void cClick(By element) {
-
     }
 
     // verifies element is present
@@ -418,12 +439,8 @@ class CookieClicker {
         }
     }
 
-    void setCycleLength(int cycleLength) {
-        this.cycleLength = cycleLength;
-    }
-
     // getter for the loop bool
-    public boolean isLoop() {
+    boolean isLoop() {
         return loop;
     }
 
@@ -432,25 +449,4 @@ class CookieClicker {
         this.loop = bool;
     }
 
-    // returns if the user wants to buy an upgrade or not
-    public boolean isUpgrade() {
-        return upgrade;
-    }
-
-    // sets the decision to buy or not upgrades
-    public void setUpgrade(boolean bool) {
-        this.upgrade = bool;
-    }
-
-    // returns if the user wants to buy an upgrade or not
-    public boolean isBuyNewBuilding() {
-        return buyNewBuilding;
-    }
-
-    // sets the decision to buy or not upgrades
-    public void setBuyNewBuilding(boolean bool) {
-        this.buyNewBuilding = bool;
-    }
 }
-
-
