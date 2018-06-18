@@ -1,4 +1,6 @@
 
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +25,11 @@ public class CookieFrame extends JFrame implements ActionListener {
     private boolean started;
 
     CookieFrame() {
+
+        System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
+
         started = false;
         setTitle("CookieAutoClicker");
 
@@ -30,9 +37,9 @@ public class CookieFrame extends JFrame implements ActionListener {
         setResizable(false);
         Container frame = getContentPane();
         panel = new JPanel();
-        panel.setLayout(new GridLayout(0, 3));
+        panel.setLayout(new GridLayout(0, 3, 0, 10));
         panel2 = new JPanel();
-        panel2.setLayout(new GridLayout(0,1));
+        panel2.setLayout(new GridLayout(0, 1));
 
         //panel.setBackground(Color.blue);
 
@@ -40,9 +47,9 @@ public class CookieFrame extends JFrame implements ActionListener {
         start.addActionListener(this);
 
         final ButtonGroup browsers = new ButtonGroup();
-        chrome = new JRadioButton("Open in Chrome");
-        firefox = new JRadioButton("Open in Firefox");
-        explorer = new JRadioButton("Open in InternetExplorer");
+        chrome = new JRadioButton("Chrome");
+        firefox = new JRadioButton("Firefox");
+        explorer = new JRadioButton("InternetExplorer");
         browsers.add(firefox);
         browsers.add(chrome);
         browsers.add(explorer);
@@ -73,35 +80,48 @@ public class CookieFrame extends JFrame implements ActionListener {
         panel.add(loadGame);
         panel.add(continueGame);
 
-        frame.add(panel,BorderLayout.NORTH);
+        frame.add(panel, BorderLayout.NORTH);
         frame.add(loadSave, BorderLayout.CENTER);
-        frame.add(panel2,BorderLayout.SOUTH);
-        setSize(1000, 3000);
-        //panel.add(loopYes);
-        //panel.add(loopNo);
+        frame.add(panel2, BorderLayout.SOUTH);
 
+        frame.setPreferredSize(new Dimension(350, 300));
+        panel2.setPreferredSize(new Dimension(0, 50));
 
         panel2.add(start);
-
-        pack();
         setVisible(true);
+        pack();
+
+        Console console = new Console();
+
     }
 
+
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == start) {
+        if (e.getSource() == start && ((!newGame.isSelected() && !loadGame.isSelected() && !continueGame.isSelected())
+                || (!firefox.isSelected() && !chrome.isSelected() && !explorer.isSelected()))) {
             if (!newGame.isSelected() && !loadGame.isSelected() && !continueGame.isSelected())
-                System.out.println("choose game error");
+                System.out.println("Please choose whether you would like to start a newgame, load a savegame, " +
+                        "or continue..");
             if (!firefox.isSelected() && !chrome.isSelected() && !explorer.isSelected())
-                System.out.println("choose browser error");
+                System.out.println("Please choose browser");
+        } else {
             if (started)
                 System.out.println("Game already started");
             else {
                 started = true;
+                panel2.setLayout(new GridLayout(0, 3, 2, 5));
                 start.setText("Update Game");
-                panel.add(loopYes);
-                panel.add(loopNo);
-                //panel.add(start);
+                panel2.add(loopYes);
+                panel2.add(loopNo);
+                panel2.add(start);
                 pack();
+
+                try {
+                    Thread.sleep(2000);
+                    CookieClicker cC = new CookieClicker(new FirefoxDriver());
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
     }

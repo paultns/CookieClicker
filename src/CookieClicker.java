@@ -28,7 +28,7 @@ class CookieClicker {
     private boolean loop; // user decides if to loop or end program
 
 
-    CookieClicker(WebDriver browser) {
+    CookieClicker(WebDriver browser) throws InterruptedException {
 
         driver = browser;
         driver.manage().window().maximize();
@@ -51,6 +51,8 @@ class CookieClicker {
         }
 
         setUp();
+
+        while (isLoop()) run();
     }
 
     // importing save and disabling resource intensive things
