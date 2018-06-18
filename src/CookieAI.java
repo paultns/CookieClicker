@@ -10,13 +10,7 @@ public class CookieAI {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
 
-
         CookieFrame cC = new CookieFrame();
-        //CookieClicker cC = new CookieClicker(new FirefoxDriver());
-
-        //while (cC.isLoop()) cC.cookieRobot();
-
-
 
     }
 }

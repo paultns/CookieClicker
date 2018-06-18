@@ -24,11 +24,10 @@ class CookieClicker {
     private boolean newBuildingFound;
     private boolean buyNewBuilding; // user decides if he wishes to save for the unlocked building
     private boolean upgrade; // user decides if he wishes to save for next upgrade
-    private boolean newGame;
     private boolean loop; // user decides if to loop or end program
 
 
-    CookieClicker(WebDriver browser) throws InterruptedException {
+    CookieClicker(WebDriver browser) {
 
         driver = browser;
         driver.manage().window().maximize();
@@ -42,27 +41,18 @@ class CookieClicker {
         buyNewBuilding = false;
         newBuildingFound = false;
         cps = new BigDecimal(0);
-        newGame = false;
         try {
             Thread.sleep(3000);
             driver.findElement(By.id("prefsButton")).click();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        setUp();
-
-        //while (isLoop())
-            cookieRobot();
     }
 
     // importing save and disabling resource intensive things
-    private void setUp() {
+    void setUp() {
 
         System.out.println("\nSetup Sequence!\n");
-
-        if (!newGame)
-            read();
 
         try {
             driver.findElement(By.linkText("Fancy graphics ON")).click();
@@ -127,22 +117,21 @@ class CookieClicker {
 
         //driver.findElement(By.id("storeBulk10")).click();
 
-        System.out.println("Setup Complete! Game starting at: " + ZonedDateTime.now().toLocalTime
-                ().truncatedTo(ChronoUnit.SECONDS) + "\n");
+        System.out.println("Setup Complete! Please select game mode! (can be also updated on the go. " +
+                "Game starting at: " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS) + "\n");
 
         //driver.manage().window().setPosition(new Point(0, -2000));
     }
 
     // actual run of program
     void cookieRobot() throws InterruptedException {
-        System.out.print((char) 27 + "[34>> New Cycle Starting. ");
-        //System.out.print("\n>> New Cycle Starting. ");
+        System.out.print("\n>> New Cycle Starting. ");
         if (upgrade)
-            System.out.println("Will buy a new upgrade." + (char) 27 + "[0m\n");
+            System.out.println("Will buy a new upgrade.\n");
         else if (buyNewBuilding)
-            System.out.println("Will buy a new building." + (char) 27 + "[0m\n");
+            System.out.println("Will buy a new building.\n");
         else
-            System.out.println("Will buy the most efficient building." + (char) 27 + "[0m\n");
+            System.out.println("Will buy the most efficient building.\n");
 
         for (int loops = 0; loops < cycleLength; loops++)
             for (int clicks = 0; clicks < 11; clicks++) {
@@ -163,17 +152,17 @@ class CookieClicker {
                 driver.findElement(By.cssSelector(".shimmer")).click();
                 break;
             } catch (Exception e) {
-                System.out.println((char) 27 + "[31m" + "Golden cookie fail. Retrying..." + (char) 27 + "[0m\n");
+                System.out.println("Golden cookie fail. Retrying...");
             }
         }
-        System.out.println((char) 27 + "[33m!! Golden cookie found !!\n");
+        System.out.println("!! Golden cookie found !!\n");
 
         while (true) {
             try {
-                System.out.println(driver.findElement(By.id("particle0")).getText() + (char) 27 + "[0m\n");
+                System.out.println(driver.findElement(By.id("particle0")).getText() + "\n");
                 break;
             } catch (Exception e) {
-                System.out.println((char) 27 + "[31m" + "Golden cookie text fail. Retrying..." + (char) 27 + "[0m\n");
+                System.out.println("Golden cookie text fail. Retrying...");
             }
         }
     }
@@ -182,10 +171,9 @@ class CookieClicker {
     private void buy() {
         if (isElementPresent(goal)) {
             driver.findElement(goal).click();
-            //System.out.println("\n++ " + goalName + " has been bought.\n");
-            System.out.println((char) 27 + "[32m   ++  " + goalName + " has been bought." + (char) 27 + "[0m\n");
+            System.out.println("  ++ " + goalName + " has been bought.\n");
             if (upgrade) {
-                System.out.println((char) 27 + "[35m" + upgradeName + (char) 27 + "[0m\n");
+                System.out.println(upgradeName + "\n");
                 upgrade = false;
             }
             if (cycleLength > 1) {
@@ -200,8 +188,8 @@ class CookieClicker {
             getGoal();
         } else {
             cycleLength++;
-            System.out.println((char) 27 + "[31m" + goalName + " could not be afforded. Trying again " + "next cycle..."
-                    + (char) 27 + "[0m Increasing number of turns per cycle to " + cycleLength);
+            System.out.println(goalName + " could not be afforded. Trying again " + "next cycle..." +
+                    " Increasing number of turns per cycle to " + cycleLength + "\n");
         }
     }
 
@@ -216,13 +204,12 @@ class CookieClicker {
                 upgradePrice = new BigDecimal(driver.findElement(By.cssSelector("#tooltip .price")).getAttribute
                         ("textContent").replaceAll("[^\\d]", ""));
                 if (upgradePrice != null) {
-                    System.out.println((char) 27 + "[36m -upgrade price pull succeeded " + (char) 27 + "[0m" +
-                            upgradePrice + "\n");
+                    System.out.println(" -upgrade price pull succeeded " + upgradePrice + "\n");
                     break;
                 }
-                System.out.println((char) 27 + "[31m -upgrade price pull error. retrying.." + (char) 27 + "[0m");
+                System.out.println(" -upgrade price pull error. retrying..");
             } catch (Exception e) {
-                System.out.println((char) 27 + "[31m -upgrade price pull error. retrying.." + (char) 27 + "[0m");
+                System.out.println(" -upgrade price pull error. retrying..");
             }
         return upgradePrice;
     }
@@ -237,13 +224,13 @@ class CookieClicker {
                 goalName = driver.findElement(By.cssSelector("#tooltip .name")).getAttribute("textContent");
                 upgradeName = driver.findElement(By.cssSelector("#tooltip .description")).getAttribute("textContent");
                 if (!upgradeName.isEmpty() && !goalName.isEmpty()) {
-                    System.out.println((char) 27 + "[36m -upgrade text pull succeeded." + (char) 27 + "[0m\n");
+                    System.out.println(" -upgrade text pull succeeded.\n");
                     break;
                 }
 
-                System.out.println((char) 27 + "[31m -upgrade pull error. retrying.." + (char) 27 + "[0m");
+                System.out.println(" -upgrade pull error. retrying..");
             } catch (Exception e) {
-                System.out.println((char) 27 + "[31m -upgrade pull error. retrying.." + (char) 27 + "[0m");
+                System.out.println(" -upgrade pull error. retrying..");
             }
     }
 
@@ -255,8 +242,8 @@ class CookieClicker {
                 break;
             if (driver.findElement(By.id("productOwned" + index)).getText().isEmpty()) {
                 newBuildingFound = true;
-                System.out.print("\nNew unlocked building found: " + (char) 27 + "[32m" + driver.findElement(By.id
-                        ("productName" + index)).getAttribute("textContent") + (char) 27 + "[0m\n");
+                System.out.print("\nNew unlocked building found: " + driver.findElement(By.id
+                        ("productName" + index)).getAttribute("textContent"));
                 break;
             } else count++;
         }
@@ -309,18 +296,15 @@ class CookieClicker {
                         }
                     } catch (Exception e) {
 
-                        //System.out.println("//// Failed to get number of producing cookies for " + driver
-                        //        .findElement(By.id("productName" + i)).getText());
+                        System.out.println("//// Failed to get number of producing cookies for " + driver
+                                .findElement(By.id("productName" + i)).getText());
 
-                        System.out.println((char) 27 + "[31m//// Failed to get number of producing cookies for " +
-                                driver.findElement(By.id("productName" + i)).getText() + (char) 27 + "[0m");
                     }
                 }
 
                 goal = By.cssSelector("#product" + index + ".enabled");
                 goalName = driver.findElement(By.id("productName" + index)).getText();
-                System.out.println("\n* Goal has been set to buy: " + (char) 27 + "[32m" + goalName + (char) 27 +
-                        "[0m\n");
+                System.out.println("\n* Goal has been set to buy: " + goalName + " \n");
             }
     }
 
@@ -332,8 +316,7 @@ class CookieClicker {
             upgrade = true;
             getUpgrade();
             goal = By.cssSelector("#upgrade0.enabled");
-            System.out.println("Profitable to buy a new upgrade. Setting goal for " +
-                    (char) 27 + "[32m" + goalName + (char) 27 + "[0m \n");
+            System.out.println("Profitable to buy a new upgrade. Setting goal for " + goalName + "\n");
             return true;
         }
  /*
@@ -344,8 +327,7 @@ class CookieClicker {
                 goal = By.cssSelector("#product" + buildings + ".enabled");
                 goalName = driver.findElement(By.id("productName" + buildings))
                         .getAttribute("textContent");
-                System.out.println("Profitable to buy a new unlocked building. Setting goal for " +
-                        (char) 27 + "[32m" + goalName + (char) 27 + "[0m\n");
+                System.out.println("Profitable to buy a new unlocked building. Setting goal for " + goalName + "\n");
                 buyNewBuilding = true;
                 return true;
             }
@@ -355,8 +337,8 @@ class CookieClicker {
             minutesTo = (new BigDecimal(driver.findElement(By.id("productPrice" + buildings)).getText()
                     .replaceAll("\\D+", "")).divide(cps, 2, RoundingMode.UP))
                     .divide(BigDecimal.valueOf(60), 2, RoundingMode.UP).doubleValue();
-            System.out.println((char) 27 + "[36m" + " > Next building can be afforded in " + minutesTo + " minutes." +
-                    +(char) 27 + "[0m " + "Must be under " + minutes + " minutes. Price for next building: " +
+            System.out.println(" > Next building can be afforded in " + minutesTo + " minutes. Must be under " +
+                    minutes + " minutes. Price for next building: " +
                     driver.findElement(By.id("productPrice" + buildings)).getText().replaceAll("\\D+", ""));
 
 
@@ -364,14 +346,13 @@ class CookieClicker {
                 goal = By.cssSelector("#product" + buildings + ".enabled");
                 goalName = driver.findElement(By.id("productName" + buildings))
                         .getAttribute("textContent");
-                System.out.println("Profitable to buy a new unlocked building. Setting goal for " +
-                        (char) 27 + "[32m" + goalName + (char) 27 + "[0m \n");
+                System.out.println("Profitable to buy a new unlocked building. Setting goal for " + goalName + "\n");
                 buyNewBuilding = true;
                 return true;
             }
         } catch (ArithmeticException e) {
-            System.out.println((char) 27 + "[31mERROR!! Skipping new building calculation. Following error has been " +
-                    "encountered: \"" + e.getMessage() + "\"" + (char) 27 + "[0m");
+            System.out.println("ERROR!! Skipping new building calculation. Following error has been " +
+                    "encountered: \"" + e.getMessage() + "\"");
         }
 
         return false;
@@ -381,83 +362,66 @@ class CookieClicker {
     // updates the cookies per second
     private void updateCps() {
         if (isElementPresent(By.cssSelector(".pieTimer"))) {
-            System.out.println((char) 27 + "[31m> Cookie multiplier underway. Not updating cps" + (char) 27 + "[0m\n");
+            System.out.println((char) 27 + "[31m> Cookie multiplier underway. Not updating cps\n");
         } else while (true) {
             try {
                 cps = new BigDecimal(driver.findElement(By.cssSelector("#cookies div")).getAttribute("textContent")
                         .replaceAll("[^\\d.]", ""));
-                System.out.println((char) 27 + "[36m -cps updated:" + (char) 27 + "[0m " + cps + "\n");
+                System.out.println(" -cps updated:" + cps + "\n");
                 break;
             } catch (Exception e) {
-                System.out.println((char) 27 + "[31m -cps error! retrying." + (char) 27 + "[0m");
+                System.out.println(" -cps error! retrying.");
             }
         }
     }
 
     // reads save code from txt file
-    private void read() {
+    void read() {
 
-        System.out.println("\n-- Importing Save! --\n");
+        System.out.println("-- Importing Save! --\n");
         try {
             driver.findElement(By.linkText("Import save")).click();
-            File txt = new File("CookieSave.txt");
+            File txt = new File("CookieSave");
             Scanner sc = new Scanner(txt);
             sc.useDelimiter("\\Z");
             driver.findElement(By.id("textareaPrompt")).sendKeys(sc.next());
             driver.findElement(By.linkText("Load")).click();
-            try {
-                driver.findElement(By.cssSelector("#bigCookie")).click();
-            } catch (Exception e) {
-                driver.findElement(By.linkText("Nevermind")).click();
-                System.out.println((char) 27 + "[31m\n   !!! Corrupted Save code !!!\n" + (char) 27 + "[0m");
-            }
             System.out.println("\n-- Save game imported --\n");
         } catch (Exception e) {
             e.getMessage();
-            driver.findElement(By.linkText("Nevermind")).click();
-            System.out.println((char) 27 + "[31m\n !! -- Savegame could not be imported! Check that file " +
-                    "is present-- !!\n" + (char) 27 + "[0m");
+            System.out.println("\n !! -- Savegame could not be imported! Check that file is present-- !!\n");
         }
-
     }
 
     // reads a save code from the input box
-    private void read(String saveGame) {
-        System.out.println("\n-- Importing Save! --\n");
+    void read(String saveGame) {
+        System.out.println("-- Importing Save! --\n");
         try {
             driver.findElement(By.linkText("Import save")).click();
             driver.findElement(By.id("textareaPrompt")).sendKeys(saveGame);
             driver.findElement(By.linkText("Load")).click();
-            try {
-                driver.findElement(By.cssSelector("#bigCookie")).click();
-            } catch (Exception e) {
-                driver.findElement(By.linkText("Nevermind")).click();
-                System.out.println((char) 27 + "[31m\n   !!! Corrupted Save code !!!\n" + (char) 27 + "[0m");
-            }
             System.out.println("\n-- Save game imported --\n");
         } catch (Exception e) {
             e.getMessage();
-            driver.findElement(By.linkText("Nevermind")).click();
-            System.out.println((char) 27 + "[31m\n !! -- Savegame could not be imported! Check that file " +
-                    "is present-- !!\n" + (char) 27 + "[0m");
+            System.out.println("\n !! -- Savegame could not be imported! Check that the code is valid !!\n");
         }
     }
 
     // saves game to txt file
-    private void save() {
+    void save() {
         try {
             driver.findElement(By.linkText("Save")).click();
             driver.findElement(By.linkText("Export save")).click();
-            File txt = new File("CookieSave.txt");
+            File txt = new File("CookieSave");
             PrintWriter saveCookies;
             saveCookies = new PrintWriter(txt);
             saveCookies.println(driver.findElement(By.id("textareaPrompt")).getText());
             saveCookies.close();
             driver.findElement(By.linkText("All done!")).click();
-            System.out.println((char) 27 + "[35m      >> Game Saved! @ " + ZonedDateTime.now().toLocalTime
-                    ().truncatedTo(ChronoUnit.SECONDS) + (char) 27 + "[0m");
+            System.out.println("      >> Game Saved! @ " + ZonedDateTime.now().toLocalTime
+                    ().truncatedTo(ChronoUnit.SECONDS));
         } catch (Exception e) {
-            System.out.println((char) 27 + "[31m      >> Game could not be saved at this time!" + (char) 27 + "[0m");
+            System.out.println("      >> Game could not be saved at this time!\n");
         }
     }
 
