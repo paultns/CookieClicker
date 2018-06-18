@@ -52,7 +52,8 @@ class CookieClicker {
 
         setUp();
 
-        while (isLoop()) run();
+        //while (isLoop())
+            cookieRobot();
     }
 
     // importing save and disabling resource intensive things
@@ -133,7 +134,7 @@ class CookieClicker {
     }
 
     // actual run of program
-    void run() throws InterruptedException {
+    void cookieRobot() throws InterruptedException {
         System.out.print((char) 27 + "[34>> New Cycle Starting. ");
         //System.out.print("\n>> New Cycle Starting. ");
         if (upgrade)
@@ -153,7 +154,6 @@ class CookieClicker {
         buy();
 
         //save();
-
     }
 
     // golden cookie

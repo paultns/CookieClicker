@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintStream;
 
 public class CookieFrame extends JFrame implements ActionListener {
 
@@ -69,6 +70,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         loopGame.add(loopNo);
 
         loadSave = new JTextField();
+        loadSave.setEditable(false);
 
         panel.add(chrome);
         panel.add(firefox);
@@ -84,14 +86,19 @@ public class CookieFrame extends JFrame implements ActionListener {
         frame.add(loadSave, BorderLayout.CENTER);
         frame.add(panel2, BorderLayout.SOUTH);
 
+        JTextArea output = new JTextArea(50, 10);
+        output.setEditable(false);
+        PrintStream printStream = new PrintStream(new Console(output));
+        System.setOut(printStream);
+        System.setErr(printStream);
+
         frame.setPreferredSize(new Dimension(350, 300));
-        panel2.setPreferredSize(new Dimension(0, 50));
+        panel2.setPreferredSize(new Dimension(0, 100));
 
         panel2.add(start);
+        panel2.add(output);
         setVisible(true);
         pack();
-
-        Console console = new Console();
 
     }
 

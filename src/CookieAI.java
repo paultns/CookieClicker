@@ -14,7 +14,7 @@ public class CookieAI {
         CookieFrame cC = new CookieFrame();
         //CookieClicker cC = new CookieClicker(new FirefoxDriver());
 
-        //while (cC.isLoop()) cC.run();
+        //while (cC.isLoop()) cC.cookieRobot();
 
 
 
