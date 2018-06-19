@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 class CookieClicker {
 
-    public WebDriver driver;
+    WebDriver driver;
     private By goal;
     private String goalName;
     private String upgradeName;
@@ -124,7 +124,7 @@ class CookieClicker {
     }
 
     // actual run of program
-    void cookieRobot() throws InterruptedException {
+    void cookieRobot() {
         System.out.print("\n>> New Cycle Starting. ");
         if (buy) {
             if (upgrade)
@@ -150,7 +150,7 @@ class CookieClicker {
     }
 
     // golden cookie
-    private void goldenCookie() throws InterruptedException {
+    private void goldenCookie() {
         while (true) {
             try {
                 driver.findElement(By.cssSelector(".shimmer")).click();
@@ -207,11 +207,11 @@ class CookieClicker {
                 Thread.sleep(200);
                 upgradePrice = new BigDecimal(driver.findElement(By.cssSelector("#tooltip .price")).getAttribute
                         ("textContent").replaceAll("[^\\d]", ""));
-                if (upgradePrice != null) {
-                    System.out.println(" -upgrade price pull succeeded " + upgradePrice + "\n");
-                    break;
-                }
-                System.out.println(" -upgrade price pull error. retrying..");
+                //if (upgradePrice != null) {
+                System.out.println(" -upgrade price pull succeeded " + upgradePrice + "\n");
+                break;
+                //}
+                //System.out.println(" -upgrade price pull error. retrying..");
             } catch (Exception e) {
                 System.out.println(" -upgrade price pull error. retrying..");
             }

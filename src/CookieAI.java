@@ -2,11 +2,15 @@
 
 public class CookieAI {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-        CookieFrame cC = new CookieFrame();
+        new CookieFrame();
     }
 }
 
 
 // edit buying / getting goal / evolving / order
+
+// lambda expression?
+
+// test scenarios with continue and load savegames

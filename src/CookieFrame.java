@@ -16,7 +16,6 @@ public class CookieFrame extends JFrame implements ActionListener {
     private JRadioButton explorer;
     private JRadioButton chrome;
     private JRadioButton loadGame;
-    private JRadioButton newGame;
     private JRadioButton continueGame;
     private JRadioButton loopYes;
     private JRadioButton loopNo;
@@ -59,7 +58,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         firefox.setSelected(true);
 
         final ButtonGroup game = new ButtonGroup();
-        newGame = new JRadioButton("New Game");
+        JRadioButton newGame = new JRadioButton("New Game");
         loadGame = new JRadioButton("Load");
         continueGame = new JRadioButton("Continue");
         game.add(loadGame);
@@ -109,7 +108,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         System.out.println(" !! In case of loading a savegame, remove this line and insert savegame here.");
     }
 
-    private void start() throws InterruptedException {
+    private void start() {
 
         if (!setup) {
             output.setText("");
@@ -180,13 +179,10 @@ public class CookieFrame extends JFrame implements ActionListener {
                     start.setText("Start");
                     JButton shutdown = new JButton("close window");
                     panel.add(shutdown);
-                    shutdown.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
+                    shutdown.addActionListener((ActionEvent e) -> {
                             cC.driver.quit();
                             setVisible(false); //you can't see me!
                             dispose(); //Destroy the JFrame object
-                        }
                     });
                 }
                 else {
