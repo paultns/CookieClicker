@@ -208,7 +208,7 @@ public class CookieFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
             @Override
-            protected Void doInBackground() throws Exception {
+            protected Void doInBackground() {
                 start();
                 return null;
             }
