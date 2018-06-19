@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 class CookieClicker {
 
-    private WebDriver driver;
+    public WebDriver driver;
     private By goal;
     private String goalName;
     private String upgradeName;
@@ -24,7 +24,8 @@ class CookieClicker {
     private boolean newBuildingFound;
     private boolean buyNewBuilding; // user decides if he wishes to save for the unlocked building
     private boolean upgrade; // user decides if he wishes to save for next upgrade
-    private boolean loop; // user decides if to loop or end program
+    private volatile boolean loop; // user decides if to loop or end program
+    private volatile boolean buy; // user decides if the program will ony click or if it will buy also
 
 
     CookieClicker(WebDriver browser) {
@@ -35,6 +36,7 @@ class CookieClicker {
 
         cycleLength = 1;
         loop = true;
+        buy = true;
         minutes = 1;
         upgrade = false;
         upgradeName = "";
@@ -64,11 +66,13 @@ class CookieClicker {
         } catch (Exception e) {
             System.out.println("Particles button already depressed");
         }
+        /*
         try {
             driver.findElement(By.linkText("Numbers ON")).click();
         } catch (Exception e) {
             System.out.println("Number button already depressed");
         }
+        */
         try {
             driver.findElement(By.linkText("Milk ON")).click();
         } catch (Exception e) {
@@ -105,7 +109,6 @@ class CookieClicker {
             System.out.println("Defocus button already pressed");
         }
 
-
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
 
         newBuilding();
@@ -117,32 +120,33 @@ class CookieClicker {
 
         //driver.findElement(By.id("storeBulk10")).click();
 
-        System.out.println("Setup Complete! Please select game mode! (can be also updated on the go. " +
-                "Game starting at: " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS) + "\n");
 
-        //driver.manage().window().setPosition(new Point(0, -2000));
     }
 
     // actual run of program
     void cookieRobot() throws InterruptedException {
         System.out.print("\n>> New Cycle Starting. ");
-        if (upgrade)
-            System.out.println("Will buy a new upgrade.\n");
-        else if (buyNewBuilding)
-            System.out.println("Will buy a new building.\n");
-        else
-            System.out.println("Will buy the most efficient building.\n");
-
+        if (buy) {
+            if (upgrade)
+                System.out.println("Will buy a new upgrade.\n");
+            else if (buyNewBuilding)
+                System.out.println("Will buy a new building.\n");
+            else
+                System.out.println("Will buy the most efficient building.\n");
+        } else System.out.println("Only clicking.");
         for (int loops = 0; loops < cycleLength; loops++)
-            for (int clicks = 0; clicks < 11; clicks++) {
+            for (int clicks = 0; clicks < 15; clicks++) {
                 driver.findElement(By.cssSelector("#bigCookie")).click();
                 if (isElementPresent(By.cssSelector(".shimmer"))) goldenCookie();
 
             }
+        if (isBuy())
+            buy();
 
-        buy();
+        save();
 
-        //save();
+        if (!isLoop())
+            System.out.println("Automation ended. Please choose another action or close window to end program");
     }
 
     // golden cookie
@@ -235,7 +239,7 @@ class CookieClicker {
     }
 
     // pulls number of already owned buildings and the next new unlocked building
-    private void newBuilding() {
+    void newBuilding() {
         int count = 0;
         for (int index = 0; index < 20; index++) {
             if (!isElementPresent(By.id("product" + index)))
@@ -267,7 +271,7 @@ class CookieClicker {
     }
 
     // pulls efficiency of each building   /// must edit, will not continue if no new buildings are found
-    private void getGoal() {
+    void getGoal() {
         if (buildings > 0 && newBuildingFound)
             if (!evolve()) {
                 Actions move = new Actions(driver);
@@ -408,7 +412,7 @@ class CookieClicker {
     }
 
     // saves game to txt file
-    void save() {
+    private void save() {
         try {
             driver.findElement(By.linkText("Save")).click();
             driver.findElement(By.linkText("Export save")).click();
@@ -441,7 +445,19 @@ class CookieClicker {
     }
 
     // setter for the loop bool
-    public void setLoop(boolean bool) {
+    void setLoop(boolean bool) {
         this.loop = bool;
+    }
+
+    private boolean isBuy() {
+        return buy;
+    }
+
+    void setBuy(boolean buy) {
+        this.buy = buy;
+    }
+
+    void setCycleLength(int turns) {
+        cycleLength = turns;
     }
 }

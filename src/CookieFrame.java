@@ -1,4 +1,3 @@
-
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -8,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class CookieFrame extends JFrame implements ActionListener {
 
@@ -25,6 +26,8 @@ public class CookieFrame extends JFrame implements ActionListener {
     private JTextArea output;
     private JPanel panel;
     private boolean started;
+    private boolean setup;
+    private CookieClicker cC;
 
     CookieFrame() {
 
@@ -33,6 +36,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
 
         started = false;
+        setup = false;
         setTitle("CookieAutoClicker");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,6 +56,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         browsers.add(firefox);
         browsers.add(chrome);
         browsers.add(explorer);
+        firefox.setSelected(true);
 
         final ButtonGroup game = new ButtonGroup();
         newGame = new JRadioButton("New Game");
@@ -60,6 +65,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         game.add(loadGame);
         game.add(newGame);
         game.add(continueGame);
+        continueGame.setSelected(true);
 
         final ButtonGroup loopGame = new ButtonGroup();
         loopYes = new JRadioButton("Loop");
@@ -94,7 +100,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         add(new JScrollPane(output), BorderLayout.CENTER);
         add(start, BorderLayout.SOUTH);
 
-        setPreferredSize(new Dimension(900, 1000));
+        setPreferredSize(new Dimension(700, 800));
         start.setPreferredSize(new Dimension(0, 50));
 
         setVisible(true);
@@ -103,54 +109,114 @@ public class CookieFrame extends JFrame implements ActionListener {
         System.out.println(" !! In case of loading a savegame, remove this line and insert savegame here.");
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == start && ((!newGame.isSelected() && !loadGame.isSelected() && !continueGame.isSelected())
-                || (!firefox.isSelected() && !chrome.isSelected() && !explorer.isSelected()))) {
-            if (!firefox.isSelected() && !chrome.isSelected() && !explorer.isSelected())
-                System.out.println("Please choose browser");
-            if (!newGame.isSelected() && !loadGame.isSelected() && !continueGame.isSelected())
-                System.out.println("Please choose whether you would like to start a newgame, load a savegame, " +
-                        "or continue..");
-        } else {
-            if (started)
-                System.out.println("Game already started");
-            else {
-                output.setText("");
-                started = true;
-                output.setEditable(false);
-                panel.setLayout(new GridLayout(0, 3, 0, 0));
-                panel.removeAll();
-                panel.add(new JLabel("Game Mode:"));
-                panel.add(clickOnly);
-                panel.add(clickBuy);
-                panel.add(new JLabel("Use to play or pause:"));
-                panel.add(loopYes);
-                panel.add(loopNo);
-                panel.add(start);
-                start.setText("Start");
-                pack();
+    private void start() throws InterruptedException {
 
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
+        if (!setup) {
+            output.setText("");
+            setup = true;
+            output.setEditable(false);
+            panel.setLayout(new GridLayout(0, 3, 0, 0));
+            panel.removeAll();
+            panel.add(new JLabel("Game Mode:"));
+            panel.add(clickOnly);
+            panel.add(clickBuy);
+            panel.add(new JLabel("Use to play or pause:"));
+            panel.add(loopYes);
+            panel.add(loopNo);
+            panel.add(start);
+            start.setText("Start");
+            pack();
+
+            if (firefox.isSelected())
+                cC = new CookieClicker(new FirefoxDriver());
+            else if (chrome.isSelected())
+                cC = new CookieClicker(new ChromeDriver());
+            else if (explorer.isSelected())
+                cC = new CookieClicker(new InternetExplorerDriver());
+            else cC = new CookieClicker(new FirefoxDriver());
+            output.setText("");
+            cC.setUp();
+            if (loadGame.isSelected())
+                cC.read(output.getText());
+            else if (continueGame.isSelected()) {
+                cC.read();
+            }
+            System.out.println("Setup Complete! Please select game mode! (can be also updated on the go) " +
+                    "Game starting at: " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS) + "\n");
+        } else {
+            if (!started) {
+                if (loopYes.isSelected()) {
+                    start.setText("Update game");
+                    started = true;
+                    cC.setLoop(true);
+                    System.out.println("Program will loop until user decides to stop it\n");
+                } else {
+                    cC.setLoop(false);
+                    started = false;
+                    System.out.println("Program will only run for one cycle\n");
                 }
-                CookieClicker cC;
-                if (firefox.isSelected())
-                    cC = new CookieClicker(new FirefoxDriver());
-                else if (chrome.isSelected())
-                    cC = new CookieClicker(new ChromeDriver());
-                else if (explorer.isSelected())
-                    cC = new CookieClicker(new InternetExplorerDriver());
-                else cC = new CookieClicker(new FirefoxDriver());
-                output.setText("");
-                cC.setUp();
-                if (loadGame.isSelected())
-                    cC.read(output.getText());
-                else if (continueGame.isSelected())
-                    cC.read();
-                cC.save();
+                if (clickOnly.isSelected()) {
+                    cC.setBuy(false);
+                    cC.setCycleLength(20);
+                    System.out.println("Program will only click cookie and golden cookies without buying " +
+                            "buildings / upgrades");
+                    System.out.println("Changes will take effect after current cycle ends\n");
+
+                } else {
+                    cC.setBuy(true);
+                    cC.setCycleLength(1);
+                    System.out.println("Program will click cookie and golden cookies, and buy upgrades / " +
+                            "buildings when feasible");
+                    System.out.println("Changes will take effect after current cycle ends\n");
+                }
+                cC.newBuilding();
+                cC.getGoal();
+                while (cC.isLoop()) cC.cookieRobot();
+            } else {
+                if (loopNo.isSelected()) {
+                    System.out.println("Program will end after current cycle finishes..\n");
+                    cC.setLoop(false);
+                    started = false;
+                    start.setText("Start");
+                    JButton shutdown = new JButton("close window");
+                    panel.add(shutdown);
+                    shutdown.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            cC.driver.quit();
+                            setVisible(false); //you can't see me!
+                            dispose(); //Destroy the JFrame object
+                        }
+                    });
+                }
+                else {
+                    if (clickOnly.isSelected()) {
+                        cC.setBuy(false);
+                        cC.setCycleLength(20);
+                        System.out.println("Program will only click cookie and golden cookies without buying " +
+                                "buildings / upgrades");
+                        System.out.println("Changes will take effect after current cycle ends\n");
+
+                    } else {
+                        cC.setBuy(true);
+                        cC.setCycleLength(1);
+                        System.out.println("Program will click cookie and golden cookies, and buy upgrades / " +
+                                "buildings when feasible");
+                        System.out.println("Changes will take effect after current cycle ends\n");
+                    }
+                }
             }
         }
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                start();
+                return null;
+            }
+        };
+        worker.execute();
     }
 }
