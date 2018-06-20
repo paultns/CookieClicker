@@ -7,8 +7,9 @@ public class CookieAI {
     }
 }
 
+// edit clicking loop text
 
 // edit buying / getting goal / evolving / order
 
-
-// test scenarios with continue and load savegames
+//         System.out.println("String is: " + output.getText().split(" ")[output.getText().split(" ").length -
+//                        1]);

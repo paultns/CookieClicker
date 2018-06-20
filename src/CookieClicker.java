@@ -56,6 +56,81 @@ class CookieClicker {
 
         System.out.println("\nSetup Sequence!\n");
 
+        read();
+
+        try {
+            driver.findElement(By.linkText("Fancy graphics ON")).click();
+        } catch (Exception e) {
+            System.out.println("Fancy graphics button already depressed");
+        }
+        try {
+            driver.findElement(By.linkText("Particles ON")).click();
+        } catch (Exception e) {
+            System.out.println("Particles button already depressed");
+        }
+        /*
+        try {
+            driver.findElement(By.linkText("Numbers ON")).click();
+        } catch (Exception e) {
+            System.out.println("Number button already depressed");
+        }
+        */
+        try {
+            driver.findElement(By.linkText("Milk ON")).click();
+        } catch (Exception e) {
+            System.out.println("Milk button already depressed");
+        }
+        try {
+            driver.findElement(By.linkText("Cursors ON")).click();
+        } catch (Exception e) {
+            System.out.println("Cursors button already depressed");
+        }
+        try {
+            driver.findElement(By.linkText("Wobbly cookie ON")).click();
+        } catch (Exception e) {
+            System.out.println("Wobbly cookie button already depressed");
+        }
+        try {
+            driver.findElement(By.linkText("Alt cookie sound ON")).click();
+        } catch (Exception e) {
+            System.out.println("Alt cookie sound button already depressed");
+        }
+        try {
+            driver.findElement(By.linkText("Short numbers ON")).click();
+        } catch (Exception e) {
+            System.out.println("Short numbers button already depressed");
+        }
+        try {
+            driver.findElement(By.linkText("Fast notes OFF")).click();
+        } catch (Exception e) {
+            System.out.println("Fast notes button already pressed");
+        }
+        try {
+            driver.findElement(By.linkText("Defocus OFF")).click();
+        } catch (Exception e) {
+            System.out.println("Defocus button already pressed");
+        }
+        System.out.println();
+        driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
+        updateCps();
+        newBuilding();
+        if (buildings == 1) {
+            goal = By.cssSelector("#product0" + ".enabled");
+            goalName = driver.findElement(By.id("productName0")).getText();
+        } else if (!buyNewBuilding && buildings != 0)
+            getGoal();
+        CookieFrame.enableStart();
+        CookieFrame.enableShutdown();
+        //driver.findElement(By.id("storeBulk10")).click();
+    }
+
+    // importing save and disabling resource intensive things
+    void setUp(String savegame) {
+
+        System.out.println("\nSetup Sequence!\n");
+
+        read(savegame);
+
         try {
             driver.findElement(By.linkText("Fancy graphics ON")).click();
         } catch (Exception e) {
@@ -110,7 +185,7 @@ class CookieClicker {
         }
 
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
-
+        updateCps();
         newBuilding();
         if (buildings == 1) {
             goal = By.cssSelector("#product0" + ".enabled");
@@ -118,35 +193,37 @@ class CookieClicker {
         } else if (!buyNewBuilding && buildings != 0)
             getGoal();
 
+        CookieFrame.enableStart();
+        CookieFrame.enableShutdown();
         //driver.findElement(By.id("storeBulk10")).click();
-
-
     }
 
     // actual run of program
     void cookieRobot() {
-        System.out.print("\n>> New Cycle Starting. ");
+
         if (buy) {
+            System.out.print("\n>> New Cycle Starting. ");
             if (upgrade)
                 System.out.println("Will buy a new upgrade.\n");
             else if (buyNewBuilding)
                 System.out.println("Will buy a new building.\n");
             else
                 System.out.println("Will buy the most efficient building.\n");
-        } else System.out.println("Only clicking.");
+        }
         for (int loops = 0; loops < cycleLength; loops++)
             for (int clicks = 0; clicks < 15; clicks++) {
                 driver.findElement(By.cssSelector("#bigCookie")).click();
                 if (isElementPresent(By.cssSelector(".shimmer"))) goldenCookie();
-
             }
-        if (isBuy())
+        if (buy)
             buy();
 
-        save();
-
-        if (!isLoop())
+        if (!isLoop()) {
             System.out.println("Automation ended. Please choose another action or close window to end program");
+            CookieFrame.enableStart();
+            CookieFrame.enableShutdown();
+            save();
+        }
     }
 
     // golden cookie
@@ -179,14 +256,13 @@ class CookieClicker {
             if (upgrade) {
                 System.out.println(upgradeName + "\n");
                 upgrade = false;
+            } else if (buyNewBuilding) {
+                buyNewBuilding = false;
+                newBuilding();
             }
             if (cycleLength > 1) {
                 cycleLength--;
                 System.out.println(" Decreasing number of turns per cycle to " + cycleLength + "\n");
-            }
-            if (buyNewBuilding) {
-                buyNewBuilding = false;
-                newBuilding();
             }
             updateCps();
             getGoal();
@@ -239,7 +315,7 @@ class CookieClicker {
     }
 
     // pulls number of already owned buildings and the next new unlocked building
-    void newBuilding() {
+    private void newBuilding() {
         int count = 0;
         for (int index = 0; index < 20; index++) {
             if (!isElementPresent(By.id("product" + index)))
@@ -271,7 +347,7 @@ class CookieClicker {
     }
 
     // pulls efficiency of each building   /// must edit, will not continue if no new buildings are found
-    void getGoal() {
+    private void getGoal() {
         if (buildings > 0 && newBuildingFound)
             if (!evolve()) {
                 Actions move = new Actions(driver);
@@ -366,7 +442,7 @@ class CookieClicker {
     // updates the cookies per second
     private void updateCps() {
         if (isElementPresent(By.cssSelector(".pieTimer"))) {
-            System.out.println((char) 27 + "[31m> Cookie multiplier underway. Not updating cps\n");
+            System.out.println("> Cookie multiplier underway. Not updating cps");
         } else while (true) {
             try {
                 cps = new BigDecimal(driver.findElement(By.cssSelector("#cookies div")).getAttribute("textContent")
@@ -380,7 +456,7 @@ class CookieClicker {
     }
 
     // reads save code from txt file
-    void read() {
+    private void read() {
 
         System.out.println("-- Importing Save! --\n");
         try {
@@ -390,7 +466,7 @@ class CookieClicker {
             sc.useDelimiter("\\Z");
             driver.findElement(By.id("textareaPrompt")).sendKeys(sc.next());
             driver.findElement(By.linkText("Load")).click();
-            System.out.println("\n-- Save game imported --\n");
+            System.out.println("\n-- Save game imported! --\n");
         } catch (Exception e) {
             e.getMessage();
             System.out.println("\n !! -- Savegame could not be imported! Check that file is present-- !!\n");
@@ -398,13 +474,13 @@ class CookieClicker {
     }
 
     // reads a save code from the input box
-    void read(String saveGame) {
+    private void read(String saveGame) {
         System.out.println("-- Importing Save! --\n");
         try {
             driver.findElement(By.linkText("Import save")).click();
             driver.findElement(By.id("textareaPrompt")).sendKeys(saveGame);
             driver.findElement(By.linkText("Load")).click();
-            System.out.println("\n-- Save game imported --\n");
+            System.out.println("\n-- Save game imported! --\n");
         } catch (Exception e) {
             e.getMessage();
             System.out.println("\n !! -- Savegame could not be imported! Check that the code is valid !!\n");
@@ -447,10 +523,6 @@ class CookieClicker {
     // setter for the loop bool
     void setLoop(boolean bool) {
         this.loop = bool;
-    }
-
-    private boolean isBuy() {
-        return buy;
     }
 
     void setBuy(boolean buy) {
