@@ -27,9 +27,11 @@ public class CookieFrame extends JFrame implements ActionListener {
     private boolean started;
     private boolean setup;
     private CookieClicker cC;
+    private static boolean test;
 
     CookieFrame() {
 
+        test = true;
         System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
@@ -176,14 +178,7 @@ public class CookieFrame extends JFrame implements ActionListener {
                     System.out.println("Program will end after current cycle finishes..\n");
                     cC.setLoop(false);
                     started = false;
-                    start.setText("Start");
-                    JButton shutdown = new JButton("close window");
-                    panel.add(shutdown);
-                    shutdown.addActionListener((ActionEvent e) -> {
-                            cC.driver.quit();
-                            setVisible(false); //you can't see me!
-                            dispose(); //Destroy the JFrame object
-                    });
+
                 }
                 else {
                     if (clickOnly.isSelected()) {
@@ -214,5 +209,21 @@ public class CookieFrame extends JFrame implements ActionListener {
             }
         };
         worker.execute();
+    }
+
+    void enableBtn () {
+        start.setText("Start");
+        start.setEnabled(true);
+        JButton shutdown = new JButton("close window");
+        panel.add(shutdown);
+        shutdown.addActionListener((ActionEvent e) -> {
+            cC.driver.quit();
+            setVisible(false); //you can't see me!
+            dispose(); //Destroy the JFrame object
+        });
+    }
+
+    void disableBtn () {
+        start.setEnabled(false);
     }
 }
