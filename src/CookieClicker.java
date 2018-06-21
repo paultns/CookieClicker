@@ -491,10 +491,10 @@ class CookieClicker {
     private void save() {
         try {
             driver.findElement(By.linkText("Save")).click();
-            driver.findElement(By.linkText("Export save")).click();
             File txt = new File("CookieSave");
             PrintWriter saveCookies;
             saveCookies = new PrintWriter(txt);
+            driver.findElement(By.linkText("Export save")).click();
             saveCookies.println(driver.findElement(By.id("textareaPrompt")).getText());
             saveCookies.close();
             driver.findElement(By.linkText("All done!")).click();
