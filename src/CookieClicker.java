@@ -51,12 +51,12 @@ class CookieClicker {
         }
     }
 
-    // importing save and disabling resource intensive things
-    void setUp() {
+    // importing save from file and disabling resource intensive things
+    void setUp(boolean newgame) {
 
         System.out.println("\nSetup Sequence!\n");
 
-        read();
+        if (!newgame) read();
 
         try {
             driver.findElement(By.linkText("Fancy graphics ON")).click();
@@ -124,7 +124,7 @@ class CookieClicker {
         //driver.findElement(By.id("storeBulk10")).click();
     }
 
-    // importing save and disabling resource intensive things
+    // importing save from text and disabling resource intensive things
     void setUp(String savegame) {
 
         System.out.println("\nSetup Sequence!\n");

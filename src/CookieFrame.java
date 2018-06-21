@@ -118,40 +118,37 @@ public class CookieFrame extends JFrame implements ActionListener {
         System.out.println(" !! To load a savegame, copy savegame in console, select Load and click run");
     }
 
-    private void start() {
-        if (continueGame.isSelected() && !saveFound())
+    private void start() {  // modify this
+        if (continueGame.isSelected() && !fileFound("CookieSave"))
             System.out.println("Save file not found, either load a game or select new game.\n");
         else if (!setup) {
             String console = output.getText().split(" ")[output.getText().split(" ").length - 1];
-            output.setText("");
-            setup = true;
-            output.setEditable(false);
-            panel.setLayout(new GridLayout(0, 3, 0, 0));
-            panel.removeAll();
-            panel.add(new JLabel("Game Mode:"));
-            panel.add(clickOnly);
-            panel.add(clickBuy);
-            panel.add(start);
-            start.setText("Start");
-            start.setEnabled(false);
-            panel.add(end);
-            panel.add(shutdown);
-            shutdown.setEnabled(false);
-            pack();
 
-            if (firefox.isSelected())
-                cC = new CookieClicker(new FirefoxDriver());
-            else if (chrome.isSelected())
-                cC = new CookieClicker(new ChromeDriver());
-            else if (explorer.isSelected())
-                cC = new CookieClicker(new InternetExplorerDriver());
-            else cC = new CookieClicker(new FirefoxDriver());
+            if (firefox.isSelected()) {
+                if (!fileFound("geckodriver")) System.out.println("ERROR!! Firefox driver file not found!");
+                else {
+                    setup();
+                    cC = new CookieClicker(new FirefoxDriver());
+                }
+            } else if (chrome.isSelected()) {
+                if (!fileFound("chromedriver")) System.out.println("ERROR!! Chrome driver file not found!");
+                else {
+                    setup();
+                    cC = new CookieClicker(new ChromeDriver());
+                }
+            } else if (explorer.isSelected()) {
+                if (!fileFound("IEDriverServer")) System.out.println("ERROR!! Internet Explorer driver file not found");
+                else {
+                    setup();
+                    cC = new CookieClicker(new InternetExplorerDriver());
+                }
+            } else cC = new CookieClicker(new FirefoxDriver());
             output.setText("");
             if (loadGame.isSelected())
                 cC.setUp(console.split("\n")[console.split("\n").length - 1]);
             else if (continueGame.isSelected()) {
-                cC.setUp();
-            }
+                cC.setUp(false);
+            } else cC.setUp(true);
             System.out.println("Setup Complete! Please select game mode! (can be also updated on the go) " +
                     "Game starting at: " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS) + "\n");
         } else {
@@ -212,8 +209,27 @@ public class CookieFrame extends JFrame implements ActionListener {
         shutdown.setEnabled(true);
     }
 
-    private boolean saveFound() {
-        File f = new File("CookieSave");
+    private boolean fileFound(String file) {
+        File f = new File(file);
         return f.exists();
+    }
+
+    private void setup() {
+        output.setText("");
+        setup = true;
+        output.setEditable(false);
+        panel.setLayout(new GridLayout(0, 3, 0, 0));
+        panel.removeAll();
+        panel.add(new JLabel("Game Mode:"));
+        panel.add(clickOnly);
+        panel.add(clickBuy);
+        panel.add(start);
+        start.setText("Start");
+        start.setEnabled(false);
+        panel.add(end);
+        panel.add(shutdown);
+        shutdown.setEnabled(false);
+        pack();
+
     }
 }
