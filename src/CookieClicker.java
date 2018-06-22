@@ -16,7 +16,7 @@ class CookieClicker {
     WebDriver driver;
     private By goal;
     private String goalName;
-    private String upgradeName;
+    private String upgradeText;
     private int cycleLength;
     private int buildings;
     private double minutes;
@@ -39,7 +39,7 @@ class CookieClicker {
         buy = true;
         minutes = 1;
         upgrade = false;
-        upgradeName = "";
+        upgradeText = "";
         buyNewBuilding = false;
         newBuildingFound = false;
         cps = new BigDecimal(0);
@@ -226,7 +226,7 @@ class CookieClicker {
         }
     }
 
-    // golden cookie
+    // clicks golden cookies and displays it's text
     private void goldenCookie() {
         while (true) {
             try {
@@ -248,13 +248,14 @@ class CookieClicker {
         }
     }
 
-    // buying method
+    // buys the current set goal if available, and finds, updates the cps, and finds the next goal
+    // increases duration of next turn if goal can not be afforded
     private void buy() {
         if (isElementPresent(goal)) {
             driver.findElement(goal).click();
             System.out.println("  ++ " + goalName + " has been bought.\n");
             if (upgrade) {
-                System.out.println(upgradeName + "\n");
+                System.out.println(upgradeText + "\n");
                 upgrade = false;
             } else if (buyNewBuilding) {
                 buyNewBuilding = false;
@@ -283,10 +284,8 @@ class CookieClicker {
                 Thread.sleep(200);
                 upgradePrice = new BigDecimal(driver.findElement(By.cssSelector("#tooltip .price")).getAttribute
                         ("textContent").replaceAll("[^\\d]", ""));
-                //if (upgradePrice != null) {
-                System.out.println(" -upgrade price pull succeeded " + upgradePrice + "\n");
+                System.out.println(" -price for next upgrade has been updated (" + upgradePrice + " cookies)\n");
                 break;
-                //}
                 //System.out.println(" -upgrade price pull error. retrying..");
             } catch (Exception e) {
                 System.out.println(" -upgrade price pull error. retrying..");
@@ -300,10 +299,10 @@ class CookieClicker {
             try {
                 Actions move = new Actions(driver);
                 move.moveToElement(driver.findElement(By.cssSelector("#upgrade0"))).build().perform();
-                Thread.sleep(500);
+                Thread.sleep(300);
                 goalName = driver.findElement(By.cssSelector("#tooltip .name")).getAttribute("textContent");
-                upgradeName = driver.findElement(By.cssSelector("#tooltip .description")).getAttribute("textContent");
-                if (!upgradeName.isEmpty() && !goalName.isEmpty()) {
+                upgradeText = driver.findElement(By.cssSelector("#tooltip .description")).getAttribute("textContent");
+                if (!upgradeText.isEmpty() && !goalName.isEmpty()) {
                     System.out.println(" -upgrade text pull succeeded.\n");
                     break;
                 }
@@ -369,7 +368,7 @@ class CookieClicker {
                                         ("\\D+", "")) + ", and it produces: " + producing);
                         eff = (new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll
                                 ("\\D+", "")).divide(producing, 0, RoundingMode.DOWN)).longValue();
-                        System.out.println(", with an effiency of: " + eff);
+                        System.out.println(", with an efficiency of: " + eff);
                         if (eff == Math.min(eff, min)) {
                             min = eff;
                             index = i;
@@ -388,30 +387,16 @@ class CookieClicker {
             }
     }
 
-    // algorhtym to decide if it's worth it to buy a new building or upgrade
+    // algorithm to decide if it's worth it to buy a new building or upgrade
     private boolean evolve() {
         if (getUpgradePrice().compareTo(new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1)))
-                .getText()
-                .replaceAll("\\D+", ""))) < 0) {
+                .getText().replaceAll("\\D+", ""))) < 0) {
             upgrade = true;
             getUpgrade();
             goal = By.cssSelector("#upgrade0.enabled");
             System.out.println("Profitable to buy a new upgrade. Setting goal for " + goalName + "\n");
             return true;
         }
- /*
-            if (new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1))).getText().replaceAll
-            ("\\D+", ""))
-                    .compareTo(new BigDecimal(driver.findElement(By.id("productPrice" + (buildings - 1))).getText()
-                            .replaceAll("\\D+", ""))) > 0) {
-                goal = By.cssSelector("#product" + buildings + ".enabled");
-                goalName = driver.findElement(By.id("productName" + buildings))
-                        .getAttribute("textContent");
-                System.out.println("Profitable to buy a new unlocked building. Setting goal for " + goalName + "\n");
-                buyNewBuilding = true;
-                return true;
-            }
-*/
         try {
             double minutesTo;
             minutesTo = (new BigDecimal(driver.findElement(By.id("productPrice" + buildings)).getText()
@@ -434,9 +419,7 @@ class CookieClicker {
             System.out.println("ERROR!! Skipping new building calculation. Following error has been " +
                     "encountered: \"" + e.getMessage() + "\"");
         }
-
         return false;
-
     }
 
     // updates the cookies per second
@@ -460,6 +443,8 @@ class CookieClicker {
 
         System.out.println("-- Importing Save! --\n");
         try {
+            if (!isElementPresent(By.id("prefsButton")))
+                driver.findElement(By.id("prefsButton")).click();
             driver.findElement(By.linkText("Import save")).click();
             File txt = new File("CookieSave");
             Scanner sc = new Scanner(txt);
@@ -477,6 +462,8 @@ class CookieClicker {
     private void read(String saveGame) {
         System.out.println("-- Importing Save! --\n");
         try {
+            if (!isElementPresent(By.id("prefsButton")))
+                driver.findElement(By.id("prefsButton")).click();
             driver.findElement(By.linkText("Import save")).click();
             driver.findElement(By.id("textareaPrompt")).sendKeys(saveGame);
             driver.findElement(By.linkText("Load")).click();
@@ -490,6 +477,8 @@ class CookieClicker {
     // saves game to txt file
     private void save() {
         try {
+            if (!isElementPresent(By.id("prefsButton")))
+                driver.findElement(By.id("prefsButton")).click();
             driver.findElement(By.linkText("Save")).click();
             File txt = new File("CookieSave");
             PrintWriter saveCookies;
