@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
@@ -26,7 +27,7 @@ class CookieClicker {
     private boolean upgrade; // user decides if he wishes to save for next upgrade
     private volatile boolean loop; // user decides if to loop or end program
     private volatile boolean buy; // user decides if the program will ony click or if it will buy also
-
+    private volatile boolean fullConsole; //user decides if he wishes to see all the details in the console
 
     CookieClicker(WebDriver browser) {
 
@@ -61,12 +62,14 @@ class CookieClicker {
         try {
             driver.findElement(By.linkText("Fancy graphics ON")).click();
         } catch (Exception e) {
-            System.out.println("Fancy graphics button already depressed");
+            if (fullConsole)
+                System.out.println("Fancy graphics button already depressed");
         }
         try {
             driver.findElement(By.linkText("Particles ON")).click();
         } catch (Exception e) {
-            System.out.println("Particles button already depressed");
+            if (fullConsole)
+                System.out.println("Particles button already depressed");
         }
         /*
         try {
@@ -78,37 +81,44 @@ class CookieClicker {
         try {
             driver.findElement(By.linkText("Milk ON")).click();
         } catch (Exception e) {
-            System.out.println("Milk button already depressed");
+            if (fullConsole)
+                System.out.println("Milk button already depressed");
         }
         try {
             driver.findElement(By.linkText("Cursors ON")).click();
         } catch (Exception e) {
-            System.out.println("Cursors button already depressed");
+            if (fullConsole)
+                System.out.println("Cursors button already depressed");
         }
         try {
             driver.findElement(By.linkText("Wobbly cookie ON")).click();
         } catch (Exception e) {
-            System.out.println("Wobbly cookie button already depressed");
+            if (fullConsole)
+                System.out.println("Wobbly cookie button already depressed");
         }
         try {
             driver.findElement(By.linkText("Alt cookie sound ON")).click();
         } catch (Exception e) {
-            System.out.println("Alt cookie sound button already depressed");
+            if (fullConsole)
+                System.out.println("Alt cookie sound button already depressed");
         }
         try {
             driver.findElement(By.linkText("Short numbers ON")).click();
         } catch (Exception e) {
-            System.out.println("Short numbers button already depressed");
+            if (fullConsole)
+                System.out.println("Short numbers button already depressed");
         }
         try {
             driver.findElement(By.linkText("Fast notes OFF")).click();
         } catch (Exception e) {
-            System.out.println("Fast notes button already pressed");
+            if (fullConsole)
+                System.out.println("Fast notes button already pressed");
         }
         try {
             driver.findElement(By.linkText("Defocus OFF")).click();
         } catch (Exception e) {
-            System.out.println("Defocus button already pressed");
+            if (fullConsole)
+                System.out.println("Defocus button already pressed");
         }
         System.out.println();
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
@@ -122,7 +132,7 @@ class CookieClicker {
     // was needed to be implemented as a standalone method
     // because user might pause, interact with the game, and unpause
     // in which case the game would be stuck on the old gola
-    void update () {
+    void update() {
         updateCps();
         newBuilding();
         if (buildings == 1) {
@@ -142,12 +152,14 @@ class CookieClicker {
         try {
             driver.findElement(By.linkText("Fancy graphics ON")).click();
         } catch (Exception e) {
-            System.out.println("Fancy graphics button already depressed");
+            if (fullConsole)
+                System.out.println("Fancy graphics button already depressed");
         }
         try {
             driver.findElement(By.linkText("Particles ON")).click();
         } catch (Exception e) {
-            System.out.println("Particles button already depressed");
+            if (fullConsole)
+                System.out.println("Particles button already depressed");
         }
         /*
         try {
@@ -159,37 +171,44 @@ class CookieClicker {
         try {
             driver.findElement(By.linkText("Milk ON")).click();
         } catch (Exception e) {
-            System.out.println("Milk button already depressed");
+            if (fullConsole)
+                System.out.println("Milk button already depressed");
         }
         try {
             driver.findElement(By.linkText("Cursors ON")).click();
         } catch (Exception e) {
-            System.out.println("Cursors button already depressed");
+            if (fullConsole)
+                System.out.println("Cursors button already depressed");
         }
         try {
             driver.findElement(By.linkText("Wobbly cookie ON")).click();
         } catch (Exception e) {
-            System.out.println("Wobbly cookie button already depressed");
+            if (fullConsole)
+                System.out.println("Wobbly cookie button already depressed");
         }
         try {
             driver.findElement(By.linkText("Alt cookie sound ON")).click();
         } catch (Exception e) {
-            System.out.println("Alt cookie sound button already depressed");
+            if (fullConsole)
+                System.out.println("Alt cookie sound button already depressed");
         }
         try {
             driver.findElement(By.linkText("Short numbers ON")).click();
         } catch (Exception e) {
-            System.out.println("Short numbers button already depressed");
+            if (fullConsole)
+                System.out.println("Short numbers button already depressed");
         }
         try {
             driver.findElement(By.linkText("Fast notes OFF")).click();
         } catch (Exception e) {
-            System.out.println("Fast notes button already pressed");
+            if (fullConsole)
+                System.out.println("Fast notes button already pressed");
         }
         try {
             driver.findElement(By.linkText("Defocus OFF")).click();
         } catch (Exception e) {
-            System.out.println("Defocus button already pressed");
+            if (fullConsole)
+                System.out.println("Defocus button already pressed");
         }
 
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
@@ -208,16 +227,16 @@ class CookieClicker {
 
     // actual run of program
     void cookieRobot() {
-
-        if (buy) {
-            System.out.print("\n>> New Cycle Starting. ");
-            if (upgrade)
-                System.out.println("Will buy a new upgrade.\n");
-            else if (buyNewBuilding)
-                System.out.println("Will buy a new building.\n");
-            else
-                System.out.println("Will buy the most efficient building.\n");
-        }
+        if (fullConsole)
+            if (buy) {
+                System.out.print("\n>> New Cycle Starting. ");
+                if (upgrade)
+                    System.out.println("Will buy a new upgrade.\n");
+                else if (buyNewBuilding)
+                    System.out.println("Will buy a new building.\n");
+                else
+                    System.out.println("Will buy the most efficient building.\n");
+            }
         for (int loops = 0; loops < cycleLength; loops++)
             for (int clicks = 0; clicks < 15; clicks++) {
                 driver.findElement(By.cssSelector("#bigCookie")).click();
@@ -241,7 +260,8 @@ class CookieClicker {
                 driver.findElement(By.cssSelector(".shimmer")).click();
                 break;
             } catch (Exception e) {
-                System.out.println("Golden cookie fail. Retrying...");
+                if (fullConsole)
+                    System.out.println("Golden cookie fail. Retrying...");
             }
         }
         System.out.println("!! Golden cookie found !!\n");
@@ -251,7 +271,8 @@ class CookieClicker {
                 System.out.println(driver.findElement(By.id("particle0")).getText() + "\n");
                 break;
             } catch (Exception e) {
-                System.out.println("Golden cookie text fail. Retrying...");
+                if (fullConsole)
+                    System.out.println("Golden cookie text fail. Retrying...");
             }
         }
     }
@@ -271,14 +292,16 @@ class CookieClicker {
             }
             if (cycleLength > 1) {
                 cycleLength--;
-                System.out.println(" Decreasing number of turns per cycle to " + cycleLength + "\n");
+                if (fullConsole)
+                    System.out.println(" Decreasing number of turns per cycle to " + cycleLength + "\n");
             }
             updateCps();
             getGoal();
         } else {
             cycleLength++;
-            System.out.println(goalName + " could not be afforded. Trying again " + "next cycle..." +
-                    " Increasing number of turns per cycle to " + cycleLength + "\n");
+            if (fullConsole)
+                System.out.println(goalName + " could not be afforded. Trying again " + "next cycle..." +
+                        " Increasing number of turns per cycle to " + cycleLength + "\n");
         }
     }
 
@@ -292,11 +315,14 @@ class CookieClicker {
                 Thread.sleep(200);
                 upgradePrice = new BigDecimal(driver.findElement(By.cssSelector("#tooltip .price")).getAttribute
                         ("textContent").replaceAll("[^\\d]", ""));
-                System.out.println(" -price for next upgrade has been updated (" + upgradePrice + " cookies)\n");
+                if (fullConsole)
+                    System.out.println(" -price for next upgrade has been updated (" + upgradePrice + " cookies)\n");
                 break;
-                //System.out.println(" -upgrade price pull error. retrying..");
             } catch (Exception e) {
-                System.out.println(" -upgrade price pull error. retrying..");
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",
+                        driver.findElement(By.cssSelector("#upgrade0")));
+                if (fullConsole)
+                    System.out.println(" -upgrade price pull error. retrying..");
             }
         return upgradePrice;
     }
@@ -311,13 +337,15 @@ class CookieClicker {
                 goalName = driver.findElement(By.cssSelector("#tooltip .name")).getAttribute("textContent");
                 upgradeText = driver.findElement(By.cssSelector("#tooltip .description")).getAttribute("textContent");
                 if (!upgradeText.isEmpty() && !goalName.isEmpty()) {
-                    System.out.println(" -upgrade text pull succeeded.\n");
+                    if (fullConsole)
+                        System.out.println(" -upgrade text pull succeeded.\n");
                     break;
                 }
-
-                System.out.println(" -upgrade pull error. retrying..");
+                if (fullConsole)
+                    System.out.println(" -upgrade pull error. retrying..");
             } catch (Exception e) {
-                System.out.println(" -upgrade pull error. retrying..");
+                if (fullConsole)
+                    System.out.println(" -upgrade pull error. retrying..");
             }
     }
 
@@ -329,8 +357,9 @@ class CookieClicker {
                 break;
             if (driver.findElement(By.id("productOwned" + index)).getText().isEmpty()) {
                 newBuildingFound = true;
-                System.out.print("\nNew unlocked building found: " + driver.findElement(By.id
-                        ("productName" + index)).getAttribute("textContent"));
+                if (fullConsole)
+                    System.out.print("\nNew unlocked building found: " + driver.findElement(By.id
+                            ("productName" + index)).getAttribute("textContent"));
                 break;
             } else count++;
         }
@@ -338,16 +367,19 @@ class CookieClicker {
         if (count > 0)
             minutes = count * 2.25;
         if (!newBuildingFound) {
-            System.out.print("No new building found");
+            if (fullConsole)
+                System.out.print("No new building found");
         }
-
-        System.out.println(". Number of already bought buildings: " + count + "\n");
+        if (fullConsole)
+            System.out.println(". Number of already bought buildings: " + count + "\n");
         if (buildings == 0) {
-            System.out.println("\nNo pre-owned buildings found. Saving for the next new building\n");
+            if (fullConsole)
+                System.out.println("\nNo pre-owned buildings found. Saving for the next new building\n");
             buyNewBuilding = true;
             goal = By.id("product0");
             goalName = driver.findElement(By.id("productName0")).getAttribute("textContent");
-            System.out.println("No buildings detected. Current goal is Cursor");
+            if (fullConsole)
+                System.out.println("No buildings detected. Current goal is Cursor");
             upgrade = false;
         }
 
@@ -362,36 +394,39 @@ class CookieClicker {
                 int index = 0;
                 long min = Integer.MAX_VALUE;
                 long eff;
-                //if (!isElementPresent(By.cssSelector(".pieTimer"))) {
-                System.out.println("\nCalculating goal..\n");
+                if (fullConsole)
+                    System.out.println("\nCalculating goal..\n");
                 for (int i = 0; i < buildings; i++) {
                     try {
                         move.moveToElement(driver.findElement(By.cssSelector("#product" + i))).build().perform();
                         Thread.sleep(100);
                         producing = new BigDecimal(driver.findElement(By.cssSelector("div.data b")).getAttribute
                                 ("textContent").replaceAll("\\D+", ""));
-                        System.out.print("Price for a " + driver.findElement(By.id("productName" + i)).getText() + " " +
-                                "is: " +
-                                new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll
-                                        ("\\D+", "")) + ", and it produces: " + producing);
+                        if (fullConsole)
+                            System.out.print("Price for a " + driver.findElement(By.id("productName" + i)).getText()
+                                    + " " +
+                                    "is: " +
+                                    new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll
+                                            ("\\D+", "")) + ", and it produces: " + producing);
                         eff = (new BigDecimal(driver.findElement(By.id("productPrice" + i)).getText().replaceAll
                                 ("\\D+", "")).divide(producing, 0, RoundingMode.DOWN)).longValue();
-                        System.out.println(", with an efficiency of: " + eff);
+                        if (fullConsole)
+                            System.out.println(", with an efficiency of: " + eff);
                         if (eff == Math.min(eff, min)) {
                             min = eff;
                             index = i;
                         }
                     } catch (Exception e) {
-
-                        System.out.println("//// Failed to get number of producing cookies for " + driver
-                                .findElement(By.id("productName" + i)).getText());
+                        if (fullConsole)
+                            System.out.println("//// Failed to get number of producing cookies for " + driver
+                                    .findElement(By.id("productName" + i)).getText());
 
                     }
                 }
 
                 goal = By.cssSelector("#product" + index + ".enabled");
                 goalName = driver.findElement(By.id("productName" + index)).getText();
-                System.out.println("\n* Goal has been set to buy: " + goalName + " \n");
+                System.out.println("* Goal has been set to buy: " + goalName + " \n");
             }
     }
 
@@ -402,7 +437,10 @@ class CookieClicker {
             upgrade = true;
             getUpgrade();
             goal = By.cssSelector("#upgrade0.enabled");
-            System.out.println("Profitable to buy a new upgrade. Setting goal for " + goalName + "\n");
+            if (fullConsole)
+                System.out.println("Profitable to buy a new upgrade. Setting goal for " + goalName + "\n");
+            else
+                System.out.println("* Goal has been set to buy: " + goalName + " \n");
             return true;
         }
         try {
@@ -410,22 +448,28 @@ class CookieClicker {
             minutesTo = (new BigDecimal(driver.findElement(By.id("productPrice" + buildings)).getText()
                     .replaceAll("\\D+", "")).divide(cps, 2, RoundingMode.UP))
                     .divide(BigDecimal.valueOf(60), 2, RoundingMode.UP).doubleValue();
-            System.out.println(" > Next building can be afforded in " + minutesTo + " minutes. Must be under " +
-                    minutes + " minutes. Price for next building: " +
-                    driver.findElement(By.id("productPrice" + buildings)).getText().replaceAll("\\D+", ""));
+            if (fullConsole)
+                System.out.println(" > Next building can be afforded in " + minutesTo + " minutes. Must be under " +
+                        minutes + " minutes. Price for next building: " +
+                        driver.findElement(By.id("productPrice" + buildings)).getText().replaceAll("\\D+", ""));
 
 
             if (minutesTo < minutes) {
                 goal = By.cssSelector("#product" + buildings + ".enabled");
                 goalName = driver.findElement(By.id("productName" + buildings))
                         .getAttribute("textContent");
-                System.out.println("Profitable to buy a new unlocked building. Setting goal for " + goalName + "\n");
+                if (fullConsole)
+                    System.out.println("Profitable to buy a new unlocked building. Setting goal for " + goalName +
+                            "\n");
+                else
+                    System.out.println("* Goal has been set to buy: " + goalName + " \n");
                 buyNewBuilding = true;
                 return true;
             }
         } catch (ArithmeticException e) {
-            System.out.println("ERROR!! Skipping new building calculation. Following error has been " +
-                    "encountered: \"" + e.getMessage() + "\"");
+            if (fullConsole)
+                System.out.println("ERROR!! Skipping new building calculation. Following error has been " +
+                        "encountered: \"" + e.getMessage() + "\"");
         }
         return false;
     }
@@ -433,15 +477,18 @@ class CookieClicker {
     // updates the cookies per second
     private void updateCps() {
         if (isElementPresent(By.cssSelector(".pieTimer"))) {
-            System.out.println("> Cookie multiplier underway. Not updating cps");
+            if (fullConsole)
+                System.out.println("> Cookie multiplier underway. Not updating cps");
         } else while (true) {
             try {
                 cps = new BigDecimal(driver.findElement(By.cssSelector("#cookies div")).getAttribute("textContent")
                         .replaceAll("[^\\d.]", ""));
-                System.out.println(" -cps updated:" + cps + "\n");
+                if (fullConsole)
+                    System.out.println(" -cps updated:" + cps + "\n");
                 break;
             } catch (Exception e) {
-                System.out.println(" -cps error! retrying.");
+                if (fullConsole)
+                    System.out.println(" -cps error! retrying.");
             }
         }
     }
@@ -528,5 +575,9 @@ class CookieClicker {
 
     void setCycleLength(int turns) {
         cycleLength = turns;
+    }
+
+    void setConsole(boolean onoff) {
+        fullConsole = onoff;
     }
 }

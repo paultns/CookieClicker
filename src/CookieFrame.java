@@ -21,6 +21,8 @@ public class CookieFrame extends JFrame implements ActionListener {
     private JRadioButton continueGame;
     private JRadioButton clickOnly;
     private JRadioButton clickBuy;
+    private JRadioButton consoleOn;
+    private JRadioButton consoleOff;
     private static JButton start;
     private static JButton shutdown;
     private static JButton end;
@@ -40,7 +42,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         consoleSave = "";
         started = false;
         setup = false;
-        setTitle("CookieAutoClicker v1.3");
+        setTitle("CookieAutoClicker v1.4");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
@@ -76,6 +78,13 @@ public class CookieFrame extends JFrame implements ActionListener {
         browsers.add(chrome);
         browsers.add(explorer);
         firefox.setSelected(true);
+
+        final ButtonGroup toggleConsole = new ButtonGroup();
+        consoleOn = new JRadioButton("Detailed Updates");
+        consoleOff = new JRadioButton("Minimal Updates");
+        toggleConsole.add(consoleOff);
+        toggleConsole.add(consoleOn);
+        consoleOff.setSelected(true);
 
         final ButtonGroup game = new ButtonGroup();
         JRadioButton newGame = new JRadioButton("New Game");
@@ -121,7 +130,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         System.out.println(" !! To load a savegame, copy savegame in console, select Load and click run");
     }
 
-    private void start() {  // modify this
+    private void start() {
         if (continueGame.isSelected() && !fileFound("CookieSave"))
             System.out.println("Save file not found, either load a game or select new game.\n");
         else if (!setup) {
@@ -153,21 +162,35 @@ public class CookieFrame extends JFrame implements ActionListener {
                 started = true;
                 cC.setLoop(true);
                 System.out.println("Program will loop until user decides to stop it\n");
+                if (consoleOn.isSelected()) {
+                    cC.setConsole(true);
+                    System.out.println("Console will show full updates.");
+                } else {
+                    cC.setConsole(false);
+                    System.out.println("Console will show only minimal updates.");
+                }
                 if (clickOnly.isSelected()) {
                     cC.setBuy(false);
                     cC.setCycleLength(1);
-                    System.out.println("\n>> New Cycle Starting.\nProgram will only click cookie and golden cookies " +
-                            "without buying buildings / upgrades");
+                    System.out.println(">> New Cycle Starting.\nProgram will only click cookie and golden cookies " +
+                            "without buying buildings / upgrades\n");
 
                 } else {
                     cC.setBuy(true);
                     cC.setCycleLength(1);
                     System.out.println("Program will click cookie and golden cookies, and buy upgrades / " +
-                            "buildings when feasible");
+                            "buildings when feasible\n");
                 }
                 cC.update();
                 while (cC.isLoop()) cC.cookieRobot();
             } else {
+                if (consoleOn.isSelected()) {
+                    cC.setConsole(true);
+                    System.out.println("Console will show full updates.");
+                } else {
+                    cC.setConsole(false);
+                    System.out.println("Console will show only minimal updates.");
+                }
                 if (clickOnly.isSelected()) {
                     cC.setBuy(false);
                     cC.setCycleLength(1);
@@ -179,7 +202,7 @@ public class CookieFrame extends JFrame implements ActionListener {
                     cC.setCycleLength(1);
                     System.out.println("Program will click cookie and golden cookies, and buy upgrades / " +
                             "buildings when feasible");
-                    System.out.println("Changes will take effect after current cycle ends\n");
+                    System.out.println("Changes will take effect after current cycle\n");
                 }
             }
         }
@@ -191,6 +214,9 @@ public class CookieFrame extends JFrame implements ActionListener {
         output.setEditable(false);
         panel.setLayout(new GridLayout(0, 3, 0, 0));
         panel.removeAll();
+        panel.add(new JLabel("Toogle Console Type"));
+        panel.add(consoleOn);
+        panel.add(consoleOff);
         panel.add(new JLabel("Game Mode:"));
         panel.add(clickOnly);
         panel.add(clickBuy);

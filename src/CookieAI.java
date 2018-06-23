@@ -7,9 +7,6 @@ public class CookieAI {
     }
 }
 
-// edit clicking loop text
+// add comments
 
-// edit buying / getting goal / evolving / order
-
-//         System.out.println("String is: " + output.getText().split(" ")[output.getText().split(" ").length -
-//                        1]);
+// add error console? look for the old console git

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" build-on-make="true" name="CookieClicker:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/CookieClicker_jar</output-path>
+    <output-path>$PROJECT_DIR$/CookieClicker_jar</output-path>
     <root id="archive" name="CookieClicker.jar">
       <element id="module-output" name="CookieClicker" />
       <element id="extracted-dir" path="D:/Dropbox/Java Shit/drivers/selenium-java-3.12.0/client-combined-3.12.0.jar" path-in-jar="/" />
