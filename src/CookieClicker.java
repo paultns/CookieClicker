@@ -112,6 +112,17 @@ class CookieClicker {
         }
         System.out.println();
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
+
+        CookieFrame.enableStart();
+        CookieFrame.enableShutdown();
+        //driver.findElement(By.id("storeBulk10")).click();
+    }
+
+    // updates the goal of the game before starting the run of the game
+    // was needed to be implemented as a standalone method
+    // because user might pause, interact with the game, and unpause
+    // in which case the game would be stuck on the old gola
+    void update () {
         updateCps();
         newBuilding();
         if (buildings == 1) {
@@ -119,9 +130,6 @@ class CookieClicker {
             goalName = driver.findElement(By.id("productName0")).getText();
         } else if (!buyNewBuilding && buildings != 0)
             getGoal();
-        CookieFrame.enableStart();
-        CookieFrame.enableShutdown();
-        //driver.findElement(By.id("storeBulk10")).click();
     }
 
     // importing save from text and disabling resource intensive things
@@ -477,7 +485,7 @@ class CookieClicker {
     // saves game to txt file
     private void save() {
         try {
-            if (!isElementPresent(By.id("prefsButton")))
+            if (!isElementPresent(By.linkText("Save")))
                 driver.findElement(By.id("prefsButton")).click();
             driver.findElement(By.linkText("Save")).click();
             File txt = new File("CookieSave");

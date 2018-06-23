@@ -40,7 +40,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         consoleSave = "";
         started = false;
         setup = false;
-        setTitle("CookieAutoClicker");
+        setTitle("CookieAutoClicker v1.3");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
@@ -165,6 +165,7 @@ public class CookieFrame extends JFrame implements ActionListener {
                     System.out.println("Program will click cookie and golden cookies, and buy upgrades / " +
                             "buildings when feasible");
                 }
+                cC.update();
                 while (cC.isLoop()) cC.cookieRobot();
             } else {
                 if (clickOnly.isSelected()) {
