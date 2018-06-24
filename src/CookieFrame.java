@@ -28,7 +28,7 @@ public class CookieFrame extends JFrame implements ActionListener {
     private static JButton end;
     private JTextArea output;
     private JPanel panel;
-    private boolean started;
+    private static boolean started;
     private boolean setup;
     private String consoleSave;
     private CookieClicker cC;
@@ -42,7 +42,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         consoleSave = "";
         started = false;
         setup = false;
-        setTitle("CookieAutoClicker v1.4");
+        setTitle("CookieAutoClicker v1.4.2");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
@@ -56,7 +56,6 @@ public class CookieFrame extends JFrame implements ActionListener {
             start.setText("Start");
             cC.setLoop(false);
             started = false;
-            //shutdown.setEnabled(false);
             start.setEnabled(false);
             end.setEnabled(false);
         });
@@ -138,19 +137,22 @@ public class CookieFrame extends JFrame implements ActionListener {
                 consoleSave = output.getText().split(" ")[output.getText().split(" ").length - 1];
 
             if (firefox.isSelected()) {
-                if (fileFound("geckodriver.exe"))
+                if (fileFound("geckodriver.exe")) {
+                    start.setEnabled(false);
                     setup(new FirefoxDriver());
-                else
+                } else
                     System.out.println("ERROR!! Firefox driver file not found!");
             } else if (chrome.isSelected()) {
-                if (fileFound("chromedriver.exe"))
+                if (fileFound("chromedriver.exe")) {
+
                     setup(new ChromeDriver());
-                else
+                } else
                     System.out.println("ERROR!! Chrome driver file not found!");
             } else if (explorer.isSelected()) {
-                if (fileFound("IEDriverServer.exe"))
+                if (fileFound("IEDriverServer.exe")) {
+                    start.setEnabled(false);
                     setup(new InternetExplorerDriver());
-                else
+                } else
                     System.out.println("ERROR!! Internet Explorer driver file not found");
             } else setup(new FirefoxDriver());
 
@@ -250,12 +252,24 @@ public class CookieFrame extends JFrame implements ActionListener {
         worker.execute();
     }
 
-    static void enableStart() {
-        start.setEnabled(true);
+    static void toggleStart(boolean bool) {
+        start.setEnabled(bool);
     }
 
-    static void enableShutdown() {
-        shutdown.setEnabled(true);
+    static void toggleEnd(boolean bool) {
+        end.setEnabled(bool);
+    }
+
+    static void toggleShutdown(boolean bool) {
+        shutdown.setEnabled(bool);
+    }
+
+    static void setStart(String text) {
+        start.setText(text);
+    }
+
+    static void toggleGame(boolean bool) {
+        started = bool;
     }
 
     private boolean fileFound(String file) {

@@ -28,6 +28,7 @@ class CookieClicker {
     private volatile boolean loop; // user decides if to loop or end program
     private volatile boolean buy; // user decides if the program will ony click or if it will buy also
     private volatile boolean fullConsole; //user decides if he wishes to see all the details in the console
+    private int failCount;
 
     CookieClicker(WebDriver browser) {
 
@@ -123,8 +124,8 @@ class CookieClicker {
         System.out.println();
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
 
-        CookieFrame.enableStart();
-        CookieFrame.enableShutdown();
+        CookieFrame.toggleStart(true);
+        CookieFrame.toggleShutdown(true);
         //driver.findElement(By.id("storeBulk10")).click();
     }
 
@@ -220,8 +221,8 @@ class CookieClicker {
         } else if (!buyNewBuilding && buildings != 0)
             getGoal();
 
-        CookieFrame.enableStart();
-        CookieFrame.enableShutdown();
+        CookieFrame.toggleStart(true);
+        CookieFrame.toggleShutdown(true);
         //driver.findElement(By.id("storeBulk10")).click();
     }
 
@@ -239,7 +240,34 @@ class CookieClicker {
             }
         for (int loops = 0; loops < cycleLength; loops++)
             for (int clicks = 0; clicks < 15; clicks++) {
-                driver.findElement(By.cssSelector("#bigCookie")).click();
+                try {
+                    driver.findElement(By.cssSelector("#bigCookie")).click();
+                    failCount = 0;
+                } catch (Exception er) {
+                    if (fullConsole)
+                        System.out.println(er.getMessage() + "\n");
+                    if (failCount > 10) {
+                        System.out.println("Program will end after current cycle finishes..\n");
+                        CookieFrame.setStart("Start");
+                        setLoop(false);
+                        CookieFrame.toggleGame(false);
+                        CookieFrame.toggleStart(false);
+                        CookieFrame.toggleEnd(false);
+                        break;
+                    }
+                    failCount++;
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        System.out.println("Thread Sleep Fail");
+                        e.printStackTrace();
+                    }
+                    System.out.print("Big Cookie cannot be found");
+                    for (int i = 0; i < failCount; i++)
+                        System.out.print(".");
+                    System.out.println();
+
+                }
                 if (isElementPresent(By.cssSelector(".shimmer"))) goldenCookie();
             }
         if (buy)
@@ -247,8 +275,8 @@ class CookieClicker {
 
         if (!isLoop()) {
             System.out.println("Automation ended. Please choose another action or close window to end program");
-            CookieFrame.enableStart();
-            CookieFrame.enableShutdown();
+            CookieFrame.toggleStart(true);
+            CookieFrame.toggleShutdown(true);
             save();
         }
     }

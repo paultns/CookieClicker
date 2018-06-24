@@ -1,0 +1,5 @@
+v1.0 - First Nightly Build
+...
+v1.3 - Tweaks and adjutsments
+v1.4 - Added Console toggler
+v1.4.2 - Added clicking fail scenario

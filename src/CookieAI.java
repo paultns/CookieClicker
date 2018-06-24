@@ -8,5 +8,3 @@ public class CookieAI {
 }
 
 // add comments
-
-// add error console? look for the old console git
