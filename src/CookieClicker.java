@@ -213,14 +213,7 @@ class CookieClicker {
         }
 
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
-        updateCps();
-        newBuilding();
-        if (buildings == 1) {
-            goal = By.cssSelector("#product0" + ".enabled");
-            goalName = driver.findElement(By.id("productName0")).getText();
-        } else if (!buyNewBuilding && buildings != 0)
-            getGoal();
-
+        //update();
         CookieFrame.toggleStart(true);
         CookieFrame.toggleShutdown(true);
         //driver.findElement(By.id("storeBulk10")).click();
