@@ -7,68 +7,81 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class CookieFrame extends JFrame implements ActionListener {
 
-    private JRadioButton firefox;
-    private JRadioButton explorer;
-    private JRadioButton chrome;
-    private JRadioButton loadGame;
-    private JRadioButton continueGame;
-    private JRadioButton clickOnly;
-    private JRadioButton clickBuy;
-    private JRadioButton consoleOn;
-    private JRadioButton consoleOff;
+    static JCheckBox buyNewBuildings;
     private static JButton start;
     private static JButton shutdown;
-    private static JButton end;
-    private JTextArea output;
+    private static JButton save;
+    private static JButton reset;
+    private static JButton load;
+    private static JRadioButton firefox;
+    private static JRadioButton explorer;
+    private static JRadioButton chrome;
+    private static JRadioButton loadGame;
+    private static JRadioButton continueGame;
+    private static JRadioButton newGame;
+    private static JRadioButton consoleOn;
+    private static JRadioButton consoleOff;
+    private static JCheckBox autoSave;
+    private static JCheckBox clickGolden;
+    private static JCheckBox buyBuildings;
+    private static JCheckBox buyUpgrades;
+    private static String gameState;
     private JPanel panel;
-    private static boolean started;
-    private boolean setup;
-    private String consoleSave;
+    private static JButton openSave;
+    private static JTextArea output;
     private CookieClicker cC;
+    private static ClearTextArea focusClearer;
 
     CookieFrame() {
 
+        // setup of the browser driver paths
         System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
 
-        consoleSave = "";
-        started = false;
-        setup = false;
-        setTitle("CookieAutoClicker v1.4.2");
-
+        // initializing all buttons
+        setTitle("CookieAutoClicker v1.5");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
-        panel = new JPanel();
-        panel.setLayout(new GridLayout(0, 7, 0, 20));
-
         //panel.setBackground(Color.blue);
-        end = new JButton("Save and Stop");
-        end.addActionListener((ActionEvent e) -> {
-            System.out.println("Program will end after current cycle finishes..\n");
-            start.setText("Start");
-            cC.setLoop(false);
-            started = false;
-            start.setEnabled(false);
-            end.setEnabled(false);
-        });
-        end.setEnabled(false);
+        panel = new JPanel();
         start = new JButton("Run");
         start.addActionListener(this);
         shutdown = new JButton("Shutdown");
         shutdown.addActionListener((ActionEvent e) -> {
-            cC.driver.quit();
+            try {
+                cC.driver.quit();
+            }
+            catch (Exception ex) {
+                System.out.println("\nWindows was already closed.\n");
+            }
             setVisible(false); //you can't see me!
             dispose(); //Destroy the JFrame object
         });
-
+        save = new JButton("Save Game");
+        save.addActionListener((ActionEvent e) -> cC.save());
+        load = new JButton("Load Save File");
+        load.addActionListener((ActionEvent e) -> cC.read(null));
+        openSave = new JButton("Open Save File");
+        openSave.addActionListener((ActionEvent open) ->
+                showSave()
+        );
+        reset = new JButton("Reset Game");
+        reset.addActionListener((ActionEvent e) -> {
+            changeState("RESET");
+            cC.driver.quit();
+            cC = null;
+        });
+        // browser chooser. with firefox as default
         final ButtonGroup browsers = new ButtonGroup();
         chrome = new JRadioButton("Chrome");
         firefox = new JRadioButton("Firefox");
@@ -77,16 +90,16 @@ public class CookieFrame extends JFrame implements ActionListener {
         browsers.add(chrome);
         browsers.add(explorer);
         firefox.setSelected(true);
-
+        // console updates selector, with minimal updates as default
         final ButtonGroup toggleConsole = new ButtonGroup();
         consoleOn = new JRadioButton("Detailed Updates");
         consoleOff = new JRadioButton("Minimal Updates");
         toggleConsole.add(consoleOff);
         toggleConsole.add(consoleOn);
-        consoleOff.setSelected(true);
-
+        consoleOn.setSelected(true);
+        // game mode selector, with continue game as default
         final ButtonGroup game = new ButtonGroup();
-        JRadioButton newGame = new JRadioButton("New Game");
+        newGame = new JRadioButton("New Game");
         loadGame = new JRadioButton("Load");
         continueGame = new JRadioButton("Continue");
         game.add(loadGame);
@@ -94,20 +107,60 @@ public class CookieFrame extends JFrame implements ActionListener {
         game.add(continueGame);
         continueGame.setSelected(true);
 
-        final ButtonGroup gameMode = new ButtonGroup();
-        clickOnly = new JRadioButton("Click Only");
-        clickBuy = new JRadioButton("Click and Buy");
-        gameMode.add(clickOnly);
-        gameMode.add(clickBuy);
-        clickBuy.setSelected(true);
-
-        panel.add(chrome);
-        panel.add(firefox);
-        panel.add(explorer);
-        panel.add(new JSeparator(SwingConstants.VERTICAL));
-        panel.add(newGame);
-        panel.add(loadGame);
-        panel.add(continueGame);
+        // initializing checkboxes
+        buyBuildings = new JCheckBox("Buy Buildings");
+        buyBuildings.addItemListener((ItemEvent e) -> {
+            if (e.getStateChange() == ItemEvent.DESELECTED) {
+                cC.setBuyingBuildings(false);
+                System.out.println("# Will not buy buildings.");
+                cC.clearGoals();
+            } else {
+                cC.setBuyingBuildings(true);
+                System.out.println("# Will also buy buildings");
+            }
+        });
+        buyUpgrades = new JCheckBox("Buy Upgrades");
+        buyUpgrades.addItemListener((ItemEvent e) -> {
+            if (e.getStateChange() == ItemEvent.DESELECTED) {
+                cC.setBuyingUpgrades(false);
+                cC.clearGoals();
+                System.out.println("# Will not buy upgrades.");
+            } else {
+                cC.setBuyingUpgrades(true);
+                System.out.println("# Will also buy upgrades.");
+            }
+        });
+        buyNewBuildings = new JCheckBox("Buy New Buildings");
+        buyNewBuildings.addItemListener((ItemEvent e) -> {
+            if (e.getStateChange() == ItemEvent.DESELECTED) {
+                System.out.println("# Will not buy new unlocked buildings");
+                cC.setBuyingNewBuildings(false);
+                cC.clearGoals();
+            } else {
+                cC.setBuyingNewBuildings(true);
+                System.out.println("# Will also buy new buildings.");
+            }
+        });
+        clickGolden = new JCheckBox("Click Golden Cookies");
+        clickGolden.addItemListener((ItemEvent e) -> {
+            if (e.getStateChange() == ItemEvent.DESELECTED) {
+                cC.setClickGoldenCookies(false);
+                System.out.println("# Golden Cookies will not be clicked.");
+            } else {
+                cC.setClickGoldenCookies(true);
+                System.out.println("# Golden Cookies will be automatically clicked.");
+            }
+        });
+        autoSave = new JCheckBox("Save Automatically");
+        autoSave.addItemListener((ItemEvent e) -> {
+            if (e.getStateChange() == ItemEvent.DESELECTED) {
+                cC.setAutoSave(false);
+                System.out.println("# Game will not be automatically saved");
+            } else {
+                cC.setAutoSave(true);
+                System.out.println("# Game will be automatically saved");
+            }
+        });
 
         // creates a text area which will work as an input area for the save game
         // and as a console after the program has started
@@ -115,163 +168,237 @@ public class CookieFrame extends JFrame implements ActionListener {
         PrintStream printStream = new PrintStream(new Console(output));
         System.setOut(printStream);
         System.setErr(printStream);
+        focusClearer = new ClearTextArea();
+        output.addFocusListener(focusClearer);
+        //initializing variables
+
+
+        gameState = "DRIVER OFF";
+        System.out.println(" !! To load a savegame, insert savegame here, select Load and click run...");
+        panelSetup();
+    }
+
+    // initial setup of the panel on opening the program
+    private void panelSetup() {
+
+        panel.setLayout(new GridLayout(0, 4, 0, 0));
+        start.setPreferredSize(new Dimension(0, 50));
+        panel.add(new JLabel("Choose Browser:"));
+        panel.add(chrome);
+        panel.add(firefox);
+        panel.add(explorer);
+        panel.add(new JLabel("Choose game mode:"));
+        panel.add(newGame);
+        panel.add(loadGame);
+        panel.add(continueGame);
+        panel.add(new JSeparator());
+        panel.add(new JLabel("Toogle Console Type"));
+        reset.setEnabled(false);
+        panel.add(consoleOn);
+        consoleOn.setEnabled(false);
+        panel.add(consoleOff);
+        consoleOff.setEnabled(false);
+        panel.add(buyBuildings);
+        buyBuildings.setEnabled(false);
+        panel.add(buyUpgrades);
+        buyUpgrades.setEnabled(false);
+        panel.add(buyNewBuildings);
+        buyNewBuildings.setEnabled(false);
+        panel.add(clickGolden);
+        clickGolden.setEnabled(false);
+        panel.add(start);
+        panel.add(save);
+        save.setEnabled(false);
+        panel.add(autoSave);
+        autoSave.setEnabled(false);
+        panel.add(shutdown);
+        shutdown.setEnabled(false);
+        panel.add(openSave);
+        panel.add(load);
+        load.setEnabled(false);
+        panel.add(new JSeparator());
+        panel.add(reset);
 
         add(panel, BorderLayout.NORTH);
         add(new JScrollPane(output), BorderLayout.CENTER);
-        add(start, BorderLayout.SOUTH);
 
         setPreferredSize(new Dimension(700, 800));
-        start.setPreferredSize(new Dimension(0, 50));
+
 
         setVisible(true);
         pack();
-
-        System.out.println(" !! To load a savegame, copy savegame in console, select Load and click run");
     }
 
-    private void start() {
+    // starting driver based on chosen browser
+    private void startDriver() {
         if (continueGame.isSelected() && !fileFound("CookieSave"))
             System.out.println("Save file not found, either load a game or select new game.\n");
-        else if (!setup) {
-            if (consoleSave.isEmpty())
-                consoleSave = output.getText().split(" ")[output.getText().split(" ").length - 1];
+        else if (firefox.isSelected()) {
+            if (fileFound("geckodriver.exe"))
+                setup(new FirefoxDriver(), output.getText());
+            else
+                System.out.println("ERROR!! Firefox driver file not found!");
+        } else if (chrome.isSelected()) {
+            if (fileFound("chromedriver.exe"))
+                setup(new ChromeDriver(), output.getText());
+            else
+                System.out.println("ERROR!! Chrome driver file not found!");
+        } else if (explorer.isSelected()) {
+            if (fileFound("IEDriverServer.exe"))
+                setup(new InternetExplorerDriver(), output.getText());
+            else
+                System.out.println("ERROR!! Internet Explorer driver file not found");
+        } else setup(new FirefoxDriver(), output.getText());
 
-            if (firefox.isSelected()) {
-                if (fileFound("geckodriver.exe")) {
-                    start.setEnabled(false);
-                    setup(new FirefoxDriver());
-                } else
-                    System.out.println("ERROR!! Firefox driver file not found!");
-            } else if (chrome.isSelected()) {
-                if (fileFound("chromedriver.exe")) {
-
-                    setup(new ChromeDriver());
-                } else
-                    System.out.println("ERROR!! Chrome driver file not found!");
-            } else if (explorer.isSelected()) {
-                if (fileFound("IEDriverServer.exe")) {
-                    start.setEnabled(false);
-                    setup(new InternetExplorerDriver());
-                } else
-                    System.out.println("ERROR!! Internet Explorer driver file not found");
-            } else setup(new FirefoxDriver());
-
-        } else {
-            if (!started) {
-                start.setText("Update game");
-                shutdown.setEnabled(false);
-                end.setEnabled(true);
-                started = true;
-                cC.setLoop(true);
-                System.out.println("Program will loop until user decides to stop it\n");
-                if (consoleOn.isSelected()) {
-                    cC.setConsole(true);
-                    System.out.println("Console will show full updates.");
-                } else {
-                    cC.setConsole(false);
-                    System.out.println("Console will show only minimal updates.");
-                }
-                if (clickOnly.isSelected()) {
-                    cC.setBuy(false);
-                    cC.setCycleLength(1);
-                    System.out.println(">> New Cycle Starting.\nProgram will only click cookie and golden cookies " +
-                            "without buying buildings / upgrades\n");
-
-                } else {
-                    cC.setBuy(true);
-                    cC.setCycleLength(1);
-                    System.out.println("Program will click cookie and golden cookies, and buy upgrades / " +
-                            "buildings when feasible\n");
-                }
-                cC.update();
-                while (cC.isLoop()) cC.cookieRobot();
-            } else {
-                if (consoleOn.isSelected()) {
-                    cC.setConsole(true);
-                    System.out.println("Console will show full updates.");
-                } else {
-                    cC.setConsole(false);
-                    System.out.println("Console will show only minimal updates.");
-                }
-                if (clickOnly.isSelected()) {
-                    cC.setBuy(false);
-                    cC.setCycleLength(1);
-                    System.out.println("Program will only click cookie and golden cookies without buying " +
-                            "buildings / upgrades");
-                    System.out.println("Changes will take effect after current cycle ends\n");
-                } else {
-                    cC.setBuy(true);
-                    cC.setCycleLength(1);
-                    System.out.println("Program will click cookie and golden cookies, and buy upgrades / " +
-                            "buildings when feasible");
-                    System.out.println("Changes will take effect after current cycle\n");
-                }
-            }
-        }
     }
 
-    private void setup(WebDriver driver) {
-        //output.setText("");
-        setup = true;
-        output.setEditable(false);
-        panel.setLayout(new GridLayout(0, 3, 0, 0));
-        panel.removeAll();
-        panel.add(new JLabel("Toogle Console Type"));
-        panel.add(consoleOn);
-        panel.add(consoleOff);
-        panel.add(new JLabel("Game Mode:"));
-        panel.add(clickOnly);
-        panel.add(clickBuy);
-        panel.add(start);
-        start.setText("Start");
-        start.setEnabled(false);
-        panel.add(end);
-        panel.add(shutdown);
-        shutdown.setEnabled(false);
-        pack();
-        output.setText("");
+    // game setup
+    private void setup(WebDriver driver, String loadedGame) {
+
+        lock();
         cC = new CookieClicker(driver);
         if (loadGame.isSelected())
-            cC.setUp(consoleSave.split("\n")[consoleSave.split("\n").length - 1]);
+            cC.setUp(loadedGame, "LOAD GAME");
         else if (continueGame.isSelected()) {
-            cC.setUp(false);
-        } else cC.setUp(true);
+            cC.setUp(null, "CONTINUE GAME");
+        } else cC.setUp(null, "NEW GAME");
+        //output.setText("");
         System.out.println("Setup Complete! Please select game mode! (can be also updated on the go) " +
                 "Game starting at: " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS) + "\n");
 
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() {
-                start();
-                return null;
+        consoleOff.addItemListener((ItemEvent ie) -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                cC.setFullConsole(false);
+                System.out.println("# Console will only display important updates");
             }
-        };
-        worker.execute();
+        });
+        consoleOn.addItemListener((ItemEvent ie) -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                cC.setFullConsole((true));
+                System.out.println("# Console will display full information");
+            }
+        });
     }
 
-    static void toggleStart(boolean bool) {
-        start.setEnabled(bool);
+    // modifies the GUI on program run and rest
+    static void changeState(String state) {
+        if (state.equals("START")) {
+            gameState = "GAME PAUSED";
+            openSave.setEnabled(true);
+            chrome.setEnabled(false);
+            firefox.setEnabled(false);
+            explorer.setEnabled(false);
+            newGame.setEnabled(false);
+            loadGame.setEnabled(false);
+            continueGame.setEnabled(false);
+            start.setText("Start");
+            start.setEnabled(true);
+            buyBuildings.setEnabled(true);
+            save.setEnabled(true);
+            buyUpgrades.setEnabled(true);
+            buyNewBuildings.setEnabled(true);
+            clickGolden.setEnabled(true);
+            autoSave.setEnabled(true);
+            consoleOn.setEnabled(true);
+            consoleOff.setEnabled(true);
+            reset.setEnabled(true);
+            buyBuildings.setSelected(false);
+            buyUpgrades.setSelected(false);
+            buyNewBuildings.setSelected(false);
+            clickGolden.setSelected(false);
+            shutdown.setEnabled(true);
+            load.setEnabled(true);
+        } else if (state.equals("RESET")) {
+            gameState = "DRIVER OFF";
+            chrome.setEnabled(true);
+            firefox.setEnabled(true);
+            explorer.setEnabled(true);
+            newGame.setEnabled(true);
+            loadGame.setEnabled(true);
+            continueGame.setEnabled(true);
+            start.setText("Run");
+            buyBuildings.setEnabled(false);
+            save.setEnabled(false);
+            buyUpgrades.setEnabled(false);
+            buyNewBuildings.setEnabled(false);
+            clickGolden.setEnabled(false);
+            autoSave.setEnabled(false);
+            consoleOn.setEnabled(false);
+            consoleOff.setEnabled(false);
+            reset.setEnabled(false);
+            shutdown.setEnabled(false);
+            output.addFocusListener(focusClearer);
+            output.setEditable(true);
+        }
     }
 
-    static void toggleEnd(boolean bool) {
-        end.setEnabled(bool);
+    // locks the console and the whole GUI
+    private void lock() {
+        Component[] comps = panel.getComponents();
+        for (Component comp : comps)
+            comp.setEnabled(false);
+        output.removeFocusListener(focusClearer);
+        output.setEditable(false);
     }
 
-    static void toggleShutdown(boolean bool) {
-        shutdown.setEnabled(bool);
+    // program startup on clicking the run button // need to edit.
+    public void actionPerformed(ActionEvent e) {
+
+        switch (gameState) {
+            case "DRIVER OFF": {
+                gameState = "GAME PAUSED";
+                SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() {
+                        startDriver();
+                        return null;
+                    }
+                };
+                worker.execute();
+                break;
+            }
+            case "GAME PAUSED": {
+                cC.stop(false);
+                start.setText("Pause");
+                shutdown.setEnabled(false);
+                reset.setEnabled(false);
+                SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() {
+                        cC.cookieRobot();
+                        return null;
+                    }
+                };
+                worker.execute();
+                gameState = "GAME STARTED";
+                break;
+            }
+            case "GAME STARTED": {
+                start.setText("Start");
+                shutdown.setEnabled(true);
+                reset.setEnabled(true);
+                gameState = "GAME PAUSED";
+                cC.stop(true);
+                cC.clearGoals();
+            }
+            default:
+                break;
+        }
     }
 
-    static void setStart(String text) {
-        start.setText(text);
+    //opens a notepad with the saved game
+    private void showSave() {
+
+        ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "CookieSave");
+        try {
+            pb.start();
+        } catch (IOException e) {
+            System.out.println("Could not open save file. Error: " + e.getMessage());
+        }
+
     }
 
-    static void toggleGame(boolean bool) {
-        started = bool;
-    }
-
+    // checks whether a file exists in the folder or not
     private boolean fileFound(String file) {
         File f = new File(file);
         return f.exists();

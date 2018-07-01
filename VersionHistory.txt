@@ -3,3 +3,16 @@ v1.0 - First Nightly Build
 v1.3 - Tweaks and adjutsments
 v1.4 - Added Console toggler
 v1.4.2 - Added clicking fail scenario
+
+v1.5
+
+- simplified loading game
+- merged getgoal and evolve methods
+- added button to open the save file
+- added interface tweaks (will now have the same elements, and will get disabled / enabled based on the state of the
+game)
+- added reset option (user can now choose to restart the application without needing to close and re-open)
+- added check boxes
+- added item listener to the radio buttons
+- changed behaviour of the run button, depending on state of the game
+- tidied and sorted up code

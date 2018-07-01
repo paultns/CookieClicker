@@ -1,11 +1,8 @@
 import java.io.OutputStream;
 import javax.swing.JTextArea;
 
-/**
- * This class extends from OutputStream to redirect output to a JTextArrea
- *
- * @author www.codejava.net
- */
+// This class extends from OutputStream to redirect output to a JTextArrea
+
 class Console extends OutputStream {
     private JTextArea textArea;
 
