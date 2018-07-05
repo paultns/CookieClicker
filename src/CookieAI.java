@@ -7,4 +7,3 @@ public class CookieAI {
     }
 }
 
-// add comments

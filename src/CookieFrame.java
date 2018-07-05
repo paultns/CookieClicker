@@ -40,6 +40,7 @@ public class CookieFrame extends JFrame implements ActionListener {
     private static JTextArea output;
     private CookieClicker cC;
     private static ClearTextArea focusClearer;
+    private static SwingWorker<Void, Void> worker;
 
     CookieFrame() {
 
@@ -49,7 +50,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
 
         // initializing all buttons
-        setTitle("CookieAutoClicker v1.5");
+        setTitle("CookieAutoClicker v1.5.1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         //panel.setBackground(Color.blue);
@@ -92,8 +93,8 @@ public class CookieFrame extends JFrame implements ActionListener {
         firefox.setSelected(true);
         // console updates selector, with minimal updates as default
         final ButtonGroup toggleConsole = new ButtonGroup();
-        consoleOn = new JRadioButton("Detailed Updates");
-        consoleOff = new JRadioButton("Minimal Updates");
+        consoleOn = new JRadioButton("Detailed Console");
+        consoleOff = new JRadioButton("Minimal Console Updates");
         toggleConsole.add(consoleOff);
         toggleConsole.add(consoleOn);
         consoleOn.setSelected(true);
@@ -181,23 +182,15 @@ public class CookieFrame extends JFrame implements ActionListener {
     // initial setup of the panel on opening the program
     private void panelSetup() {
 
-        panel.setLayout(new GridLayout(0, 4, 0, 0));
+        panel.setLayout(new GridLayout(0, 6, 0, 0));
         start.setPreferredSize(new Dimension(0, 50));
-        panel.add(new JLabel("Choose Browser:"));
+        //panel.add(new JLabel("Choose Browser:"));
+        panel.add(explorer);
         panel.add(chrome);
         panel.add(firefox);
-        panel.add(explorer);
-        panel.add(new JLabel("Choose game mode:"));
         panel.add(newGame);
         panel.add(loadGame);
         panel.add(continueGame);
-        panel.add(new JSeparator());
-        panel.add(new JLabel("Toogle Console Type"));
-        reset.setEnabled(false);
-        panel.add(consoleOn);
-        consoleOn.setEnabled(false);
-        panel.add(consoleOff);
-        consoleOff.setEnabled(false);
         panel.add(buyBuildings);
         buyBuildings.setEnabled(false);
         panel.add(buyUpgrades);
@@ -207,22 +200,28 @@ public class CookieFrame extends JFrame implements ActionListener {
         panel.add(clickGolden);
         clickGolden.setEnabled(false);
         panel.add(start);
+        panel.add(openSave);
         panel.add(save);
         save.setEnabled(false);
-        panel.add(autoSave);
-        autoSave.setEnabled(false);
-        panel.add(shutdown);
-        shutdown.setEnabled(false);
-        panel.add(openSave);
         panel.add(load);
         load.setEnabled(false);
-        panel.add(new JSeparator());
-        panel.add(reset);
 
+        panel.add(autoSave);
+        autoSave.setEnabled(false);
         add(panel, BorderLayout.NORTH);
         add(new JScrollPane(output), BorderLayout.CENTER);
+        JPanel panel2 = new JPanel();
+        panel2.add(reset);
+        panel2.add(shutdown);
+        shutdown.setEnabled(false);
+        reset.setEnabled(false);
+        panel2.add(consoleOn);
+        consoleOn.setEnabled(false);
+        panel2.add(consoleOff);
+        consoleOff.setEnabled(false);
+        add(panel2, BorderLayout.SOUTH);
 
-        setPreferredSize(new Dimension(700, 800));
+        setPreferredSize(new Dimension(750, 850));
 
 
         setVisible(true);
@@ -347,7 +346,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         switch (gameState) {
             case "DRIVER OFF": {
                 gameState = "GAME PAUSED";
-                SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                worker = new SwingWorker<Void, Void>() {
                     @Override
                     protected Void doInBackground() {
                         startDriver();
@@ -380,6 +379,7 @@ public class CookieFrame extends JFrame implements ActionListener {
                 gameState = "GAME PAUSED";
                 cC.stop(true);
                 cC.clearGoals();
+
             }
             default:
                 break;

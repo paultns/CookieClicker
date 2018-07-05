@@ -51,7 +51,7 @@ class CookieClicker {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        stop = false;
+        //stop = false;
     }
 
 
@@ -66,7 +66,8 @@ class CookieClicker {
             read(null);
         else if (gameType.equals("LOAD GAME"))
             read(savegame);
-
+        if (!isElementPresent(By.linkText("Save")))
+            driver.findElement(By.id("prefsButton")).click();
         try {
             driver.findElement(By.linkText("Fancy graphics ON")).click();
         } catch (Exception e) {
@@ -128,7 +129,7 @@ class CookieClicker {
             if (fullConsole)
                 System.out.println("Defocus button already pressed");
         }
-
+        driver.findElement(By.id("prefsButton")).click();
         driver.findElement(By.cssSelector(".cc_btn_accept_all")).click();
         update();
         CookieFrame.changeState("START");
@@ -138,22 +139,11 @@ class CookieClicker {
 
     // actual run of program
     void cookieRobot() {
-        loop:
+
         while (true) {
-            /*
-            if (fullConsole)
-                if (buy) {
-                    System.out.print("\n>> New Cycle Starting. ");
-                    if (upgrade)
-                        System.out.println("Will buy a new upgrade.\n");
-                    else if (saveForNewBuilding)
-                        System.out.println("Will buy a new building.\n");
-                    else
-                        System.out.println("Will buy the most efficient building.\n");
-                }
-                */
+
             for (int clicks = 0; clicks < 15 * cycleLength; clicks++) {
-                if (stop) break loop;
+                if (stop) return;
                 try {
                     driver.findElement(By.cssSelector("#bigCookie")).click();
                     failCount = 0;
@@ -183,11 +173,10 @@ class CookieClicker {
             }
             if (buyUpgrades || buyBuildings || buyNewBuildings)
                 if (goal == null) {
-                    getGoal();
-                    buy();
+                    if (getGoal())
+                        buy();
                 } else
                     buy();
-
             if (autoSave)
                 save();
         }
@@ -205,7 +194,6 @@ class CookieClicker {
     // buys the current set goal if available, and finds, updates the cps, and finds the next goal
     // increases duration of next turn if goal can not be afforded
     private void buy() {
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(goal));
         if (isElementPresent(goal)) {
             driver.findElement(goal).click();
             System.out.println("  ++ " + goalName + " has been bought.\n");
@@ -223,7 +211,8 @@ class CookieClicker {
             }
             clearGoals();
             updateCps();
-            getGoal();
+            if (!getGoal())
+                return;
         } else {
             cycleLength++;
             if (fullConsole)
@@ -241,7 +230,7 @@ class CookieClicker {
                 break;
             if (driver.findElement(By.id("productOwned" + index)).getText().isEmpty()) {
                 if (fullConsole)
-                    System.out.print("New unlocked building found: " + driver.findElement(By.id
+                    System.out.println("New unlocked building found: " + driver.findElement(By.id
                             ("productName" + index)).getAttribute("textContent"));
                 break;
             } else count++;
@@ -250,7 +239,7 @@ class CookieClicker {
         if (count > 0)
             minutes = count * 4.5;
         if (fullConsole)
-            System.out.println(". Number of already bought buildings: " + count + "\n");
+            System.out.println("Number of already bought buildings: " + count + "\n");
         if (buildings == 0) {
             if (fullConsole)
                 System.out.println("No pre-owned buildings found. Saving for the next new building\n");
@@ -262,13 +251,6 @@ class CookieClicker {
             //upgrade = false;
         } else if (buildings == 15 && fullConsole)
             System.out.print("No new building found");
-        /*
-        if (buildings == 1) {
-            goal = By.cssSelector("#product0" + ".enabled");
-            goalName = driver.findElement(By.id("productName0")).getText();
-        } else if (!saveForNewBuilding && buildings != 0)
-            getGoal();
-            */
     }
 
     // retrieves the next upgrade's price
@@ -288,6 +270,7 @@ class CookieClicker {
                         driver.findElement(By.cssSelector("#upgrade0")));
                 if (fullConsole)
                     System.out.println(" -upgrade price pull error. retrying..");
+                if (stop) break;
             }
         return upgradePrice;
     }
@@ -322,17 +305,13 @@ class CookieClicker {
     }
 
     // pulls efficiency of each building   /// must edit, will not continue if no new buildings are found
-    private void getGoal() {
-        // checks if goal is to be set on buying an upgrade
-        if (buyUpgrades && !buyBuildings && !buyNewBuildings) {
-            getUpgrade();
-            return;
-        }
-        if (buyNewBuildings && !buyUpgrades && !buyBuildings) {
+    private boolean getGoal() {
 
-            return;
-        }
         if (buyUpgrades) {
+            if (!buyBuildings && !buyNewBuildings) {
+                getUpgrade();
+                return true;
+            }
             System.out.println("The last building price is: " + new BigDecimal(driver.findElement(By.id
                     ("productPrice" + (buildings - 1)))
                     .getText().replaceAll("[^\\d.]", "")));
@@ -340,14 +319,19 @@ class CookieClicker {
                     .getText().replaceAll("[^\\d.]", ""))) < 0) {
                 System.out.println("Its Cheaper!");
                 getUpgrade();
-                return;
+                return true;
             }
         }
         // checks if goal si to be set on buying a new building
-        if (buyNewBuildings)
+        if (buyNewBuildings) {
+            if (!buyBuildings && buildings < 15) {
+                setGoalNewBuilding();
+                return true;
+            }
             if (buildings == 15) {
                 System.out.println("No new unlocked buildings found, cannot buy new buildings");
                 CookieFrame.buyNewBuildings.setSelected(false);
+                if (!buyBuildings) return false;
             } else {
                 try {
                     double minutesTo;
@@ -361,7 +345,7 @@ class CookieClicker {
                                 driver.findElement(By.id("productPrice" + buildings)).getText().replaceAll("\\D+", ""));
                     if (minutesTo < minutes) {
                         setGoalNewBuilding();
-                        return;
+                        return true;
                     }
                 } catch (ArithmeticException e) {
                     if (fullConsole)
@@ -369,6 +353,7 @@ class CookieClicker {
                                 "encountered: \"" + e.getMessage() + "\"");
                 }
             }
+        }
         // calculates the most efficient building
         if (buyBuildings) {
             Actions move = new Actions(driver);
@@ -403,17 +388,21 @@ class CookieClicker {
                         break;
                     } catch (Exception e) {
                         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",
-                                driver.findElement(By.cssSelector("#upgrade" + i)));
+                                driver.findElement(By.cssSelector("#product" + i)));
                         if (fullConsole)
                             System.out.println("//// Failed to get number of producing cookies for " +
                                     driver.findElement(By.id("productName" + i)).getText());
+                        if (stop)
+                            return false;
                     }
                 }
             }
             goal = By.cssSelector("#product" + index + ".enabled");
             goalName = driver.findElement(By.id("productName" + index)).getText();
             System.out.println("* Goal has been set to buy: " + goalName + " \n");
+            return true;
         }
+        return false;
     }
 
     // will set goal to buy a new unlocked building
@@ -466,6 +455,7 @@ class CookieClicker {
                 driver.findElement(By.id("textareaPrompt")).sendKeys(sc.next());
             }
             driver.findElement(By.linkText("Load")).click();
+            driver.findElement(By.id("prefsButton")).click();
             System.out.println("\n-- Save game imported! --\n");
         } catch (Exception e) {
             e.getMessage();
@@ -473,7 +463,6 @@ class CookieClicker {
                     "present!!\n");
         }
     }
-
 
     // saves game to txt file
     void save() {
@@ -488,6 +477,7 @@ class CookieClicker {
             saveCookies.println(driver.findElement(By.id("textareaPrompt")).getText());
             saveCookies.close();
             driver.findElement(By.linkText("All done!")).click();
+            driver.findElement(By.id("prefsButton")).click();
             System.out.println("      >> Game Saved! @ " + ZonedDateTime.now().toLocalTime
                     ().truncatedTo(ChronoUnit.SECONDS));
         } catch (Exception e) {
@@ -563,4 +553,5 @@ class CookieClicker {
         goal = null;
         goalName = null;
     }
+
 }
