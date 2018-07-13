@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="CookieClicker:jar" />
-    </artifacts-to-build>
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4806543-7898-4eea-b620-a9c57da7fa4f" name="Default" comment="">
+    <list default="true" id="0072686b-1c17-4f09-9b89-4c2295b447b5" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Buildings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/CookieClicker_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/CookieClicker_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/project-template.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CookieClicker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CookieClicker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CookieSave" beforeDir="false" afterPath="$PROJECT_DIR$/CookieSave" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VersionHistory.txt" beforeDir="false" afterPath="$PROJECT_DIR$/VersionHistory.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CookieAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CookieAI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CookieClicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CookieClicker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CookieFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CookieFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OldMethods" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,35 +32,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CookieClicker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="131" column="57" selection-start-line="131" selection-start-column="57" selection-end-line="131" selection-end-column="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#update#0;class#CookieClicker#0" />
-                <element signature="method#goldenCookie#0;class#CookieClicker#0" />
-                <element signature="method#isElementPresent#0;class#CookieClicker#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VersionHistory.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/VersionHistory.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CookieAI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CookieAI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="170">
+              <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VersionHistory.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VersionHistory.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CookieClicker.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-470">
+              <caret line="341" column="26" selection-start-line="341" selection-start-column="26" selection-end-line="341" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#setUp#0;class#CookieClicker#0" />
+                <element signature="method#update#0;class#CookieClicker#0" />
+                <element signature="e#22238#22239#0" expanded="true" />
+                <element signature="e#22277#22278#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,12 +69,23 @@
       <file leaf-file-name="CookieFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CookieFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1019">
-              <caret line="359" column="16" selection-start-line="359" selection-start-column="16" selection-end-line="359" selection-end-column="16" />
+            <state relative-caret-position="452">
+              <caret line="58" column="53" selection-start-line="58" selection-start-column="53" selection-end-line="58" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#startDriver#0;class#CookieFrame#0" />
-                <element signature="method#showSave#0;class#CookieFrame#0" />
+                <element signature="method#lock#0;class#CookieFrame#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Buildings.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Buildings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-169">
+              <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+              <folding>
+                <element signature="method#convert#0;class#Buildings#0" />
               </folding>
             </state>
           </provider>
@@ -73,41 +94,11 @@
       <file leaf-file-name="ClearTextArea.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ClearTextArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="34">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CookieSave" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CookieSave">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="2882" selection-start-column="2882" selection-end-column="2882" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Console.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Console.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="backup" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backup">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-column="2891" />
             </state>
           </provider>
         </entry>
@@ -123,86 +114,64 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>\\D+</find>
+      <find>save</find>
+      <find>Setup</find>
+      <find>3</find>
       <find>setup</find>
-      <find>consolesave</find>
-      <find>newga</find>
-      <find>remove</find>
-      <find>start</find>
-      <find>console</find>
-      <find>full</find>
-      <find>read(</find>
-      <find>cC.setup</find>
-      <find>consoles</find>
-      <find>load</find>
-      <find>newBuildingFound</find>
-      <find>gamestate</find>
-      <find>DRIVER OFF</find>
-      <find>DRIVER ON</find>
-      <find>PAUSED</find>
-      <find>quit</find>
-      <find>output</find>
-      <find>start.seten</find>
-      <find>componen</find>
+      <find>buynew</find>
+      <find>stop</find>
+      <find>saved</find>
+      <find>fail</find>
+      <find>golden</find>
       <find>buy</find>
-      <find>null</find>
-      <find>s</find>
-      <find>updatecps</find>
-      <find>javascript</find>
-      <find>javascrip</find>
-      <find>replaceall</find>
-      <find>javascr</find>
-      <find>cC.</find>
-      <find>while</find>
+      <find>clicker</find>
+      <find>goldenc</find>
+      <find>autosave</find>
+      <find>time</find>
+      <find>next upgrade</find>
+      <find>getupgradeprice</find>
     </findStrings>
     <replaceStrings>
-      <replace>PAUSED</replace>
-      <replace>GAME PAUSED</replace>
+      <replace>[^\\d.]</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/TestSelenium.java" />
-        <option value="$PROJECT_DIR$/src/TestSelenium.java" />
-        <option value="$PROJECT_DIR$/src/TestSelenium.java" />
-        <option value="$PROJECT_DIR$/src/TestSelenium.java" />
-        <option value="$PROJECT_DIR$/src/TestSelenium.java" />
-        <option value="$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-        <option value="$PROJECT_DIR$/src/OldMethods.java" />
-        <option value="$PROJECT_DIR$/src/OldMethods" />
-        <option value="$PROJECT_DIR$/console" />
-        <option value="$PROJECT_DIR$/src/TextAreaLogProgram.java" />
-        <option value="$PROJECT_DIR$/CookieSave.txt" />
-        <option value="$PROJECT_DIR$/backup" />
-        <option value="$PROJECT_DIR$/src/Console.java" />
-        <option value="$PROJECT_DIR$/CookieSave" />
-        <option value="$PROJECT_DIR$/src/ClearTextArea.java" />
         <option value="$PROJECT_DIR$/src/CookieAI.java" />
+        <option value="$PROJECT_DIR$/src/BuildingProduction.java" />
         <option value="$PROJECT_DIR$/src/CookieFrame.java" />
+        <option value="$PROJECT_DIR$/src/Buildings.java" />
         <option value="$PROJECT_DIR$/src/CookieClicker.java" />
         <option value="$PROJECT_DIR$/VersionHistory.txt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="85" />
+    <option name="y" value="25" />
+    <option name="width" value="1750" />
+    <option name="height" value="970" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -219,17 +188,21 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="jdk.selected.JAVA_MODULE" value="10.0" />
-    <property name="last_opened_file_path" value="D:/Dropbox/Java Shit/drivers  and libraries/selenium-java-3.12.0/client-combined-3.12.0.jar!/" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/selenium-java-3.12.0/client-combined-3.12.0.jar!/" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -244,24 +217,51 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="10" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <configuration name="Unnamed" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="CookieAI" />
       <module name="CookieClicker" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="PACKAGE_NAME" />
       <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <module name="" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -269,360 +269,301 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f4806543-7898-4eea-b620-a9c57da7fa4f" name="Default" comment="" />
-      <created>1526890885072</created>
+      <changelist id="0072686b-1c17-4f09-9b89-4c2295b447b5" name="Default" comment="" />
+      <created>1531149731550</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1526890885072</updated>
+      <updated>1531149731550</updated>
+      <workItem from="1531149733825" duration="8880000" />
+      <workItem from="1531310401017" duration="4136000" />
+      <workItem from="1531331220641" duration="1776000" />
+      <workItem from="1531394469697" duration="10184000" />
+      <workItem from="1531493005529" duration="9784000" />
     </task>
-    <task id="LOCAL-00001" summary="-added login">
-      <created>1528287282682</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1528287282682</updated>
-    </task>
-    <task id="LOCAL-00002" summary="- added console updates&#10;- added product finding method">
-      <created>1528824705594</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1528824705594</updated>
-    </task>
-    <task id="LOCAL-00003" summary="- added console updates&#10;- added product finding method">
-      <created>1528825386761</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1528825386761</updated>
-    </task>
-    <task id="LOCAL-00004" summary="- added console updates&#10;- started progress towards making it more OO">
-      <created>1528839930600</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1528839930600</updated>
-    </task>
-    <task id="LOCAL-00005" summary="- transformed into OO&#10;- added comments">
-      <created>1528878662993</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1528878662993</updated>
-    </task>
-    <task id="LOCAL-00006" summary="- save update">
-      <created>1528913086759</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1528913086759</updated>
-    </task>
-    <task id="LOCAL-00007" summary="- added algorythm !!!!! wooop">
-      <created>1529015753953</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1529015753953</updated>
-    </task>
-    <task id="LOCAL-00008" summary="- added algorythm !!!!! wooop">
-      <created>1529016179345</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1529016179345</updated>
-    </task>
-    <task id="LOCAL-00009" summary="- added algorythm !!!!! wooop">
-      <created>1529016261484</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1529016261484</updated>
-    </task>
-    <task id="LOCAL-00010" summary="- split to multiple files">
-      <created>1529046078846</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1529046078846</updated>
-    </task>
-    <task id="LOCAL-00011" summary="- starting to setup frame">
-      <created>1529081422814</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1529081422814</updated>
-    </task>
-    <task id="LOCAL-00012" summary="- paused progress on frame&#10;- progress on transforming in self playing">
-      <created>1529190243233</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1529190243233</updated>
-    </task>
-    <task id="LOCAL-00013" summary="- semi-stable version of the AI&#10;- only need minor adjustments&#10;- frame remains to be built">
-      <created>1529251324413</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1529251324413</updated>
-    </task>
-    <task id="LOCAL-00014" summary="- cookie adjustments&#10;- started working on frame">
-      <created>1529273557911</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1529273557911</updated>
-    </task>
-    <task id="LOCAL-00015" summary="- frame progress&#10;- next step is multhreading">
-      <created>1529355122544</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1529355122544</updated>
-    </task>
-    <task id="LOCAL-00016" summary="- first nightly build&#10;- package and distribute">
-      <created>1529533809417</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1529533809417</updated>
-    </task>
-    <task id="LOCAL-00017" summary="- tweaks">
-      <created>1529651147700</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1529651147700</updated>
-    </task>
-    <task id="LOCAL-00018" summary="v1.3">
-      <created>1529748816804</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1529748816804</updated>
-    </task>
-    <task id="LOCAL-00019" summary="v1.4 // Added Console Toggling">
-      <created>1529770474876</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1529770474876</updated>
-    </task>
-    <task id="LOCAL-00020" summary="v1.4.2 // Added Error handling for when cookie is not in focus">
-      <created>1529877922908</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1529877922908</updated>
-    </task>
-    <task id="LOCAL-00021" summary="v1.4.2 // Added Error handling for when cookie is not in focus">
-      <created>1530126721026</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1530126721026</updated>
-    </task>
-    <task id="LOCAL-00022" summary="v1.5&#10;&#10;- simplified loading game&#10;- merged getgoal and evolve methods&#10;- added button to open the save file&#10;- added interface tweaks (will now have the same elements, and will get disabled / enabled based on the state of the&#10;game)&#10;- added reset option (user can now choose to restart the application without needing to close and re-open)&#10;- added check boxes&#10;- added item listener to the radio buttons&#10;- changed behaviour of the run button, depending on state of the game&#10;- tidied and sorted up code">
-      <created>1530467173199</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1530467173199</updated>
-    </task>
-    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="34760000" />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-1091" width="1096" height="1896" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32943678" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5009259" side_tool="true" weight="0.32509825" />
-      <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49907407" weight="0.32509825" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.44208288" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.15" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22552083" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39977542" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32902864" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32509825" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49907407" visible="true" weight="0.32509825" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32902864" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39977542" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5009259" side_tool="true" weight="0.32509825" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32509825" />
-      <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="-added login" />
-    <MESSAGE value="- added console updates&#10;- added product finding method" />
-    <MESSAGE value="- added console updates&#10;- started progress towards making it more OO" />
-    <MESSAGE value="- transformed into OO&#10;- added comments" />
-    <MESSAGE value="- save update" />
-    <MESSAGE value="- added algorythm !!!!! wooop" />
-    <MESSAGE value="- split to multiple files" />
-    <MESSAGE value="- starting to setup frame" />
-    <MESSAGE value="- paused progress on frame&#10;- progress on transforming in self playing" />
-    <MESSAGE value="- semi-stable version of the AI&#10;- only need minor adjustments&#10;- frame remains to be built" />
-    <MESSAGE value="- cookie adjustments&#10;- started working on frame" />
-    <MESSAGE value="- frame progress&#10;- next step is multhreading" />
-    <MESSAGE value="- first nightly build&#10;- package and distribute" />
-    <MESSAGE value="- tweaks" />
-    <MESSAGE value="v1.3" />
-    <MESSAGE value="v1.4 // Added Console Toggling" />
-    <MESSAGE value="v1.4.2 // Added Error handling for when cookie is not in focus" />
-    <MESSAGE value="v1.5&#10;&#10;- simplified loading game&#10;- merged getgoal and evolve methods&#10;- added button to open the save file&#10;- added interface tweaks (will now have the same elements, and will get disabled / enabled based on the state of the&#10;game)&#10;- added reset option (user can now choose to restart the application without needing to close and re-open)&#10;- added check boxes&#10;- added item listener to the radio buttons&#10;- changed behaviour of the run button, depending on state of the game&#10;- tidied and sorted up code" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.5&#10;&#10;- simplified loading game&#10;- merged getgoal and evolve methods&#10;- added button to open the save file&#10;- added interface tweaks (will now have the same elements, and will get disabled / enabled based on the state of the&#10;game)&#10;- added reset option (user can now choose to restart the application without needing to close and re-open)&#10;- added check boxes&#10;- added item listener to the radio buttons&#10;- changed behaviour of the run button, depending on state of the game&#10;- tidied and sorted up code" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="41" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="9" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/SeleniumPractice.iml" />
-    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
+    <entry file="file://$PROJECT_DIR$/src/CookieAI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="89" column="48" lean-forward="true" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
+        <state relative-caret-position="170">
+          <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VersionHistory.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Buildings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="method#convert#0;class#Buildings#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CookieFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2363">
+          <caret line="139" column="29" selection-start-line="139" selection-start-column="29" selection-end-line="139" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#lock#0;class#CookieFrame#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClearTextArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        <state relative-caret-position="646">
+          <caret line="38" column="20" lean-forward="true" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#update#0;class#CookieClicker#0" />
+            <element signature="e#22238#22239#0" expanded="true" />
+            <element signature="e#22277#22278#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/jdk/internal/reflect/NativeConstructorAccessorImpl.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/jdk/internal/reflect/NativeConstructorAccessorImpl.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/jdk/internal/reflect/NativeConstructorAccessorImpl.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/SeleniumPractice.iml" />
-    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
+    <entry file="file://$PROJECT_DIR$/src/CookieAI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="74" column="61" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
+        <state relative-caret-position="170">
+          <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
+    <entry file="file://$PROJECT_DIR$/VersionHistory.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2448">
-          <caret line="144" column="1" lean-forward="true" selection-start-line="144" selection-start-column="1" selection-end-line="144" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CookieSave.txt" />
-    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+        <state relative-caret-position="561">
+          <caret line="33" column="99" selection-start-line="33" selection-start-column="99" selection-end-line="33" selection-end-column="99" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        <state relative-caret-position="2788">
+          <caret line="164" selection-start-line="164" selection-end-line="164" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#update#0;class#CookieClicker#0" />
+            <element signature="e#22238#22239#0" expanded="true" />
+            <element signature="e#22277#22278#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/jdk/internal/reflect/NativeConstructorAccessorImpl.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/jdk/internal/reflect/NativeConstructorAccessorImpl.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/jdk/internal/reflect/NativeConstructorAccessorImpl.java" />
-    <entry file="file://$PROJECT_DIR$/../SeleniumPractice/src/CookieClicker.java" />
-    <entry file="file://$PROJECT_DIR$/SeleniumPractice.iml" />
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/6-WorkingWithElementsList.java" />
-    <entry file="file://$PROJECT_DIR$/src/OldMethods.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/java/lang/System.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.desktop/java/awt/event/ActionListener.java" />
-    <entry file="file://$PROJECT_DIR$/src/TextAreaLogProgram.java" />
-    <entry file="file://$PROJECT_DIR$/console">
+    <entry file="file://$PROJECT_DIR$/src/Buildings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="method#convert#0;class#Buildings#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/OldMethods">
+    <entry file="file://$PROJECT_DIR$/src/ClearTextArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CookieSave.txt" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/java/io/OutputStream.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.desktop/javax/swing/JToggleButton.java">
+    <entry file="file://$PROJECT_DIR$/src/CookieFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="363" selection-start-line="363" selection-end-line="363" />
+        <state relative-caret-position="6494">
+          <caret line="382" column="31" selection-start-line="382" selection-start-column="31" selection-end-line="382" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#lock#0;class#CookieFrame#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Console.java">
+    <entry file="file://$PROJECT_DIR$/src/CookieAI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        <state relative-caret-position="170">
+          <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2431">
+          <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#update#0;class#CookieClicker#0" />
+            <element signature="e#22238#22239#0" expanded="true" />
+            <element signature="e#22277#22278#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Buildings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="method#convert#0;class#Buildings#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CookieFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6511">
+          <caret line="383" column="62" selection-start-line="383" selection-start-column="62" selection-end-line="383" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#lock#0;class#CookieFrame#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClearTextArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VersionHistory.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="99" selection-start-line="33" selection-start-column="99" selection-end-line="33" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CookieAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="3" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VersionHistory.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2397">
+          <caret line="141" column="65" selection-start-line="141" selection-start-column="65" selection-end-line="141" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#update#0;class#CookieClicker#0" />
+            <element signature="e#22238#22239#0" expanded="true" />
+            <element signature="e#22277#22278#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Buildings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="method#convert#0;class#Buildings#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CookieFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6324">
+          <caret line="372" column="43" selection-start-line="372" selection-start-column="43" selection-end-line="372" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#lock#0;class#CookieFrame#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClearTextArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -632,63 +573,74 @@
     <entry file="file://$PROJECT_DIR$/CookieSave">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="2882" selection-start-column="2882" selection-end-column="2882" />
+          <caret selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backup">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="2891" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BuildingProduction.java" />
     <entry file="file://$PROJECT_DIR$/src/ClearTextArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="34">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
+    <entry file="file://$PROJECT_DIR$/CookieSave">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="131" column="57" selection-start-line="131" selection-start-column="57" selection-end-line="131" selection-end-column="57" />
+        <state>
+          <caret selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Buildings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-169">
+          <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#update#0;class#CookieClicker#0" />
-            <element signature="method#goldenCookie#0;class#CookieClicker#0" />
-            <element signature="method#isElementPresent#0;class#CookieClicker#0" />
+            <element signature="method#convert#0;class#Buildings#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CookieAI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="170">
+          <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CookieFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1019">
-          <caret line="359" column="16" selection-start-line="359" selection-start-column="16" selection-end-line="359" selection-end-column="16" />
+        <state relative-caret-position="452">
+          <caret line="58" column="53" selection-start-line="58" selection-start-column="53" selection-end-line="58" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#startDriver#0;class#CookieFrame#0" />
-            <element signature="method#showSave#0;class#CookieFrame#0" />
+            <element signature="method#lock#0;class#CookieFrame#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/VersionHistory.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+        <state relative-caret-position="228">
+          <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CookieClicker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-470">
+          <caret line="341" column="26" selection-start-line="341" selection-start-column="26" selection-end-line="341" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setUp#0;class#CookieClicker#0" />
+            <element signature="method#update#0;class#CookieClicker#0" />
+            <element signature="e#22238#22239#0" expanded="true" />
+            <element signature="e#22277#22278#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -758,7 +710,6 @@
       </state>
       <state key="ProjectJDKs.UI">
         <settings>
-          <last-edited>10.0</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -770,7 +721,6 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>src</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -16,8 +16,7 @@ import java.time.temporal.ChronoUnit;
 
 public class CookieFrame extends JFrame implements ActionListener {
 
-    static JCheckBox buyNewBuildings;
-    private static JButton start;
+    static JButton start;
     private static JButton shutdown;
     private static JButton save;
     private static JButton reset;
@@ -33,14 +32,13 @@ public class CookieFrame extends JFrame implements ActionListener {
     private static JCheckBox autoSave;
     private static JCheckBox clickGolden;
     private static JCheckBox buyBuildings;
-    private static JCheckBox buyUpgrades;
     private static String gameState;
     private JPanel panel;
     private static JButton openSave;
     private static JTextArea output;
     private CookieClicker cC;
     private static ClearTextArea focusClearer;
-    private static SwingWorker<Void, Void> worker;
+    static boolean loop = true;
 
     CookieFrame() {
 
@@ -50,7 +48,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
 
         // initializing all buttons
-        setTitle("CookieAutoClicker v1.5.1");
+        setTitle("CookieAutoClicker v1.6");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         //panel.setBackground(Color.blue);
@@ -61,15 +59,28 @@ public class CookieFrame extends JFrame implements ActionListener {
         shutdown.addActionListener((ActionEvent e) -> {
             try {
                 cC.driver.quit();
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 System.out.println("\nWindows was already closed.\n");
             }
             setVisible(false); //you can't see me!
             dispose(); //Destroy the JFrame object
         });
         save = new JButton("Save Game");
-        save.addActionListener((ActionEvent e) -> cC.save());
+        save.addActionListener((ActionEvent e) -> {
+            SwingWorker<Void, Void> saver = new SwingWorker<>() {
+                @Override
+                protected Void doInBackground() {
+                    cC.save();
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    System.out.println("The save swingworker has finished");
+                }
+            };
+            saver.execute();
+        });
         load = new JButton("Load Save File");
         load.addActionListener((ActionEvent e) -> cC.read(null));
         openSave = new JButton("Open Save File");
@@ -112,53 +123,31 @@ public class CookieFrame extends JFrame implements ActionListener {
         buyBuildings = new JCheckBox("Buy Buildings");
         buyBuildings.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.DESELECTED) {
-                cC.setBuyingBuildings(false);
-                System.out.println("# Will not buy buildings.");
                 cC.clearGoals();
+                cC.buy = false;
+                System.out.println(" # Buildings will not be bought anymore");
             } else {
-                cC.setBuyingBuildings(true);
-                System.out.println("# Will also buy buildings");
-            }
-        });
-        buyUpgrades = new JCheckBox("Buy Upgrades");
-        buyUpgrades.addItemListener((ItemEvent e) -> {
-            if (e.getStateChange() == ItemEvent.DESELECTED) {
-                cC.setBuyingUpgrades(false);
-                cC.clearGoals();
-                System.out.println("# Will not buy upgrades.");
-            } else {
-                cC.setBuyingUpgrades(true);
-                System.out.println("# Will also buy upgrades.");
-            }
-        });
-        buyNewBuildings = new JCheckBox("Buy New Buildings");
-        buyNewBuildings.addItemListener((ItemEvent e) -> {
-            if (e.getStateChange() == ItemEvent.DESELECTED) {
-                System.out.println("# Will not buy new unlocked buildings");
-                cC.setBuyingNewBuildings(false);
-                cC.clearGoals();
-            } else {
-                cC.setBuyingNewBuildings(true);
-                System.out.println("# Will also buy new buildings.");
+                cC.buy = true;
+                System.out.println(" # Will automatically buy most efficient building");
             }
         });
         clickGolden = new JCheckBox("Click Golden Cookies");
         clickGolden.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.DESELECTED) {
-                cC.setClickGoldenCookies(false);
-                System.out.println("# Golden Cookies will not be clicked.");
+                cC.clickGoldenCookie = false;
+                System.out.println(" # Golden cookies will not be clicked anymore");
             } else {
-                cC.setClickGoldenCookies(true);
-                System.out.println("# Golden Cookies will be automatically clicked.");
+                cC.clickGoldenCookie = true;
+                System.out.println(" # Golden cookies will be automatically clicked");
             }
         });
         autoSave = new JCheckBox("Save Automatically");
         autoSave.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.DESELECTED) {
-                cC.setAutoSave(false);
+                cC.autoSave = false;
                 System.out.println("# Game will not be automatically saved");
             } else {
-                cC.setAutoSave(true);
+                cC.autoSave = true;
                 System.out.println("# Game will be automatically saved");
             }
         });
@@ -172,8 +161,6 @@ public class CookieFrame extends JFrame implements ActionListener {
         focusClearer = new ClearTextArea();
         output.addFocusListener(focusClearer);
         //initializing variables
-
-
         gameState = "DRIVER OFF";
         System.out.println(" !! To load a savegame, insert savegame here, select Load and click run...");
         panelSetup();
@@ -193,10 +180,6 @@ public class CookieFrame extends JFrame implements ActionListener {
         panel.add(continueGame);
         panel.add(buyBuildings);
         buyBuildings.setEnabled(false);
-        panel.add(buyUpgrades);
-        buyUpgrades.setEnabled(false);
-        panel.add(buyNewBuildings);
-        buyNewBuildings.setEnabled(false);
         panel.add(clickGolden);
         clickGolden.setEnabled(false);
         panel.add(start);
@@ -206,7 +189,7 @@ public class CookieFrame extends JFrame implements ActionListener {
         panel.add(load);
         load.setEnabled(false);
 
-        panel.add(autoSave);
+        //panel.add(autoSave);
         autoSave.setEnabled(false);
         add(panel, BorderLayout.NORTH);
         add(new JScrollPane(output), BorderLayout.CENTER);
@@ -219,11 +202,9 @@ public class CookieFrame extends JFrame implements ActionListener {
         consoleOn.setEnabled(false);
         panel2.add(consoleOff);
         consoleOff.setEnabled(false);
+        panel2.add(autoSave);
         add(panel2, BorderLayout.SOUTH);
-
         setPreferredSize(new Dimension(750, 850));
-
-
         setVisible(true);
         pack();
     }
@@ -262,8 +243,6 @@ public class CookieFrame extends JFrame implements ActionListener {
             cC.setUp(null, "CONTINUE GAME");
         } else cC.setUp(null, "NEW GAME");
         //output.setText("");
-        System.out.println("Setup Complete! Please select game mode! (can be also updated on the go) " +
-                "Game starting at: " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS) + "\n");
 
         consoleOff.addItemListener((ItemEvent ie) -> {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
@@ -294,16 +273,12 @@ public class CookieFrame extends JFrame implements ActionListener {
             start.setEnabled(true);
             buyBuildings.setEnabled(true);
             save.setEnabled(true);
-            buyUpgrades.setEnabled(true);
-            buyNewBuildings.setEnabled(true);
             clickGolden.setEnabled(true);
             autoSave.setEnabled(true);
             consoleOn.setEnabled(true);
             consoleOff.setEnabled(true);
             reset.setEnabled(true);
             buyBuildings.setSelected(false);
-            buyUpgrades.setSelected(false);
-            buyNewBuildings.setSelected(false);
             clickGolden.setSelected(false);
             shutdown.setEnabled(true);
             load.setEnabled(true);
@@ -318,8 +293,6 @@ public class CookieFrame extends JFrame implements ActionListener {
             start.setText("Run");
             buyBuildings.setEnabled(false);
             save.setEnabled(false);
-            buyUpgrades.setEnabled(false);
-            buyNewBuildings.setEnabled(false);
             clickGolden.setEnabled(false);
             autoSave.setEnabled(false);
             consoleOn.setEnabled(false);
@@ -346,29 +319,43 @@ public class CookieFrame extends JFrame implements ActionListener {
         switch (gameState) {
             case "DRIVER OFF": {
                 gameState = "GAME PAUSED";
-                worker = new SwingWorker<Void, Void>() {
+                SwingWorker<Void, Void> startup = new SwingWorker<>() {
                     @Override
                     protected Void doInBackground() {
                         startDriver();
                         return null;
                     }
+
+                    @Override
+                    protected void done() {
+                        System.out.println("Setup Complete! Please select game mode! (can be also updated on the go) " +
+                                "Game starting at: " + ZonedDateTime.now().toLocalTime().truncatedTo(ChronoUnit.SECONDS) + "\n");
+                    }
                 };
-                worker.execute();
+                startup.execute();
                 break;
             }
             case "GAME PAUSED": {
-                cC.stop(false);
                 start.setText("Pause");
                 shutdown.setEnabled(false);
                 reset.setEnabled(false);
-                SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                loop = true;
+                cC.stop = false;
+                SwingWorker<Void, Void> runner = new SwingWorker<>() {
                     @Override
-                    protected Void doInBackground() {
-                        cC.cookieRobot();
+                    protected Void doInBackground() throws InterruptedException {
+                        System.out.println("Starting game");
+                        while (loop)
+                            cC.runner();
                         return null;
                     }
+
+                    @Override
+                    protected void done() {
+                        System.out.println(" # Cookie clicking has finished");
+                    }
                 };
-                worker.execute();
+                runner.execute();
                 gameState = "GAME STARTED";
                 break;
             }
@@ -377,9 +364,9 @@ public class CookieFrame extends JFrame implements ActionListener {
                 shutdown.setEnabled(true);
                 reset.setEnabled(true);
                 gameState = "GAME PAUSED";
-                cC.stop(true);
+                loop = false;
+                cC.stop = true;
                 cC.clearGoals();
-
             }
             default:
                 break;

@@ -7,30 +7,17 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://D:/Dropbox/Java Shit/drivers/selenium-java-3.12.0/libs" />
-          <root url="jar://D:/Dropbox/Java Shit/drivers/selenium-java-3.12.0/client-combined-3.12.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://D:/Dropbox/Java Shit/drivers/selenium-java-3.12.0/client-combined-3.12.0-sources.jar!/" />
-        </SOURCES>
-        <jarDirectory url="file://D:/Dropbox/Java Shit/drivers/selenium-java-3.12.0/libs" recursive="false" />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="file://D:/Dropbox/Java Shit/drivers  and libraries/selenium-java-3.12.0/libs" />
-          <root url="jar://D:/Dropbox/Java Shit/drivers  and libraries/selenium-java-3.12.0/client-combined-3.12.0.jar!/" />
+          <root url="file://$USER_HOME$/Desktop/selenium-java-3.12.0/libs" />
+          <root url="jar://$USER_HOME$/Desktop/selenium-java-3.12.0/client-combined-3.12.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://D:/Dropbox/Java Shit/drivers  and libraries/selenium-java-3.12.0/client-combined-3.12.0-sources.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/selenium-java-3.12.0/client-combined-3.12.0-sources.jar!/" />
         </SOURCES>
-        <jarDirectory url="file://D:/Dropbox/Java Shit/drivers  and libraries/selenium-java-3.12.0/libs" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Desktop/selenium-java-3.12.0/libs" recursive="false" />
       </library>
     </orderEntry>
   </component>

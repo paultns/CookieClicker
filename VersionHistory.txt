@@ -24,27 +24,26 @@ v1.5.1
 - fixed error looping when buildings was not in sight
 - various buying tweaks
 
+v1.5.2
+
+- joined buying of upgrades, of new buildings, and new buildings under a single option
+- add time estimate until goal will available
+
+v1.6
+
+- added support for short numbers calculations
+
+- last version. progress will be given up, considering too much effort would need to be invested in this program,
+and return will be too small nonetheless
+
 On the list:
 
 // comment code
 // add confirmation when trying to close the window and driver is running
-// add option to change cycle length
-// add information about that on startup
 // add option to run headless
 	// add number of current cookies
 	// add special kind of console updates if running headless
 	// add cps displayer in the GUI which updates every cycle and everytime something is bought
-// change method of cycling through clicking / golden cookies / buying
-	// simplify the buying condition to only one if... remove the could not be afforded text... and just use one loop
-	// crazy ideea.. a separate thread just for clicking, and one for buying / clicking golden cookies
-	// a separate loop method for clicking
-	// loop for clicking golden and buying, but with only one if, and waits so that it doesnt overload ~ 5 sec
-	// if decide to go this way, check the number of running threads (aka multiple swingworkers)
-
-// create a class or method which will handle operations between 'short numbers' (numbers with prefixes, e.g. million,
-trillion. etc)
-
-
 
 
 bugs
