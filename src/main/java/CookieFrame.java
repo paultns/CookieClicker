@@ -33,7 +33,7 @@ public class CookieFrame extends JFrame implements ActionListener {
     private static JCheckBox clickGolden;
     private static JCheckBox buyBuildings;
     private static String gameState;
-    private JPanel panel;
+    private final JPanel panel;
     private static JButton openSave;
     private static JTextArea output;
     private CookieClicker cC;
@@ -76,7 +76,7 @@ public class CookieFrame extends JFrame implements ActionListener {
 
                 @Override
                 protected void done() {
-                    System.out.println("The save swingworker has finished");
+                    System.out.println("The save has finished");
                 }
             };
             saver.execute();
